@@ -74,6 +74,11 @@
       <bpmn:outgoing>SequenceFlow_1qqln55</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:startEvent id="aanvraag-ontvangen-start-event" name="Aanvraag ontvangen">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="zaak-id" label="Zaak" type="zaak" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_0zxmava</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1qqln55" sourceRef="exclusive-gateway-1" targetRef="ExclusiveGateway_08nh387" />
