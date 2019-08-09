@@ -13,7 +13,23 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * see https://directory.demo.nlx.io/documentation/gemeente-utrecht/zrc#operation/zaak_create
+ */
 public class ZaakImpl implements Zaak {
+
+    final String bronorganisatie; //TODO [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
+    final URI zaaktype; //[ 1 .. 1000 ] characters
+    final String verantwoordelijkeOrganisatie; // TODO RSIN [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
+    final LocalDate startdatum;
+
+    public ZaakImpl(String bronorganisatie, URI zaaktype, String verantwoordelijkeOrganisatie, LocalDate startdatum) {
+        this.bronorganisatie = bronorganisatie;
+        this.zaaktype = zaaktype;
+        this.verantwoordelijkeOrganisatie = verantwoordelijkeOrganisatie;
+        this.startdatum = startdatum;
+    }
+
     @Override
     public String identificatie() {
         return null;
@@ -21,7 +37,7 @@ public class ZaakImpl implements Zaak {
 
     @Override
     public String bronorganisatie() {
-        return null;
+        return bronorganisatie;
     }
 
     @Override
@@ -36,7 +52,7 @@ public class ZaakImpl implements Zaak {
 
     @Override
     public URI zaaktype() {
-        return null;
+        return zaaktype;
     }
 
     @Override
@@ -46,12 +62,12 @@ public class ZaakImpl implements Zaak {
 
     @Override
     public String verantwoordelijkeOrganisatie() {
-        return null;
+        return verantwoordelijkeOrganisatie;
     }
 
     @Override
     public LocalDate startdatum() {
-        return null;
+        return startdatum;
     }
 
     @Override

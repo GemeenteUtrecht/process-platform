@@ -83,7 +83,6 @@
             <camunda:value id="Verkeersdrempel" name="Verkeersdrempel" />
             <camunda:value id="Gebouw" name="Gebouw" />
           </camunda:formField>
-          <camunda:formField id="zaak" type="com.oksadokdmok" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_0zxmava</bpmn:outgoing>
