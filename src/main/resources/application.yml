@@ -10,5 +10,7 @@ spring:
     jersey:
         application-path: /api/camunda-rest
 
-
-camunda.bpm.filter.create: show all
+camunda:
+    bpm:
+        history-level: NONE
+        process-engine-name: gemeente-utrecht-camunda-process-platform
