@@ -1,0 +1,26 @@
+ext {
+    logbackLoglevel = "INFO"
+}
+
+dependencies {
+
+}
+
+def profiles = 'prod'
+
+bootRun {
+    args = []
+}
+
+processResources {
+    filesMatching('**/logback-spring.xml') {
+        filter {
+            it.replace('#logback.loglevel#', logbackLoglevel)
+        }
+    }
+    filesMatching('**/application.yml') {
+        filter {
+            it.replace('#spring.profiles.active#', profiles)
+        }
+    }
+}

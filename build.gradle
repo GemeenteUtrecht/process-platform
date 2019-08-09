@@ -5,6 +5,14 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
+print(project)
+
+if (project.hasProperty('prod')) {
+    apply from: 'gradle/profile_prod.gradle'
+} else {
+    apply from: 'gradle/profile_dev.gradle'
+}
+
 group = 'com.gemeente-utrecht'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
@@ -26,9 +34,13 @@ dependencies {
     implementation group: 'org.camunda.bpm.springboot', name: 'camunda-bpm-spring-boot-starter-webapp', version: '3.3.3'
     implementation group: 'org.camunda.bpm.springboot', name: 'camunda-bpm-spring-boot-starter-rest', version: '3.3.3'
 
+    //Database
+    implementation "org.testcontainers:mysql:1.11.3"
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "org.assertj:assertj-core"
 }
