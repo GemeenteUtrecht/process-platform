@@ -14,3 +14,7 @@ camunda:
     bpm:
         history-level: NONE
         process-engine-name: gemeente-utrecht-camunda-process-platform
+        authorization:
+            enabled: false
+            enabled-for-custom-code: false
+            tenant-check-enabled: false
