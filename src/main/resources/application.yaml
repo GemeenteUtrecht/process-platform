@@ -1,0 +1,3 @@
+server.port: 8080
+
+camunda.bpm.filter.create: show all
