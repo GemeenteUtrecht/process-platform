@@ -8,43 +8,43 @@
   <bpmn:process id="BInGprocesmettabel" name="BInG proces met tabel" isExecutable="true">
     <bpmn:laneSet id="LaneSet_19nbrv4">
       <bpmn:lane id="Lane_0zmkymm" name="Adviseur">
-        <bpmn:flowNodeRef>concept_rapport_maken</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>definitief_rapport_maken</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_1opretb</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>concept-rapport-maken</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>definitief-rapport-maken</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>besluit-nemen</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0wdu8ab" name="Toetsingscommissie">
         <bpmn:flowNodeRef>IntermediateThrowEvent_1dyzvgz</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0dpea0h" name="Secretariaat">
         <bpmn:flowNodeRef>ExclusiveGateway_08nh387</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>controle_regulier</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>controle_versneld</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ExclusiveGateway_0td223m</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>StartEvent_0avqjz6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>controle-stukken-regulier</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>controle-stukken-versneld</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>exclusive-gateway-1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>aanvraag-ontvangen-start-event</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0fm5q3i</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0x019hl</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>opvragen_extra_stukken</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>extra-stukken-opvragen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0sfwei2</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>vergadering_voorbereiden</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>vergadering-voorbereiden</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_054hcrz</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EventBasedGateway_0utwco7</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>IntermediateCatchEvent_18ajjyt</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>IntermediateCatchEvent_0oh466y</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>EndEvent_1277xzy</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>EndEvent_12viqqm</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>bepalen_procedure</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>aanvraag-geweigerd-end-event</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>end-event</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>bepalen-procedure</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0swbqjx</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_18zyxn9</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_1qftoqa</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>aanvrager_informeren</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>zaak-sluiten</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_08nh387" name="Welke procedure?" default="SequenceFlow_0iz6srg">
+    <bpmn:exclusiveGateway id="ExclusiveGateway_08nh387" name="Welke procedure?" default="regulier-sequence-flow">
       <bpmn:incoming>SequenceFlow_1qqln55</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0iz6srg</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_02sp1h5</bpmn:outgoing>
+      <bpmn:outgoing>regulier-sequence-flow</bpmn:outgoing>
+      <bpmn:outgoing>versneld-sequence-flow</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="controle_regulier" name="Controle stukken - regulier">
+    <bpmn:userTask id="controle-stukken-regulier" name="Controle stukken - regulier">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="ControleStukken" label="Zijn alle stukken aanwezig en compleet?" type="enum">
@@ -53,10 +53,10 @@
           </camunda:formField>
         </camunda:formData>
       </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_0iz6srg</bpmn:incoming>
+      <bpmn:incoming>regulier-sequence-flow</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0orhnmd</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="controle_versneld" name="Controle stukken - versneld">
+    <bpmn:userTask id="controle-stukken-versneld" name="Controle stukken - versneld">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="ControleStukken" label="Zijn alle stukken aanwezig en compleet?" type="enum">
@@ -65,15 +65,15 @@
           </camunda:formField>
         </camunda:formData>
       </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_02sp1h5</bpmn:incoming>
+      <bpmn:incoming>versneld-sequence-flow</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_15gu60u</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_0td223m">
+    <bpmn:exclusiveGateway id="exclusive-gateway-1">
       <bpmn:incoming>SequenceFlow_0li0j4v</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_1d6nbfu</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1qqln55</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:startEvent id="StartEvent_0avqjz6" name="Aanvraag ontvangen">
+    <bpmn:startEvent id="aanvraag-ontvangen-start-event" name="Aanvraag ontvangen">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="type_object" label="Selecteer je object" type="enum">
@@ -87,16 +87,16 @@
       </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_0zxmava</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_1qqln55" sourceRef="ExclusiveGateway_0td223m" targetRef="ExclusiveGateway_08nh387" />
-    <bpmn:sequenceFlow id="SequenceFlow_15gu60u" sourceRef="controle_versneld" targetRef="ExclusiveGateway_0fm5q3i" />
-    <bpmn:sequenceFlow id="SequenceFlow_0orhnmd" sourceRef="controle_regulier" targetRef="ExclusiveGateway_0fm5q3i" />
-    <bpmn:sequenceFlow id="SequenceFlow_1d6nbfu" sourceRef="IntermediateCatchEvent_18ajjyt" targetRef="ExclusiveGateway_0td223m" />
-    <bpmn:sequenceFlow id="SequenceFlow_02sp1h5" name="Versneld" sourceRef="ExclusiveGateway_08nh387" targetRef="controle_versneld">
+    <bpmn:sequenceFlow id="SequenceFlow_1qqln55" sourceRef="exclusive-gateway-1" targetRef="ExclusiveGateway_08nh387" />
+    <bpmn:sequenceFlow id="SequenceFlow_15gu60u" sourceRef="controle-stukken-versneld" targetRef="ExclusiveGateway_0fm5q3i" />
+    <bpmn:sequenceFlow id="SequenceFlow_0orhnmd" sourceRef="controle-stukken-regulier" targetRef="ExclusiveGateway_0fm5q3i" />
+    <bpmn:sequenceFlow id="SequenceFlow_1d6nbfu" sourceRef="IntermediateCatchEvent_18ajjyt" targetRef="exclusive-gateway-1" />
+    <bpmn:sequenceFlow id="versneld-sequence-flow" name="Versneld" sourceRef="ExclusiveGateway_08nh387" targetRef="controle-stukken-versneld">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${Procedure=='Versneld'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0iz6srg" name="Regulier" sourceRef="ExclusiveGateway_08nh387" targetRef="controle_regulier" />
-    <bpmn:sequenceFlow id="SequenceFlow_0li0j4v" sourceRef="bepalen_procedure" targetRef="ExclusiveGateway_0td223m" />
-    <bpmn:sequenceFlow id="SequenceFlow_0zxmava" sourceRef="StartEvent_0avqjz6" targetRef="bepalen_procedure" />
+    <bpmn:sequenceFlow id="regulier-sequence-flow" name="Regulier" sourceRef="ExclusiveGateway_08nh387" targetRef="controle-stukken-regulier" />
+    <bpmn:sequenceFlow id="SequenceFlow_0li0j4v" sourceRef="bepalen-procedure" targetRef="exclusive-gateway-1" />
+    <bpmn:sequenceFlow id="SequenceFlow_0zxmava" sourceRef="aanvraag-ontvangen-start-event" targetRef="bepalen-procedure" />
     <bpmn:exclusiveGateway id="ExclusiveGateway_0fm5q3i">
       <bpmn:incoming>SequenceFlow_0orhnmd</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_15gu60u</bpmn:incoming>
@@ -107,7 +107,7 @@
       <bpmn:outgoing>SequenceFlow_1i9yjq1</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0jzb64g</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="opvragen_extra_stukken" name="Extra stukken opvragen">
+    <bpmn:userTask id="extra-stukken-opvragen" name="Extra stukken opvragen">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:outputParameter name="Output_07an3ck">Vraag extra stukken op</camunda:outputParameter>
@@ -121,11 +121,11 @@
       <bpmn:outgoing>SequenceFlow_0oqwpva</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0cqfp68</bpmn:outgoing>
     </bpmn:parallelGateway>
-    <bpmn:userTask id="vergadering_voorbereiden" name="Vergadering voorbereiden">
+    <bpmn:userTask id="vergadering-voorbereiden" name="Vergadering voorbereiden">
       <bpmn:incoming>SequenceFlow_0cqfp68</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1vlc2wu</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="concept_rapport_maken" name="Concept rapport maken">
+    <bpmn:userTask id="concept-rapport-maken" name="Concept rapport maken">
       <bpmn:incoming>SequenceFlow_0oqwpva</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0a43oac</bpmn:outgoing>
     </bpmn:userTask>
@@ -150,18 +150,18 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_0g7i8n0" messageRef="Message_1rjw2b3" />
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1gil0rs" sourceRef="ExclusiveGateway_0fm5q3i" targetRef="ExclusiveGateway_0x019hl" />
-    <bpmn:sequenceFlow id="SequenceFlow_1i9yjq1" name="Nee" sourceRef="ExclusiveGateway_0x019hl" targetRef="opvragen_extra_stukken">
+    <bpmn:sequenceFlow id="SequenceFlow_1i9yjq1" name="Nee" sourceRef="ExclusiveGateway_0x019hl" targetRef="extra-stukken-opvragen">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{ControleStukken == 'Nee'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0jzb64g" name="Ja" sourceRef="ExclusiveGateway_0x019hl" targetRef="ExclusiveGateway_054hcrz" />
     <bpmn:sequenceFlow id="SequenceFlow_0pn3djl" sourceRef="EventBasedGateway_0utwco7" targetRef="IntermediateCatchEvent_0oh466y" />
-    <bpmn:sequenceFlow id="SequenceFlow_1m7ekak" sourceRef="IntermediateCatchEvent_0oh466y" targetRef="EndEvent_1277xzy" />
-    <bpmn:sequenceFlow id="SequenceFlow_0px2i0f" sourceRef="opvragen_extra_stukken" targetRef="EventBasedGateway_0utwco7" />
+    <bpmn:sequenceFlow id="SequenceFlow_1m7ekak" sourceRef="IntermediateCatchEvent_0oh466y" targetRef="aanvraag-geweigerd-end-event" />
+    <bpmn:sequenceFlow id="SequenceFlow_0px2i0f" sourceRef="extra-stukken-opvragen" targetRef="EventBasedGateway_0utwco7" />
     <bpmn:sequenceFlow id="SequenceFlow_1rmume7" name="Regulier" sourceRef="ExclusiveGateway_054hcrz" targetRef="ExclusiveGateway_0sfwei2" />
-    <bpmn:sequenceFlow id="SequenceFlow_0oqwpva" sourceRef="ExclusiveGateway_0sfwei2" targetRef="concept_rapport_maken" />
-    <bpmn:sequenceFlow id="SequenceFlow_0cqfp68" sourceRef="ExclusiveGateway_0sfwei2" targetRef="vergadering_voorbereiden" />
-    <bpmn:sequenceFlow id="SequenceFlow_1vlc2wu" sourceRef="vergadering_voorbereiden" targetRef="ExclusiveGateway_0swbqjx" />
-    <bpmn:sequenceFlow id="SequenceFlow_0a43oac" sourceRef="concept_rapport_maken" targetRef="ExclusiveGateway_0swbqjx" />
+    <bpmn:sequenceFlow id="SequenceFlow_0oqwpva" sourceRef="ExclusiveGateway_0sfwei2" targetRef="concept-rapport-maken" />
+    <bpmn:sequenceFlow id="SequenceFlow_0cqfp68" sourceRef="ExclusiveGateway_0sfwei2" targetRef="vergadering-voorbereiden" />
+    <bpmn:sequenceFlow id="SequenceFlow_1vlc2wu" sourceRef="vergadering-voorbereiden" targetRef="ExclusiveGateway_0swbqjx" />
+    <bpmn:sequenceFlow id="SequenceFlow_0a43oac" sourceRef="concept-rapport-maken" targetRef="ExclusiveGateway_0swbqjx" />
     <bpmn:sequenceFlow id="SequenceFlow_1n9dht7" sourceRef="ExclusiveGateway_0swbqjx" targetRef="ExclusiveGateway_18zyxn9" />
     <bpmn:sequenceFlow id="SequenceFlow_01zuhml" name="Versneld" sourceRef="ExclusiveGateway_054hcrz" targetRef="ExclusiveGateway_18zyxn9">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${Procedure=='Versneld'}</bpmn:conditionExpression>
@@ -174,21 +174,21 @@
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P14D</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
-    <bpmn:endEvent id="EndEvent_1277xzy" name="Aanvraag geweigerd">
+    <bpmn:endEvent id="aanvraag-geweigerd-end-event" name="Aanvraag geweigerd">
       <bpmn:incoming>SequenceFlow_1m7ekak</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1fccwi0" sourceRef="ExclusiveGateway_18zyxn9" targetRef="ExclusiveGateway_1qftoqa" />
     <bpmn:sequenceFlow id="SequenceFlow_1rv1v70" name="Regulier" sourceRef="ExclusiveGateway_1qftoqa" targetRef="IntermediateThrowEvent_1dyzvgz" />
-    <bpmn:sequenceFlow id="SequenceFlow_1x0jca3" sourceRef="definitief_rapport_maken" targetRef="aanvrager_informeren" />
-    <bpmn:sequenceFlow id="SequenceFlow_10ral4p" sourceRef="aanvrager_informeren" targetRef="EndEvent_12viqqm" />
-    <bpmn:sequenceFlow id="SequenceFlow_13kor81" name="Versneld" sourceRef="ExclusiveGateway_1qftoqa" targetRef="Task_1opretb">
+    <bpmn:sequenceFlow id="SequenceFlow_1x0jca3" sourceRef="definitief-rapport-maken" targetRef="zaak-sluiten" />
+    <bpmn:sequenceFlow id="SequenceFlow_10ral4p" sourceRef="zaak-sluiten" targetRef="end-event" />
+    <bpmn:sequenceFlow id="SequenceFlow_13kor81" name="Versneld" sourceRef="ExclusiveGateway_1qftoqa" targetRef="besluit-nemen">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${Procedure=='Versneld'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_00z0zvo" sourceRef="Task_1opretb" targetRef="definitief_rapport_maken" />
-    <bpmn:endEvent id="EndEvent_12viqqm">
+    <bpmn:sequenceFlow id="SequenceFlow_00z0zvo" sourceRef="besluit-nemen" targetRef="definitief-rapport-maken" />
+    <bpmn:endEvent id="end-event">
       <bpmn:incoming>SequenceFlow_10ral4p</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="bepalen_procedure" name="Bepalen procedure">
+    <bpmn:userTask id="bepalen-procedure" name="Bepalen procedure">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="Procedure" label="Welke procedure is van toepassing?" type="enum">
@@ -200,7 +200,7 @@
       <bpmn:incoming>SequenceFlow_0zxmava</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0li0j4v</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="definitief_rapport_maken" name="Definitief rapport maken">
+    <bpmn:userTask id="definitief-rapport-maken" name="Definitief rapport maken">
       <bpmn:incoming>SequenceFlow_00z0zvo</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_0m3ixxg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1x0jca3</bpmn:outgoing>
@@ -215,20 +215,20 @@
       <bpmn:incoming>SequenceFlow_1n9dht7</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1fccwi0</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_1qftoqa" name="Welke procedure?">
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1qftoqa" name="Welke procedure?" default="SequenceFlow_1rv1v70">
       <bpmn:incoming>SequenceFlow_1fccwi0</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1rv1v70</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_13kor81</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Task_1opretb" name="Besluit nemen">
+    <bpmn:userTask id="besluit-nemen" name="Besluit nemen">
       <bpmn:incoming>SequenceFlow_13kor81</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_00z0zvo</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="aanvrager_informeren" name="Zaak sluiten (en aanvrager informeren)">
+    <bpmn:serviceTask id="zaak-sluiten" name="Zaak sluiten (en aanvrager informeren)" camunda:delegateExpression="null">
       <bpmn:incoming>SequenceFlow_1x0jca3</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_10ral4p</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="SequenceFlow_0m3ixxg" sourceRef="IntermediateThrowEvent_1dyzvgz" targetRef="definitief_rapport_maken" />
+    <bpmn:sequenceFlow id="SequenceFlow_0m3ixxg" sourceRef="IntermediateThrowEvent_1dyzvgz" targetRef="definitief-rapport-maken" />
     <bpmn:intermediateCatchEvent id="IntermediateThrowEvent_1dyzvgz" name="Besluit uit toetsingscommissie ontvangen">
       <bpmn:incoming>SequenceFlow_1rv1v70</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0m3ixxg</bpmn:outgoing>
@@ -241,7 +241,7 @@
       <bpmndi:BPMNShape id="Participant_0u41jmc_di" bpmnElement="beheer-inrichting-gebruik" isHorizontal="true">
         <dc:Bounds x="156" y="81" width="2326" height="793" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="StartEvent_0avqjz6_di" bpmnElement="StartEvent_0avqjz6">
+      <bpmndi:BPMNShape id="StartEvent_0avqjz6_di" bpmnElement="aanvraag-ontvangen-start-event">
         <dc:Bounds x="249" y="399" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="241" y="442" width="52" height="27" />
@@ -253,10 +253,10 @@
           <dc:Bounds x="588" y="376" width="89" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_19xsybc_di" bpmnElement="controle_regulier">
+      <bpmndi:BPMNShape id="UserTask_19xsybc_di" bpmnElement="controle-stukken-regulier">
         <dc:Bounds x="734" y="377" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_0vty1ar_di" bpmnElement="controle_versneld">
+      <bpmndi:BPMNShape id="UserTask_0vty1ar_di" bpmnElement="controle-stukken-versneld">
         <dc:Bounds x="734" y="500" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0x019hl_di" bpmnElement="ExclusiveGateway_0x019hl" isMarkerVisible="true">
@@ -265,13 +265,13 @@
           <dc:Bounds x="988" y="442" width="51" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_12viqqm_di" bpmnElement="EndEvent_12viqqm">
+      <bpmndi:BPMNShape id="EndEvent_12viqqm_di" bpmnElement="end-event">
         <dc:Bounds x="2426" y="399" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="2110" y="354" width="88" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_044i5ij_di" bpmnElement="opvragen_extra_stukken">
+      <bpmndi:BPMNShape id="UserTask_044i5ij_di" bpmnElement="extra-stukken-opvragen">
         <dc:Bounds x="962" y="205" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="IntermediateCatchEvent_18ajjyt_di" bpmnElement="IntermediateCatchEvent_18ajjyt">
@@ -289,10 +289,10 @@
           <dc:Bounds x="1223" y="210" width="86" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_1277xzy_di" bpmnElement="EndEvent_1277xzy">
+      <bpmndi:BPMNShape id="EndEvent_1277xzy_di" bpmnElement="aanvraag-geweigerd-end-event">
         <dc:Bounds x="1378" y="227" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1370" y="198" width="52" height="27" />
+          <dc:Bounds x="1371" y="198" width="51" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0fm5q3i_di" bpmnElement="ExclusiveGateway_0fm5q3i" isMarkerVisible="true">
@@ -307,16 +307,16 @@
       <bpmndi:BPMNShape id="ExclusiveGateway_18zyxn9_di" bpmnElement="ExclusiveGateway_18zyxn9" isMarkerVisible="true">
         <dc:Bounds x="1589" y="392" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_0sfe805_di" bpmnElement="concept_rapport_maken">
+      <bpmndi:BPMNShape id="UserTask_0sfe805_di" bpmnElement="concept-rapport-maken">
         <dc:Bounds x="1346" y="628" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_0nhmwpr_di" bpmnElement="vergadering_voorbereiden">
+      <bpmndi:BPMNShape id="UserTask_0nhmwpr_di" bpmnElement="vergadering-voorbereiden">
         <dc:Bounds x="1346" y="377" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_0tdtq6h_di" bpmnElement="definitief_rapport_maken">
+      <bpmndi:BPMNShape id="UserTask_0tdtq6h_di" bpmnElement="definitief-rapport-maken">
         <dc:Bounds x="2112" y="628" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ExclusiveGateway_0td223m_di" bpmnElement="ExclusiveGateway_0td223m" isMarkerVisible="true">
+      <bpmndi:BPMNShape id="ExclusiveGateway_0td223m_di" bpmnElement="exclusive-gateway-1" isMarkerVisible="true">
         <dc:Bounds x="517" y="392" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1qqln55_di" bpmnElement="SequenceFlow_1qqln55">
@@ -402,7 +402,7 @@
         <di:waypoint x="542" y="164" />
         <di:waypoint x="542" y="392" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_02sp1h5_di" bpmnElement="SequenceFlow_02sp1h5">
+      <bpmndi:BPMNEdge id="SequenceFlow_02sp1h5_di" bpmnElement="versneld-sequence-flow">
         <di:waypoint x="641" y="442" />
         <di:waypoint x="641" y="540" />
         <di:waypoint x="734" y="540" />
@@ -410,11 +410,11 @@
           <dc:Bounds x="647" y="524" width="43" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0iz6srg_di" bpmnElement="SequenceFlow_0iz6srg">
+      <bpmndi:BPMNEdge id="SequenceFlow_0iz6srg_di" bpmnElement="regulier-sequence-flow">
         <di:waypoint x="666" y="417" />
         <di:waypoint x="734" y="417" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="676" y="401" width="43" height="14" />
+          <dc:Bounds x="677" y="401" width="42" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0li0j4v_di" bpmnElement="SequenceFlow_0li0j4v">
@@ -431,7 +431,7 @@
       <bpmndi:BPMNShape id="Lane_0zmkymm_di" bpmnElement="Lane_0zmkymm" isHorizontal="true">
         <dc:Bounds x="186" y="600" width="2296" height="140" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_1mx9uq6_di" bpmnElement="bepalen_procedure">
+      <bpmndi:BPMNShape id="UserTask_1mx9uq6_di" bpmnElement="bepalen-procedure">
         <dc:Bounds x="349" y="377" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1rmume7_di" bpmnElement="SequenceFlow_1rmume7">
@@ -465,7 +465,7 @@
       <bpmndi:BPMNShape id="ExclusiveGateway_1qftoqa_di" bpmnElement="ExclusiveGateway_1qftoqa" isMarkerVisible="true">
         <dc:Bounds x="1677" y="392" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1657" y="368" width="89" height="14" />
+          <dc:Bounds x="1657" y="368" width="90" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1fccwi0_di" bpmnElement="SequenceFlow_1fccwi0">
@@ -493,10 +493,10 @@
         <di:waypoint x="1958" y="668" />
         <di:waypoint x="2112" y="668" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_0xuipbg_di" bpmnElement="Task_1opretb">
+      <bpmndi:BPMNShape id="UserTask_0xuipbg_di" bpmnElement="besluit-nemen">
         <dc:Bounds x="1858" y="628" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_16ejth4_di" bpmnElement="aanvrager_informeren">
+      <bpmndi:BPMNShape id="ServiceTask_16ejth4_di" bpmnElement="zaak-sluiten">
         <dc:Bounds x="2280" y="377" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0m3ixxg_di" bpmnElement="SequenceFlow_0m3ixxg">
