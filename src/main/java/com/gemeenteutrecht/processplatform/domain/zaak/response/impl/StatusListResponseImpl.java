@@ -10,6 +10,9 @@ public class StatusListResponseImpl implements StatusListResponse {
 
     private List results;
 
+    public StatusListResponseImpl() {
+    }
+
     public StatusListResponseImpl(List results) {
         this.results = results;
     }

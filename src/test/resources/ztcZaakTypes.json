@@ -1,0 +1,47 @@
+[
+    {
+        "url": "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/zaaktypen/7af2d4dd-511b-4b27-89a8-77ac7c8e7a82/statustypen/ddefa741-4592-4147-8101-0e65f0abaa3a",
+        "omschrijving": "Ontvangen",
+        "omschrijvingGeneriek": "",
+        "statustekst": "Wij hebben uw aanvraag ontvangen",
+        "zaaktype": "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/zaaktypen/7af2d4dd-511b-4b27-89a8-77ac7c8e7a82",
+        "volgnummer": 1,
+        "isEindstatus": false
+    },
+    {
+        "url": "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/zaaktypen/7af2d4dd-511b-4b27-89a8-77ac7c8e7a82/statustypen/2053f562-e6f7-4bcd-9f8f-3f8033be8453",
+        "omschrijving": "In behandeling",
+        "omschrijvingGeneriek": "",
+        "statustekst": "Uw aanvraag is in behandeling genomen",
+        "zaaktype": "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/zaaktypen/7af2d4dd-511b-4b27-89a8-77ac7c8e7a82",
+        "volgnummer": 2,
+        "isEindstatus": false
+    },
+    {
+        "url": "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/zaaktypen/7af2d4dd-511b-4b27-89a8-77ac7c8e7a82/statustypen/88c5f9f9-48e2-42f4-8205-1440de2243f3",
+        "omschrijving": "In afwachting",
+        "omschrijvingGeneriek": "",
+        "statustekst": "",
+        "zaaktype": "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/zaaktypen/7af2d4dd-511b-4b27-89a8-77ac7c8e7a82",
+        "volgnummer": 3,
+        "isEindstatus": false
+    },
+    {
+        "url": "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/zaaktypen/7af2d4dd-511b-4b27-89a8-77ac7c8e7a82/statustypen/e80e50ba-6339-4571-b147-eec7db7c8cf6",
+        "omschrijving": "Ingetrokken",
+        "omschrijvingGeneriek": "Aanvraag is ingetrokken",
+        "statustekst": "Uw aanvraag is ingetrokken",
+        "zaaktype": "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/zaaktypen/7af2d4dd-511b-4b27-89a8-77ac7c8e7a82",
+        "volgnummer": 4,
+        "isEindstatus": false
+    },
+    {
+        "url": "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/zaaktypen/7af2d4dd-511b-4b27-89a8-77ac7c8e7a82/statustypen/8008644a-99d8-4299-9af3-f51443b53b66",
+        "omschrijving": "Afgehandeld",
+        "omschrijvingGeneriek": "Aanvraag is afgehandeld",
+        "statustekst": "Uw aanvraag is afgehandeld",
+        "zaaktype": "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/zaaktypen/7af2d4dd-511b-4b27-89a8-77ac7c8e7a82",
+        "volgnummer": 5,
+        "isEindstatus": true
+    }
+]

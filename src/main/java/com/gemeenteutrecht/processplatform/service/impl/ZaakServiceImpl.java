@@ -6,8 +6,10 @@ import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
 import com.gemeenteutrecht.processplatform.domain.zaak.ZaakStatus;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.ZaakCreateRequest;
+import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakStatusImpl;
+import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.StatusCreateRequestImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.ZaakCreateRequestImpl;
-import com.gemeenteutrecht.processplatform.domain.zaak.response.StatusListResponse;
+import com.gemeenteutrecht.processplatform.domain.zaak.response.impl.StatusListResponseImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.response.impl.ZaakListResponse;
 import com.gemeenteutrecht.processplatform.service.ZaakService;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,8 +21,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 
@@ -66,8 +70,8 @@ public class ZaakServiceImpl implements ZaakService {
     }
 
     @Override
-    public Zaak createZaak(ZaakCreateRequest zaak) {
-        final HttpEntity<ZaakCreateRequest> request = new HttpEntity<>(zaak, getHeaders());
+    public Zaak createZaak(ZaakCreateRequestImpl zaakCreateRequest) {
+        final HttpEntity<ZaakCreateRequestImpl> request = new HttpEntity<>(zaakCreateRequest, getHeaders());
 
         ResponseEntity<ZaakImpl> response = restTemplate.exchange(
                 endpointProperties.getZaak(),
@@ -83,18 +87,37 @@ public class ZaakServiceImpl implements ZaakService {
     }
 
     @Override
-    public List<ZaakStatus> getStatussen(Zaak zaak) {
+    public ZaakStatusImpl setStatus(StatusCreateRequestImpl statusCreateRequest) {
+        final HttpEntity request = new HttpEntity<>(statusCreateRequest, getHeaders());
+
+        final ResponseEntity<ZaakStatusImpl> response = restTemplate.exchange(
+                endpointProperties.getStatus(),
+                HttpMethod.POST,
+                request,
+                ZaakStatusImpl.class
+        );
+        if (response.getStatusCode().equals(HttpStatus.CREATED)) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Error while performing GET on /status with code: " + response.getStatusCode());
+        }
+    }
+
+    @Override
+    public List<ZaakStatus> getStatussen(URI zaak) {
         final HttpEntity entity = new HttpEntity<>(getHeaders());
+        final UriComponentsBuilder builder = UriComponentsBuilder.fromUri(endpointProperties.getStatus())
+                .queryParam("zaak", zaak.toString());
 
         final ResponseEntity<String> response = restTemplate.exchange(
-                endpointProperties.getStatus(),
+                builder.toUriString(),
                 HttpMethod.GET,
                 entity,
                 String.class
         );
         if (response.getStatusCode().is2xxSuccessful()) {
             try {
-                return mapper.readValue(response.getBody(), StatusListResponse.class).results();
+                return mapper.readValue(response.getBody(), StatusListResponseImpl.class).results();
             } catch (IOException e) {
                 throw new RuntimeException("Parsing error " + e.getMessage(), e);
             }

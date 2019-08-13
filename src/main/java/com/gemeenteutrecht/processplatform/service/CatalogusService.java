@@ -8,14 +8,8 @@ import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.ZaakCreateRe
 import java.net.URI;
 import java.util.List;
 
-public interface ZaakService {
+public interface CatalogusService {
 
-    List<Zaak> getZaken();
-
-    Zaak createZaak(ZaakCreateRequest zaak);
-
-    List<ZaakStatus> getStatussen(URI zaak);
-
-    ZaakStatus setStatus(StatusCreateRequestImpl statusCreateRequest);
+    List<Zaak> getZakenType(URI catalogs, URI zaakType);
 
 }

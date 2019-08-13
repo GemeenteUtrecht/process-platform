@@ -1,29 +1,22 @@
-package com.gemeenteutrecht.processplatform.domain.zaak.impl;
+package com.gemeenteutrecht.processplatform.domain.zaak.request.impl;
 
-import com.gemeenteutrecht.processplatform.domain.zaak.ZaakStatus;
+import com.gemeenteutrecht.processplatform.domain.zaak.request.StatusCreateRequest;
 
 import java.net.URI;
 import java.time.LocalDateTime;
 
-public class StatusImpl implements ZaakStatus {
+public class StatusCreateRequestImpl implements StatusCreateRequest {
 
-    private URI url;
     private URI zaak;
     private URI statusType;
     private LocalDateTime datumStatusGezet;
     private String statustoelichting;
 
-    public StatusImpl(URI url, URI zaak, URI statusType, LocalDateTime datumStatusGezet, String statustoelichting) {
-        this.url = url;
+    public StatusCreateRequestImpl(URI zaak, URI statusType, LocalDateTime datumStatusGezet, String statustoelichting) {
         this.zaak = zaak;
         this.statusType = statusType;
         this.datumStatusGezet = datumStatusGezet;
         this.statustoelichting = statustoelichting;
-    }
-
-    @Override
-    public URI url() {
-        return url;
     }
 
     @Override
@@ -45,4 +38,5 @@ public class StatusImpl implements ZaakStatus {
     public String statustoelichting() {
         return statustoelichting;
     }
+
 }

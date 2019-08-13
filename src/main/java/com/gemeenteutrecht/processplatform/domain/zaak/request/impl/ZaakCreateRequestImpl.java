@@ -11,13 +11,13 @@ public class ZaakCreateRequestImpl implements ZaakCreateRequest {
     private String bronorganisatie; //TODO [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
     private URI zaaktype; //[ 1 .. 1000 ] characters
     private String verantwoordelijkeOrganisatie; // TODO RSIN [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
-    private String startdatum;
+    private LocalDate startdatum;
 
     public ZaakCreateRequestImpl(String bronorganisatie, URI zaaktype, String verantwoordelijkeOrganisatie, LocalDate startdatum) {
         this.bronorganisatie = bronorganisatie;
         this.zaaktype = zaaktype;
         this.verantwoordelijkeOrganisatie = verantwoordelijkeOrganisatie;
-        this.startdatum = startdatum.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.startdatum = startdatum;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ZaakCreateRequestImpl implements ZaakCreateRequest {
     }
 
     @Override
-    public String startdatum() {
+    public LocalDate startdatum() {
         return startdatum;
     }
 }
