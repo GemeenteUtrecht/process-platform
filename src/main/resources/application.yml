@@ -18,3 +18,4 @@ camunda:
             enabled: false
             enabled-for-custom-code: false
             tenant-check-enabled: false
+        default-serialization-format: "application/json"

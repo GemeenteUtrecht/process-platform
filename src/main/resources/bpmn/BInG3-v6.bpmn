@@ -75,9 +75,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:startEvent id="aanvraag-ontvangen-start-event" name="Aanvraag ontvangen">
       <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="zaak-id" label="Zaak" type="zaak" />
-        </camunda:formData>
+        <camunda:executionListener expression="${zaakService.create(execution)}" event="end" />
       </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_0zxmava</bpmn:outgoing>
     </bpmn:startEvent>

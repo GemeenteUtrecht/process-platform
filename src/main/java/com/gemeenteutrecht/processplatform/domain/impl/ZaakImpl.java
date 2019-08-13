@@ -1,5 +1,6 @@
 package com.gemeenteutrecht.processplatform.domain.impl;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gemeenteutrecht.processplatform.domain.ArchiefNominatie;
 import com.gemeenteutrecht.processplatform.domain.ArchiefStatus;
 import com.gemeenteutrecht.processplatform.domain.Geometrie;
@@ -8,6 +9,7 @@ import com.gemeenteutrecht.processplatform.domain.Opschorting;
 import com.gemeenteutrecht.processplatform.domain.Verlenging;
 import com.gemeenteutrecht.processplatform.domain.Zaak;
 
+import java.io.Serializable;
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,12 +20,22 @@ import java.util.List;
  */
 public class ZaakImpl implements Zaak {
 
-    final String bronorganisatie; //TODO [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
-    final URI zaaktype; //[ 1 .. 1000 ] characters
-    final String verantwoordelijkeOrganisatie; // TODO RSIN [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
-    final LocalDate startdatum;
+    @JsonProperty
+    private String bronorganisatie; //TODO [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
 
-    public ZaakImpl(String bronorganisatie, URI zaaktype, String verantwoordelijkeOrganisatie, LocalDate startdatum) {
+    @JsonProperty
+    private String zaaktype; //[ 1 .. 1000 ] characters
+
+    @JsonProperty
+    private String verantwoordelijkeOrganisatie; // TODO RSIN [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
+
+    @JsonProperty
+    private String startdatum;
+
+    public ZaakImpl() {
+    }
+
+    public ZaakImpl(String bronorganisatie, String zaaktype, String verantwoordelijkeOrganisatie, String startdatum) {
         this.bronorganisatie = bronorganisatie;
         this.zaaktype = zaaktype;
         this.verantwoordelijkeOrganisatie = verantwoordelijkeOrganisatie;
@@ -52,7 +64,7 @@ public class ZaakImpl implements Zaak {
 
     @Override
     public URI zaaktype() {
-        return zaaktype;
+        return null;
     }
 
     @Override
@@ -67,7 +79,7 @@ public class ZaakImpl implements Zaak {
 
     @Override
     public LocalDate startdatum() {
-        return startdatum;
+        return null;
     }
 
     @Override

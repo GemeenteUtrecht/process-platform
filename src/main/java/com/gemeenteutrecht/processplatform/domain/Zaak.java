@@ -2,12 +2,13 @@ package com.gemeenteutrecht.processplatform.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface Zaak {
+public interface Zaak extends Serializable {
 
     String identificatie();
 
