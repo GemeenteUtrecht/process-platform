@@ -19,13 +19,13 @@ spring:
     datasource:
         driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:tc:mysql:5.7://localhost:3306/gemeente-utrecht-dev
-        name: gemeente-utrecht-dev
-        username: mysql
-        password:
+        url: jdbc:mysql:5.7://localhost:3306/camunda
+        name: gemeente-utrecht-acc
+        username: camunda
+        password: gJsFNdHBtMCynXB93zqrn83mpBkVNk
         hikari:
             auto-commit: false
-            poolName: "gemeente-utrecht-dev-pool"
+            poolName: "gemeente-utrecht-acc-pool"
             maximum-pool-size: 25
             data-source-properties:
                 cachePrepStmts: true
@@ -62,7 +62,3 @@ spring:
                     use_second_level_cache: false
                     use_query_cache: false
                     region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
-
-nlx:
-    zaken: http://localhost:12018/gemeente-utrecht/zrc/zaken
-    statussen: http://localhost:12018/gemeente-utrecht/zrc/statussen
