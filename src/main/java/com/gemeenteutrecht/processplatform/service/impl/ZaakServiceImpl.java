@@ -1,10 +1,11 @@
-package com.gemeenteutrecht.processplatform.nlxapi.zaak.service;
+package com.gemeenteutrecht.processplatform.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gemeenteutrecht.processplatform.domain.Zaak;
 import com.gemeenteutrecht.processplatform.domain.impl.ZaakImpl;
-import com.gemeenteutrecht.processplatform.nlxapi.zaak.service.dto.ZaakListResponse;
-import com.gemeenteutrecht.processplatform.nlxapi.zaak.service.dto.ZaakRequest;
+import com.gemeenteutrecht.processplatform.service.ZaakService;
+import com.gemeenteutrecht.processplatform.service.dto.ZaakListResponse;
+import com.gemeenteutrecht.processplatform.service.dto.ZaakRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

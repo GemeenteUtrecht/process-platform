@@ -1,8 +1,9 @@
-package com.gemeenteutrecht.processplatform.nlxapi.zaak.service;
+package com.gemeenteutrecht.processplatform.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gemeenteutrecht.processplatform.domain.Zaak;
-import com.gemeenteutrecht.processplatform.nlxapi.zaak.service.dto.ZaakRequest;
+import com.gemeenteutrecht.processplatform.service.impl.ZaakServiceImpl;
+import com.gemeenteutrecht.processplatform.service.dto.ZaakRequest;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.client.RestTemplate;
