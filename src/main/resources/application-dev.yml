@@ -66,3 +66,4 @@ spring:
 nlx:
     zaken: http://localhost:12018/gemeente-utrecht/zrc/zaken
     statussen: http://localhost:12018/gemeente-utrecht/zrc/statussen
+    document: http://localhost:12018/gemeente-utrecht/drc/objectinformatieobjecten
