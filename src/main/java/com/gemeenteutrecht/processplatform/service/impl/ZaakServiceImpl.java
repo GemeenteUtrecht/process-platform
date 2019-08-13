@@ -1,11 +1,14 @@
 package com.gemeenteutrecht.processplatform.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
 import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
+import com.gemeenteutrecht.processplatform.domain.zaak.ZaakStatus;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
-import com.gemeenteutrecht.processplatform.service.ZaakService;
-import com.gemeenteutrecht.processplatform.domain.zaak.response.impl.ZaakListResponse;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.ZaakCreateRequestImpl;
+import com.gemeenteutrecht.processplatform.domain.zaak.response.StatusListResponse;
+import com.gemeenteutrecht.processplatform.domain.zaak.response.impl.ZaakListResponse;
+import com.gemeenteutrecht.processplatform.service.ZaakService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,43 +16,49 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
+@Service
 public class ZaakServiceImpl implements ZaakService {
 
     private final RestTemplate restTemplate;
     private final ObjectMapper mapper;
-    private final String url;
     private final String token;
+    private final NlxEndpointProperties endpointProperties;
 
     public ZaakServiceImpl(
             RestTemplate restTemplate,
             ObjectMapper mapper,
-            @Value("url.zaken") String url,
+            NlxEndpointProperties endpointProperties,
             @Value("jwt.token.zaak") String token
     ) {
         this.restTemplate = restTemplate;
         this.mapper = mapper;
-        this.url = url;
+        this.endpointProperties = endpointProperties;
         this.token = token;
     }
 
     @Override
-    public List<Zaak> getZaken() throws IOException {
+    public List<Zaak> getZaken() {
         final HttpEntity entity = new HttpEntity<>(getHeaders());
 
         final ResponseEntity<String> response = restTemplate.exchange(
-                url,
+                endpointProperties.getZaak(),
                 HttpMethod.GET,
                 entity,
                 String.class
         );
         if (response.getStatusCode().is2xxSuccessful()) {
-            return mapper.readValue(response.getBody(), ZaakListResponse.class).results();
+            try {
+                return mapper.readValue(response.getBody(), ZaakListResponse.class).results();
+            } catch (IOException e) {
+                throw new RuntimeException("Parsing error " + e.getMessage(), e);
+            }
         } else {
             throw new RuntimeException("Error while performing GET on /zaken with code: " + response.getStatusCode());
         }
@@ -60,7 +69,7 @@ public class ZaakServiceImpl implements ZaakService {
         final HttpEntity<ZaakCreateRequestImpl> request = new HttpEntity<>(zaak, getHeaders());
 
         ResponseEntity<ZaakImpl> response = restTemplate.exchange(
-                url,
+                endpointProperties.getZaak(),
                 HttpMethod.POST,
                 request,
                 ZaakImpl.class
@@ -69,6 +78,27 @@ public class ZaakServiceImpl implements ZaakService {
             return response.getBody();
         } else {
             throw new RuntimeException("Error while performing POST on /zaak with code: " + response.getStatusCode());
+        }
+    }
+
+    @Override
+    public List<ZaakStatus> getStatussen(Zaak zaak) {
+        final HttpEntity entity = new HttpEntity<>(getHeaders());
+
+        final ResponseEntity<String> response = restTemplate.exchange(
+                endpointProperties.getStatus(),
+                HttpMethod.GET,
+                entity,
+                String.class
+        );
+        if (response.getStatusCode().is2xxSuccessful()) {
+            try {
+                return mapper.readValue(response.getBody(), StatusListResponse.class).results();
+            } catch (IOException e) {
+                throw new RuntimeException("Parsing error " + e.getMessage(), e);
+            }
+        } else {
+            throw new RuntimeException("Error while performing GET on /status with code: " + response.getStatusCode());
         }
     }
 
