@@ -2,6 +2,7 @@ package com.gemeenteutrecht.processplatform.service;
 
 import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
 import com.gemeenteutrecht.processplatform.domain.zaak.ZaakStatus;
+import com.gemeenteutrecht.processplatform.domain.zaak.request.ZaakCreateRequest;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.ZaakCreateRequestImpl;
 
 import java.io.IOException;
