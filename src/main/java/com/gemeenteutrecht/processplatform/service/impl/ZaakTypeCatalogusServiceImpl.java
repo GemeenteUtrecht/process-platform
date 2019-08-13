@@ -2,10 +2,10 @@ package com.gemeenteutrecht.processplatform.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
-import com.gemeenteutrecht.processplatform.domain.catalogus.StatusType;
-import com.gemeenteutrecht.processplatform.domain.catalogus.response.impl.StatusTypeListResponseImpl;
+import com.gemeenteutrecht.processplatform.domain.catalogus.impl.StatusTypeImpl;
 import com.gemeenteutrecht.processplatform.service.ZaakTypeCatalogusService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +41,7 @@ public class ZaakTypeCatalogusServiceImpl implements ZaakTypeCatalogusService {
     }
 
     @Override
-    public List<StatusType> getZakenTypes(UUID catalog, UUID zaakType) {
+    public List<StatusTypeImpl> getZakenTypes(UUID catalog, UUID zaakType) {
         final HttpEntity entity = new HttpEntity<>(getHeaders());
 
         // URI (URL) parameters
@@ -54,18 +53,16 @@ public class ZaakTypeCatalogusServiceImpl implements ZaakTypeCatalogusService {
         final UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString(endpointProperties.getCatalogusZaakType());
 
-        final ResponseEntity<String> response = restTemplate.exchange(
+        final ResponseEntity<List<StatusTypeImpl>> response = restTemplate.exchange(
                 builder.buildAndExpand(uriParams).toUri(),
                 HttpMethod.GET,
                 entity,
-                String.class
+                new ParameterizedTypeReference<List<StatusTypeImpl>>() {
+                }
         );
+
         if (response.getStatusCode().is2xxSuccessful()) {
-            try {
-                return mapper.readValue(response.getBody(), StatusTypeListResponseImpl.class).results();
-            } catch (IOException e) {
-                throw new RuntimeException("Parsing error " + e.getMessage(), e);
-            }
+            return response.getBody();
         } else {
             throw new RuntimeException("Error while performing GET on /status with code: " + response.getStatusCode());
         }

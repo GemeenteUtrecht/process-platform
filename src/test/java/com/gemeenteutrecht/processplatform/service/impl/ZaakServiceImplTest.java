@@ -5,6 +5,7 @@ import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
 import com.gemeenteutrecht.processplatform.config.RestTemplateConfiguration;
 import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
 import com.gemeenteutrecht.processplatform.domain.zaak.ZaakStatus;
+import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakStatusImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.StatusCreateRequestImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.ZaakCreateRequestImpl;
 import com.gemeenteutrecht.processplatform.service.ZaakService;
@@ -68,7 +69,7 @@ public class ZaakServiceImplTest {
     public void shouldGetStatussen() {
         final ZaakCreateRequestImpl zaakRequest = zaakCreateRequest();
         Zaak zaak = zaakService.createZaak(zaakRequest);
-        List<ZaakStatus> statussen = zaakService.getStatussen(zaak.url());
+        List<ZaakStatusImpl> statussen = zaakService.getStatussen(zaak.url());
         assertNotNull(statussen);
     }
 

@@ -3,16 +3,14 @@ package com.gemeenteutrecht.processplatform.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
 import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
-import com.gemeenteutrecht.processplatform.domain.zaak.ZaakStatus;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakStatusImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.ZaakCreateRequest;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.StatusCreateRequestImpl;
-import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.ZaakCreateRequestImpl;
-import com.gemeenteutrecht.processplatform.domain.zaak.response.impl.StatusListResponseImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.response.impl.ZaakListResponse;
 import com.gemeenteutrecht.processplatform.service.ZaakService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -104,23 +102,25 @@ public class ZaakServiceImpl implements ZaakService {
     }
 
     @Override
-    public List<ZaakStatus> getStatussen(URI zaak) {
+    public List<ZaakStatusImpl> getStatussen(URI zaak) {
         final HttpEntity entity = new HttpEntity<>(getHeaders());
         final UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(endpointProperties.getStatus())
                 .queryParam("zaak", zaak.toString());
 
-        final ResponseEntity<String> response = restTemplate.exchange(
+        final ResponseEntity<List<ZaakStatusImpl>> response = restTemplate.exchange(
                 builder.toUriString(),
                 HttpMethod.GET,
                 entity,
-                String.class
+                new ParameterizedTypeReference<List<ZaakStatusImpl>>(){}
         );
         if (response.getStatusCode().is2xxSuccessful()) {
-            try {
-                return mapper.readValue(response.getBody(), StatusListResponseImpl.class).results();
-            } catch (IOException e) {
+            return response.getBody();
+            /*try {*/
+
+               // return mapper.readValue(response.getBody(), StatusListResponseImpl.class).results();
+/*            } catch (IOException e) {
                 throw new RuntimeException("Parsing error " + e.getMessage(), e);
-            }
+            }*/
         } else {
             throw new RuntimeException("Error while performing GET on /status with code: " + response.getStatusCode());
         }

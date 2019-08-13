@@ -3,14 +3,13 @@ package com.gemeenteutrecht.processplatform.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
 import com.gemeenteutrecht.processplatform.config.RestTemplateConfiguration;
-import com.gemeenteutrecht.processplatform.domain.catalogus.StatusType;
+import com.gemeenteutrecht.processplatform.domain.catalogus.impl.StatusTypeImpl;
 import com.gemeenteutrecht.processplatform.service.ZaakTypeCatalogusService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,8 +36,8 @@ public class ZaakTypeCatalogusServiceImplTest {
     public void shouldGetZakenTypes() {
         UUID catalog = UUID.fromString("28487d3f-6a1b-489c-b03d-c75ac6693e72");
         UUID zaakType = UUID.fromString("7af2d4dd-511b-4b27-89a8-77ac7c8e7a82");
-        List<StatusType> zakenTypes = zaakTypeCatalogusService.getZakenTypes(catalog, zaakType);
-        assertNotNull(zakenTypes);
+        List<StatusTypeImpl> statusTypeList = zaakTypeCatalogusService.getZakenTypes(catalog, zaakType);
+        assertNotNull(statusTypeList);
     }
 
 }
