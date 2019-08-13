@@ -1,8 +1,7 @@
-package com.gemeenteutrecht.processplatform.domain.listener.impl;
+package com.gemeenteutrecht.processplatform.domain.zaak.listener.impl;
 
-import com.gemeenteutrecht.processplatform.domain.listener.ZaakExecutionListener;
+import com.gemeenteutrecht.processplatform.domain.zaak.listener.ZaakExecutionListener;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
-import org.camunda.bpm.engine.variable.value.ObjectValue;
 import org.springframework.stereotype.Service;
 
 @Service

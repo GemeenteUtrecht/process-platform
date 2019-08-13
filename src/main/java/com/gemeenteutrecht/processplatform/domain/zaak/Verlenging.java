@@ -1,8 +1,8 @@
-package com.gemeenteutrecht.processplatform.domain;
+package com.gemeenteutrecht.processplatform.domain.zaak;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.gemeenteutrecht.processplatform.domain.impl.VerlengingImpl;
+import com.gemeenteutrecht.processplatform.domain.zaak.impl.VerlengingImpl;
 
 @JsonDeserialize(as = VerlengingImpl.class)
 public interface Verlenging {

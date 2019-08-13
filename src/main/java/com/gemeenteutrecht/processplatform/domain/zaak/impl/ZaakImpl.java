@@ -1,13 +1,10 @@
-package com.gemeenteutrecht.processplatform.domain.impl;
+package com.gemeenteutrecht.processplatform.domain.zaak.impl;
 
-import com.gemeenteutrecht.processplatform.domain.ArchiefNominatie;
-import com.gemeenteutrecht.processplatform.domain.ArchiefStatus;
-import com.gemeenteutrecht.processplatform.domain.Betalingsindicatie;
-import com.gemeenteutrecht.processplatform.domain.Geometrie;
-import com.gemeenteutrecht.processplatform.domain.Kenmerk;
-import com.gemeenteutrecht.processplatform.domain.Opschorting;
-import com.gemeenteutrecht.processplatform.domain.Verlenging;
-import com.gemeenteutrecht.processplatform.domain.Zaak;
+import com.gemeenteutrecht.processplatform.domain.zaak.Geometrie;
+import com.gemeenteutrecht.processplatform.domain.zaak.Kenmerk;
+import com.gemeenteutrecht.processplatform.domain.zaak.Opschorting;
+import com.gemeenteutrecht.processplatform.domain.zaak.Verlenging;
+import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

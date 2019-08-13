@@ -1,7 +1,8 @@
-package com.gemeenteutrecht.processplatform.service.dto;
+package com.gemeenteutrecht.processplatform.domain.zaak.response.impl;
 
-import com.gemeenteutrecht.processplatform.domain.Zaak;
-import com.gemeenteutrecht.processplatform.domain.impl.ZaakImpl;
+import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
+import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
+import com.gemeenteutrecht.processplatform.domain.zaak.response.ListResponse;
 
 
 import java.net.URI;

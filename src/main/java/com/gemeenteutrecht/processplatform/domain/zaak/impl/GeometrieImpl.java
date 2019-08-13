@@ -1,7 +1,7 @@
-package com.gemeenteutrecht.processplatform.domain.impl;
+package com.gemeenteutrecht.processplatform.domain.zaak.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.gemeenteutrecht.processplatform.domain.Geometrie;
+import com.gemeenteutrecht.processplatform.domain.zaak.Geometrie;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

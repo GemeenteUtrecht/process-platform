@@ -1,6 +1,6 @@
-package com.gemeenteutrecht.processplatform.domain.impl;
+package com.gemeenteutrecht.processplatform.domain.zaak.impl;
 
-import com.gemeenteutrecht.processplatform.domain.Opschorting;
+import com.gemeenteutrecht.processplatform.domain.zaak.Opschorting;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

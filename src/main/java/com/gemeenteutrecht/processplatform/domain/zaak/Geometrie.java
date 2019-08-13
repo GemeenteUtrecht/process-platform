@@ -1,4 +1,4 @@
-package com.gemeenteutrecht.processplatform.domain;
+package com.gemeenteutrecht.processplatform.domain.zaak;
 
 import java.awt.*;
 

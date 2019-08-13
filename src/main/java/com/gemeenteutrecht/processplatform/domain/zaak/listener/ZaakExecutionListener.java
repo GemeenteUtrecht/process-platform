@@ -1,4 +1,4 @@
-package com.gemeenteutrecht.processplatform.domain.listener;
+package com.gemeenteutrecht.processplatform.domain.zaak.listener;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 

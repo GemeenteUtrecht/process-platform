@@ -1,6 +1,6 @@
-package com.gemeenteutrecht.processplatform.domain.impl;
+package com.gemeenteutrecht.processplatform.domain.zaak.impl;
 
-import com.gemeenteutrecht.processplatform.domain.Kenmerk;
+import com.gemeenteutrecht.processplatform.domain.zaak.Kenmerk;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

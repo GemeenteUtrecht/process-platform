@@ -1,13 +1,13 @@
-package com.gemeenteutrecht.processplatform.service.dto;
+package com.gemeenteutrecht.processplatform.domain.zaak.request.impl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.gemeenteutrecht.processplatform.domain.zaak.request.ZaakCreateRequest;
 
-import java.io.Serializable;
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class ZaakRequest implements Serializable {
+public class ZaakCreateRequestImpl implements ZaakCreateRequest {
 
     @JsonProperty
     private String bronorganisatie; //TODO [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
@@ -18,7 +18,7 @@ public class ZaakRequest implements Serializable {
     @JsonProperty
     private String startdatum;
 
-    public ZaakRequest(String bronorganisatie, URI zaaktype, String verantwoordelijkeOrganisatie, LocalDate startdatum) {
+    public ZaakCreateRequestImpl(String bronorganisatie, URI zaaktype, String verantwoordelijkeOrganisatie, LocalDate startdatum) {
         this.bronorganisatie = bronorganisatie;
         this.zaaktype = zaaktype;
         this.verantwoordelijkeOrganisatie = verantwoordelijkeOrganisatie;

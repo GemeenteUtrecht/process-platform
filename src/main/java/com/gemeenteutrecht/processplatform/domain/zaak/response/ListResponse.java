@@ -1,4 +1,4 @@
-package com.gemeenteutrecht.processplatform.service.dto;
+package com.gemeenteutrecht.processplatform.domain.zaak.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

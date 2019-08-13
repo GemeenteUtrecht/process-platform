@@ -1,4 +1,4 @@
-package com.gemeenteutrecht.processplatform.domain;
+package com.gemeenteutrecht.processplatform.domain.zaak;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.gemeenteutrecht.processplatform.domain.zaak.impl.ArchiefNominatie;
+import com.gemeenteutrecht.processplatform.domain.zaak.impl.ArchiefStatus;
+import com.gemeenteutrecht.processplatform.domain.zaak.impl.Betalingsindicatie;
 
 import java.net.URI;
 import java.time.LocalDate;
