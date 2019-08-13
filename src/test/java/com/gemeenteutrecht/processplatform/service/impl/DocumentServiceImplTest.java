@@ -37,7 +37,7 @@ public class DocumentServiceImplTest {
         DocumentRequestImpl documentRequest = new DocumentRequestImpl(
                 URI.create("http://example.com"),
                 URI.create("http://gemma-zrc.k8s.dc1.proeftuin.utrecht.nl/api/v1/zaken/73bd9e00-18c9-4b05-9ed0-b78afd372a9e"),
-                "zaak");
+                ObjectType.zaak);
         Document document = documentService.createDocument(documentRequest);
         assertNotNull(document);
     }
