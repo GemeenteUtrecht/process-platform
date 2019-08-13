@@ -3,9 +3,10 @@ package com.gemeenteutrecht.processplatform.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
-import com.gemeenteutrecht.processplatform.service.ZaakService;
-import com.gemeenteutrecht.processplatform.domain.zaak.response.impl.ZaakListResponse;
+import com.gemeenteutrecht.processplatform.domain.zaak.request.ZaakCreateRequest;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.ZaakCreateRequestImpl;
+import com.gemeenteutrecht.processplatform.domain.zaak.response.impl.ZaakListResponse;
+import com.gemeenteutrecht.processplatform.service.ZaakService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -56,8 +57,8 @@ public class ZaakServiceImpl implements ZaakService {
     }
 
     @Override
-    public Zaak createZaak(ZaakCreateRequestImpl zaak) {
-        final HttpEntity<ZaakCreateRequestImpl> request = new HttpEntity<>(zaak, getHeaders());
+    public Zaak createZaak(ZaakCreateRequest zaak) {
+        final HttpEntity<ZaakCreateRequest> request = new HttpEntity<>(zaak, getHeaders());
 
         ResponseEntity<ZaakImpl> response = restTemplate.exchange(
                 url,
