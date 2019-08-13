@@ -75,15 +75,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:startEvent id="aanvraag-ontvangen-start-event" name="Aanvraag ontvangen">
       <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="type_object" label="Selecteer je object" type="enum">
-            <camunda:value id="Fietsenrek" name="Fietsenrek" />
-            <camunda:value id="Lantaarnpaal" name="Lantaarnpaal" />
-            <camunda:value id="Verkeersbord" name="Verkeersbord" />
-            <camunda:value id="Verkeersdrempel" name="Verkeersdrempel" />
-            <camunda:value id="Gebouw" name="Gebouw" />
-          </camunda:formField>
-        </camunda:formData>
+        <camunda:executionListener expression="${zaakService.create(execution)}" event="end" />
       </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_0zxmava</bpmn:outgoing>
     </bpmn:startEvent>

@@ -31,8 +31,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "org.springframework.boot:spring-boot-starter-jdbc"
     implementation group: 'org.camunda.bpm.springboot', name: 'camunda-bpm-spring-boot-starter', version: '3.3.3'
-    implementation group: 'org.camunda.bpm.springboot', name: 'camunda-bpm-spring-boot-starter-webapp', version: '3.3.3'
+    //implementation group: 'org.camunda.bpm.springboot', name: 'camunda-bpm-spring-boot-starter-webapp', version: '3.3.3'//for some reason this will result in a issue where you cannot post
     implementation group: 'org.camunda.bpm.springboot', name: 'camunda-bpm-spring-boot-starter-rest', version: '3.3.3'
+
+    //Spin
+    implementation group: 'org.camunda.bpm', name: 'camunda-engine-plugin-spin', version: '7.11.0'
+    implementation group: 'org.camunda.spin', name: 'camunda-spin-dataformat-json-jackson', version: '1.7.0'
 
     //Database
     implementation "org.testcontainers:mysql:1.11.3"
