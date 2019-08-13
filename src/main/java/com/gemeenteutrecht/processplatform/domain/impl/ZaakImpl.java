@@ -2,11 +2,14 @@ package com.gemeenteutrecht.processplatform.domain.impl;
 
 import com.gemeenteutrecht.processplatform.domain.ArchiefNominatie;
 import com.gemeenteutrecht.processplatform.domain.ArchiefStatus;
+import com.gemeenteutrecht.processplatform.domain.Betalingsindicatie;
 import com.gemeenteutrecht.processplatform.domain.Geometrie;
 import com.gemeenteutrecht.processplatform.domain.Kenmerk;
 import com.gemeenteutrecht.processplatform.domain.Opschorting;
 import com.gemeenteutrecht.processplatform.domain.Verlenging;
 import com.gemeenteutrecht.processplatform.domain.Zaak;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.net.URI;
 import java.time.LocalDate;
@@ -16,23 +19,45 @@ import java.util.List;
 /**
  * see https://directory.demo.nlx.io/documentation/gemeente-utrecht/zrc#operation/zaak_create
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ZaakImpl implements Zaak {
 
-    final String bronorganisatie; //TODO [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
-    final URI zaaktype; //[ 1 .. 1000 ] characters
-    final String verantwoordelijkeOrganisatie; // TODO RSIN [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
-    final LocalDate startdatum;
+    private String bronorganisatie; //TODO [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
+    private URI zaaktype; //[ 1 .. 1000 ] characters
+    private String verantwoordelijkeOrganisatie; // TODO RSIN [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
+    private LocalDate startdatum;
+    private URI url;
+    private String identificatie;
+    private String omschrijving;
+    private String toelichting;
+    private LocalDate registratiedatum;
+    private LocalDate einddatumGepland;
+    private LocalDate uiterlijkeEinddatumAfdoening;
+    private LocalDate publicatiedatum;
+    private URI communicatiekanaal;
+    private List<URI> productenOfDiensten;
+    private String vertrouwelijkheidaanduiding;
+    private Betalingsindicatie betalingsindicatie;
+    private LocalDateTime laatsteBetaaldatum;
+    private Geometrie geometrie;
+    private Verlenging verlenging;
+    private Opschorting opschorting;
+    private URI selectielijstklasse;
+    private URI hoofdzaak;
+    private List<URI> relevanteAndereZaken;
+    private List<Kenmerk> kenmerken;
+    private ArchiefNominatie archiefNominatie;
+    private ArchiefStatus archiefStatus;
+    private LocalDate archiefActieDatum;
 
-    public ZaakImpl(String bronorganisatie, URI zaaktype, String verantwoordelijkeOrganisatie, LocalDate startdatum) {
-        this.bronorganisatie = bronorganisatie;
-        this.zaaktype = zaaktype;
-        this.verantwoordelijkeOrganisatie = verantwoordelijkeOrganisatie;
-        this.startdatum = startdatum;
+    @Override
+    public URI url() {
+        return url;
     }
 
     @Override
     public String identificatie() {
-        return null;
+        return identificatie;
     }
 
     @Override
@@ -42,12 +67,12 @@ public class ZaakImpl implements Zaak {
 
     @Override
     public String omschrijving() {
-        return null;
+        return omschrijving;
     }
 
     @Override
     public String toelichting() {
-        return null;
+        return toelichting;
     }
 
     @Override
@@ -57,7 +82,7 @@ public class ZaakImpl implements Zaak {
 
     @Override
     public LocalDate registratiedatum() {
-        return null;
+        return registratiedatum;
     }
 
     @Override
@@ -72,91 +97,91 @@ public class ZaakImpl implements Zaak {
 
     @Override
     public LocalDate einddatumGepland() {
-        return null;
+        return einddatumGepland;
     }
 
     @Override
     public LocalDate uiterlijkeEinddatumAfdoening() {
-        return null;
+        return uiterlijkeEinddatumAfdoening;
     }
 
     @Override
     public LocalDate publicatiedatum() {
-        return null;
+        return publicatiedatum;
     }
 
     @Override
     public URI communicatiekanaal() {
-        return null;
+        return communicatiekanaal;
     }
 
     @Override
     public List<URI> productenOfDiensten() {
-        return null;
+        return productenOfDiensten;
     }
 
     @Override
     public String vertrouwelijkheidaanduiding() {
-        return null;
+        return vertrouwelijkheidaanduiding;
     }
 
     @Override
-    public String betalingsindicatie() {
-        return null;
+    public Betalingsindicatie betalingsindicatie() {
+        return betalingsindicatie;
     }
 
     @Override
     public LocalDateTime laatsteBetaaldatum() {
-        return null;
+        return laatsteBetaaldatum;
     }
 
     @Override
     public Geometrie geometrie() {
-        return null;
+        return geometrie;
     }
 
     @Override
     public Verlenging verlenging() {
-        return null;
+        return verlenging;
     }
 
     @Override
     public Opschorting opschorting() {
-        return null;
+        return opschorting;
     }
 
     @Override
     public URI selectielijstklasse() {
-        return null;
+        return selectielijstklasse;
     }
 
     @Override
     public URI hoofdzaak() {
-        return null;
+        return hoofdzaak;
     }
 
     @Override
     public List<URI> relevanteAndereZaken() {
-        return null;
+        return relevanteAndereZaken;
     }
 
     @Override
     public List<Kenmerk> kenmerken() {
-        return null;
+        return kenmerken;
     }
 
     @Override
     public ArchiefNominatie archiefNominatie() {
-        return null;
+        return archiefNominatie;
     }
 
     @Override
     public ArchiefStatus archiefStatus() {
-        return null;
+        return archiefStatus;
     }
 
     @Override
     public LocalDate archiefActieDatum() {
-        return null;
+        return archiefActieDatum;
     }
 }

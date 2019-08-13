@@ -1,5 +1,6 @@
 package com.gemeenteutrecht.processplatform.domain;
 
 public enum ArchiefNominatie {
-    blijvend_bewaren
+    blijvend_bewaren,
+    vernietigen
 }
