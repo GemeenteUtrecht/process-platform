@@ -1,4 +1,4 @@
-package com.gemeenteutrecht.processplatform.nlxapi.zaak.service.dto;
+package com.gemeenteutrecht.processplatform.service.dto;
 
 import com.gemeenteutrecht.processplatform.domain.Zaak;
 import com.gemeenteutrecht.processplatform.domain.impl.ZaakImpl;
