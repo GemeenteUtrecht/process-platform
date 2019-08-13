@@ -28,7 +28,7 @@ public class DocumentServiceImplTest {
         restTemplate = new RestTemplate();
         objectMapper = new ObjectMapper();
         endpointProperties = new NlxEndpointProperties();
-        endpointProperties.setDocument(URI.create("http://localhost:12018/gemeente-utrecht/drc/objectinformatieobjecten"));
+        endpointProperties.setDocument("http://localhost:12018/gemeente-utrecht/drc/objectinformatieobjecten");
         documentService = new DocumentServiceImpl(restTemplate, objectMapper, endpointProperties);
     }
 

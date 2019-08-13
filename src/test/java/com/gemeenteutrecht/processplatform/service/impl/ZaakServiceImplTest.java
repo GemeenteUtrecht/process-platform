@@ -33,8 +33,8 @@ public class ZaakServiceImplTest {
         restTemplate = new RestTemplateConfiguration().restTemplate(new RestTemplateBuilder());
         objectMapper = new ObjectMapper();
         nlxEndpointProperties = new NlxEndpointProperties();
-        nlxEndpointProperties.setZaak(URI.create("http://localhost:12018/gemeente-utrecht/zrc/zaken"));
-        nlxEndpointProperties.setStatus(URI.create("http://localhost:12018/gemeente-utrecht/zrc/statussen"));
+        nlxEndpointProperties.setZaak("http://localhost:12018/gemeente-utrecht/zrc/zaken");
+        nlxEndpointProperties.setStatus("http://localhost:12018/gemeente-utrecht/zrc/statussen");
         zaakService = new ZaakServiceImpl(restTemplate, objectMapper, nlxEndpointProperties, token);
     }
 

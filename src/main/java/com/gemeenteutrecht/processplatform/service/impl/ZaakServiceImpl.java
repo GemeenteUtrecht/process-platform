@@ -106,7 +106,7 @@ public class ZaakServiceImpl implements ZaakService {
     @Override
     public List<ZaakStatus> getStatussen(URI zaak) {
         final HttpEntity entity = new HttpEntity<>(getHeaders());
-        final UriComponentsBuilder builder = UriComponentsBuilder.fromUri(endpointProperties.getStatus())
+        final UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(endpointProperties.getStatus())
                 .queryParam("zaak", zaak.toString());
 
         final ResponseEntity<String> response = restTemplate.exchange(

@@ -2,36 +2,46 @@ package com.gemeenteutrecht.processplatform.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.net.URI;
-
 @ConfigurationProperties(prefix = "nlx", ignoreUnknownFields = false)
 public class NlxEndpointProperties {
 
-    private URI zaak;
+    private String zaak;
 
-    private URI status;
+    private String status;
 
-    private URI document;
+    private String catalogusZaakType;
 
-    public URI getZaak() {
+    private String document;
+
+    public String getZaak() {
         return zaak;
     }
 
-    public void setZaak(URI zaak) {
+    public void setZaak(String zaak) {
         this.zaak = zaak;
     }
 
-    public URI getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(URI status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public URI getDocument() { return document; }
+    public String getCatalogusZaakType() {
+        return catalogusZaakType;
+    }
 
-    public void setDocument(URI document) {
+    public void setCatalogusZaakType(String catalogusZaakType) {
+        this.catalogusZaakType = catalogusZaakType;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
         this.document = document;
     }
 }
