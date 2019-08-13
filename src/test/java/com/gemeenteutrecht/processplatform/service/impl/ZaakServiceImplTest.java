@@ -1,9 +1,10 @@
-package com.gemeenteutrecht.processplatform.service;
+package com.gemeenteutrecht.processplatform.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
-import com.gemeenteutrecht.processplatform.service.impl.ZaakServiceImpl;
+import com.gemeenteutrecht.processplatform.domain.zaak.request.ZaakCreateRequest;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.ZaakCreateRequestImpl;
+import com.gemeenteutrecht.processplatform.service.ZaakService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.client.RestTemplate;
@@ -13,9 +14,9 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
-public class ZaakServiceTest {
+public class ZaakServiceImplTest {
 
     private ZaakService zaakService;
     private RestTemplate restTemplate;
@@ -38,14 +39,13 @@ public class ZaakServiceTest {
 
     @Test
     public void createZaak() throws IOException {
-        ZaakCreateRequestImpl zaak = new ZaakCreateRequestImpl(
+        ZaakCreateRequest zaakRequest = new ZaakCreateRequestImpl(
                 "002220647",
                 URI.create("http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/zaaktypen/7af2d4dd-511b-4b27-89a8-77ac7c8e7a82"),
                 "002220647",
                 LocalDate.of(2019, 6, 28)
         );
-        Zaak zaak1 = zaakService.createZaak(zaak);
-        assertNotNull(zaak1);
+        Zaak zaak = zaakService.createZaak(zaakRequest);
+        assertNotNull(zaak);
     }
-
 }
