@@ -1,6 +1,7 @@
 package com.gemeenteutrecht.processplatform.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
 import com.gemeenteutrecht.processplatform.domain.document.Document;
 import com.gemeenteutrecht.processplatform.domain.document.impl.DocumentImpl;
 import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequest;
@@ -22,19 +23,16 @@ public class DocumentServiceImpl implements DocumentService {
 
     private final RestTemplate restTemplate;
     private final ObjectMapper mapper;
-    private final String url;
-    private final String token;//TODO token voor drc
+    private final NlxEndpointProperties endpointProperties;
 
     public DocumentServiceImpl(
             RestTemplate restTemplate,
             ObjectMapper mapper,
-            @Value("url.document") String url,
-            @Value("jwt.token.document") String token
+            NlxEndpointProperties endpointProperties
     ) {
         this.restTemplate = restTemplate;
         this.mapper = mapper;
-        this.url = url;
-        this.token = token;
+        this.endpointProperties = endpointProperties;
     }
 
     @Override
@@ -42,7 +40,7 @@ public class DocumentServiceImpl implements DocumentService {
         final HttpEntity<DocumentRequest> request = new HttpEntity<>(documentRequest, getHeaders());
 
         ResponseEntity<DocumentImpl> response = restTemplate.exchange(
-                url,
+                endpointProperties.getDocument(),
                 HttpMethod.POST,
                 request,
                 DocumentImpl.class
@@ -59,7 +57,6 @@ public class DocumentServiceImpl implements DocumentService {
         final HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("Authorization", "Bearer " + token);
 
         return headers;
     }

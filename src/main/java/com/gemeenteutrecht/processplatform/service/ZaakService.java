@@ -12,7 +12,7 @@ public interface ZaakService {
 
     List<Zaak> getZaken();
 
-    Zaak createZaak(ZaakCreateRequestImpl zaak);
+    Zaak createZaak(ZaakCreateRequest zaak);
 
     List<ZaakStatus> getStatussen(Zaak zaak);
 

@@ -1,0 +1,8 @@
+jwt:
+  token:
+    zaak: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImNsaWVudF9pZGVudGlmaWVyIjoicml0ZW5zZSJ9.eyJpc3MiOiJkb2NzLVU1b2FIaGYxQTJUWCIsImlhdCI6MTU0MzI0NjkwNywiemRzIjp7InNjb3BlcyI6WyJ6ZHMuc2NvcGVzLnpha2VuLmxlemVuIiwiemRzLnNjb3Blcy56YWtlbi5hYW5tYWtlbiJdLCJ6YWFrdHlwZXMiOlsiKiJdfX0.FvF76GZjd7XRmfWUSsbJUsDAemISwOhex8MYvfQNv1Y
+
+nlx:
+  zaken: http://localhost:12018/gemeente-utrecht/zrc/zaken
+  statussen: http://localhost:12018/gemeente-utrecht/zrc/statussen
+  document: http://localhost:12018/gemeente-utrecht/drc/objectinformatieobjecten

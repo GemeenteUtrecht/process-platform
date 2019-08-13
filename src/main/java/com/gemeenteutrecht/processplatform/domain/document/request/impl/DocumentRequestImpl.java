@@ -1,16 +1,16 @@
 package com.gemeenteutrecht.processplatform.domain.document.request.impl;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gemeenteutrecht.processplatform.domain.document.impl.ObjectType;
 import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequest;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import java.io.Serializable;
 import java.net.URI;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class DocumentRequestImpl implements DocumentRequest {
+public class DocumentRequestImpl implements DocumentRequest, Serializable {
 
     private URI url;
     private URI informatieObject;

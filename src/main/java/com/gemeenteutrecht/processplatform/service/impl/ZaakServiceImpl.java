@@ -5,6 +5,7 @@ import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
 import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
 import com.gemeenteutrecht.processplatform.domain.zaak.ZaakStatus;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
+import com.gemeenteutrecht.processplatform.domain.zaak.request.ZaakCreateRequest;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.ZaakCreateRequestImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.response.StatusListResponse;
 import com.gemeenteutrecht.processplatform.domain.zaak.response.impl.ZaakListResponse;
@@ -65,8 +66,8 @@ public class ZaakServiceImpl implements ZaakService {
     }
 
     @Override
-    public Zaak createZaak(ZaakCreateRequestImpl zaak) {
-        final HttpEntity<ZaakCreateRequestImpl> request = new HttpEntity<>(zaak, getHeaders());
+    public Zaak createZaak(ZaakCreateRequest zaak) {
+        final HttpEntity<ZaakCreateRequest> request = new HttpEntity<>(zaak, getHeaders());
 
         ResponseEntity<ZaakImpl> response = restTemplate.exchange(
                 endpointProperties.getZaak(),

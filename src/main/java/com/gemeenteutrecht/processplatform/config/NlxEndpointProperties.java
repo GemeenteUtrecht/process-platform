@@ -11,6 +11,8 @@ public class NlxEndpointProperties {
 
     private URI status;
 
+    private URI document;
+
     public URI getZaak() {
         return zaak;
     }
@@ -25,5 +27,11 @@ public class NlxEndpointProperties {
 
     public void setStatus(URI status) {
         this.status = status;
+    }
+
+    public URI getDocument() { return document; }
+
+    public void setDocument(URI document) {
+        this.document = document;
     }
 }
