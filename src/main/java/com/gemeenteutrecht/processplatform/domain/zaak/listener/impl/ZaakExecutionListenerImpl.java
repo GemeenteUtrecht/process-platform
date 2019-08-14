@@ -45,11 +45,14 @@ public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
                         zaak.startdatum()
                 )
         );
-        // fetch status
         List<StatusTypeImpl> zakenTypes = zaakTypeCatalogusService.getZakenTypes(zaak.catalog(), zaak.zaakType());
+        // set initial status
+        StatusTypeImpl initialStatusType = zakenTypes
+                .stream()
+                .filter(statusType -> statusType.volgnummer().equals(1))
+                .findFirst()
+                .orElseThrow();
 
-        // set status
-        StatusTypeImpl initialStatusType = zakenTypes.get(0);
         zaakService.setStatus(
                 new StatusCreateRequestImpl(
                         zaak.url(),
