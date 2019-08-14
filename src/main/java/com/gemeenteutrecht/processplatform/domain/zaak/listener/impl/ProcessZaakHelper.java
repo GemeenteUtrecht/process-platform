@@ -23,7 +23,7 @@ public class ProcessZaakHelper {
             final JacksonJsonNode variable = (JacksonJsonNode) execution.getVariable("zaak");
             return Optional.of(objectMapper.readValue(variable.toString(), ZaakImpl.class));
         } catch (IOException e) {
-            return Optional.empty();
+            throw new RuntimeException("Cannot find zaak variable in process");
         }
     }
 

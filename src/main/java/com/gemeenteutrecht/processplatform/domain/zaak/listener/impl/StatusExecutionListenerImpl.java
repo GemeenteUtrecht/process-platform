@@ -28,10 +28,7 @@ public class StatusExecutionListenerImpl implements StatusExecutionListener {
 
     @Override
     public void setStatus(DelegateExecution execution, Integer volgnummer, String toelichting) {
-        final ZaakImpl zaak = processZaakHelper.getZaakFrom(execution).orElseThrow(() -> {
-            throw new RuntimeException("Cannot find zaak from process");
-        });
-
+        final ZaakImpl zaak = processZaakHelper.getZaakFrom(execution).orElseThrow();
         final List<StatusTypeImpl> zakenTypes = zaakTypeCatalogusService.getZakenTypes(zaak.catalog(), zaak.zaakType());
         final Optional<StatusTypeImpl> type = zakenTypes
             .stream()
