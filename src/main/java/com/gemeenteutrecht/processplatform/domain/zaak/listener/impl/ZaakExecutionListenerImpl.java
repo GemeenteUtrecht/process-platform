@@ -50,9 +50,17 @@ public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
 
         // set status
         StatusTypeImpl initialStatusType = zakenTypes.get(0);
-        zaakService.setStatus(new StatusCreateRequestImpl(zaak.url(), initialStatusType.url(), LocalDateTime.now(), ""));
+        zaakService.setStatus(
+                new StatusCreateRequestImpl(
+                        zaak.url(),
+                        initialStatusType.url(),
+                        LocalDateTime.now(),
+                        ""
+                )
+        );
 
         // link document
+        //TODO
 
         // update process var
         execution.setVariable("zaak", zaak);
