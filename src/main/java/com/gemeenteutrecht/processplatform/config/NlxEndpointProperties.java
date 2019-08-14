@@ -2,7 +2,7 @@ package com.gemeenteutrecht.processplatform.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "nlx", ignoreUnknownFields = true)
+@ConfigurationProperties(prefix = "nlx")
 public class NlxEndpointProperties {
 
     private String token;
