@@ -7,16 +7,19 @@ import com.gemeenteutrecht.processplatform.domain.zaak.Verlenging;
 import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * see https://directory.demo.nlx.io/documentation/gemeente-utrecht/zrc#operation/zaak_create
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ZaakImpl implements Zaak {
 
     private String bronorganisatie; //TODO [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
@@ -47,9 +50,16 @@ public class ZaakImpl implements Zaak {
     private ArchiefStatus archiefStatus;
     private LocalDate archiefActieDatum;
 
+    public ZaakImpl() {
+    }
+
     @Override
     public URI url() {
         return url;
+    }
+
+    public void setUrl(URI url) {
+        this.url = url;
     }
 
     @Override
@@ -180,5 +190,15 @@ public class ZaakImpl implements Zaak {
     @Override
     public LocalDate archiefActieDatum() {
         return archiefActieDatum;
+    }
+
+    public UUID catalog() {
+        final String uuidAsString = StringUtils.substringBetween(zaaktype().toString(), "catalogussen/", "/");
+        return UUID.fromString(uuidAsString);
+    }
+
+    public UUID zaakType() {
+        final String uuidAsString = StringUtils.substringAfter(zaaktype().toString(), "zaaktypen/");
+        return UUID.fromString(uuidAsString);
     }
 }

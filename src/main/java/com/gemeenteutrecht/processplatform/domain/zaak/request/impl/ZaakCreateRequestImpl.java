@@ -4,12 +4,11 @@ import com.gemeenteutrecht.processplatform.domain.zaak.request.ZaakCreateRequest
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class ZaakCreateRequestImpl implements ZaakCreateRequest {
 
     private String bronorganisatie; //TODO [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
-    private URI zaaktype; //[ 1 .. 1000 ] characters
+    private URI zaaktype;
     private String verantwoordelijkeOrganisatie; // TODO RSIN [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
     private LocalDate startdatum;
 

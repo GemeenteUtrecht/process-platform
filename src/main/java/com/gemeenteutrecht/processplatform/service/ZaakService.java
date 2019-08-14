@@ -2,6 +2,7 @@ package com.gemeenteutrecht.processplatform.service;
 
 import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
 import com.gemeenteutrecht.processplatform.domain.zaak.ZaakStatus;
+import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakStatusImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.ZaakCreateRequest;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.StatusCreateRequestImpl;
@@ -15,10 +16,10 @@ public interface ZaakService {
 
     ListResponse getZaken();
 
-    Zaak createZaak(ZaakCreateRequest zaak);
+    ZaakImpl createZaak(ZaakCreateRequest zaak);
 
     List<ZaakStatusImpl> getStatussen(URI zaak);
 
-    ZaakStatus setStatus(StatusCreateRequestImpl statusCreateRequest);
+    ZaakStatusImpl setStatus(StatusCreateRequestImpl statusCreateRequest);
 
 }

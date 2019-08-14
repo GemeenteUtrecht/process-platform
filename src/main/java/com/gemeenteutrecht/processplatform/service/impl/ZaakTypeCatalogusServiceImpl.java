@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -20,6 +21,7 @@ import static com.gemeenteutrecht.processplatform.service.impl.ApiHelper.headers
 @Service
 public class ZaakTypeCatalogusServiceImpl implements ZaakTypeCatalogusService {
 
+    private static final String STATUS_TYPEN_PATH = "/{catalogus_uuid}/zaaktypen/{zaaktype_uuid}/statustypen";
     private final RestTemplate restTemplate;
     private final NlxEndpointProperties endpointProperties;
 
@@ -38,7 +40,7 @@ public class ZaakTypeCatalogusServiceImpl implements ZaakTypeCatalogusService {
         );
 
         final UriComponentsBuilder builder = UriComponentsBuilder
-                .fromUriString(endpointProperties.getCatalogusZaakType());
+                .fromUriString(endpointProperties.getCatalogusZaakType() + STATUS_TYPEN_PATH);
 
         final ResponseEntity<List<StatusTypeImpl>> response = restTemplate.exchange(
                 builder.buildAndExpand(uriParams).toUri(),

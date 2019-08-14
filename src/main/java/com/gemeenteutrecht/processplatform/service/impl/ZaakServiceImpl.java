@@ -18,6 +18,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 import static com.gemeenteutrecht.processplatform.service.impl.ApiHelper.headers;
@@ -51,11 +53,11 @@ public class ZaakServiceImpl implements ZaakService {
     }
 
     @Override
-    public Zaak createZaak(ZaakCreateRequest zaakCreateRequest) {
+    public ZaakImpl createZaak(ZaakCreateRequest zaakCreateRequest) {
         final HttpEntity<ZaakCreateRequest> request = new HttpEntity<>(zaakCreateRequest, headers(endpointProperties.getToken()));
 
         ResponseEntity<ZaakImpl> response = restTemplate.exchange(
-                endpointProperties.getZaak(),
+                URI.create(endpointProperties.getZaak()),
                 HttpMethod.POST,
                 request,
                 ZaakImpl.class
@@ -72,7 +74,7 @@ public class ZaakServiceImpl implements ZaakService {
         final HttpEntity request = new HttpEntity<>(statusCreateRequest, headers(endpointProperties.getToken()));
 
         final ResponseEntity<ZaakStatusImpl> response = restTemplate.exchange(
-                endpointProperties.getStatus(),
+                URI.create(endpointProperties.getStatus()),
                 HttpMethod.POST,
                 request,
                 ZaakStatusImpl.class

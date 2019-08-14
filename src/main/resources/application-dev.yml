@@ -64,6 +64,7 @@ spring:
                     region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
 
 nlx:
-    zaken: http://localhost:12018/gemeente-utrecht/zrc/zaken
-    statussen: http://localhost:12018/gemeente-utrecht/zrc/statussen
+    zaak: http://localhost:12018/gemeente-utrecht/zrc/zaken
+    catalogusZaakType: http://localhost:12018/gemeente-utrecht/ztc/catalogussen
+    status: http://localhost:12018/gemeente-utrecht/zrc/statussen
     document: http://localhost:12018/gemeente-utrecht/drc/objectinformatieobjecten
