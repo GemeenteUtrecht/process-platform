@@ -104,6 +104,7 @@
         <camunda:inputOutput>
           <camunda:outputParameter name="Output_07an3ck">Vraag extra stukken op</camunda:outputParameter>
         </camunda:inputOutput>
+        <camunda:taskListener expression="${statusExecutionListenerImpl.setStatus(execution, 3)}" event="complete" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1i9yjq1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0px2i0f</bpmn:outgoing>
@@ -167,6 +168,9 @@
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
     <bpmn:endEvent id="aanvraag-geweigerd-end-event" name="Aanvraag geweigerd">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${statusExecutionListenerImpl.setStatus(execution, 4)}" event="end" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1m7ekak</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1fccwi0" sourceRef="ExclusiveGateway_18zyxn9" targetRef="ExclusiveGateway_1qftoqa" />
