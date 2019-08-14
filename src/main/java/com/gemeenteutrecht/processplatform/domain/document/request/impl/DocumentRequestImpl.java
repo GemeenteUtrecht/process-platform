@@ -13,16 +13,18 @@ import java.net.URI;
 public class DocumentRequestImpl implements DocumentRequest, Serializable {
 
     private URI url;
-    private URI informatieObject;
+    private URI informatieobject;
     private URI object;
     private ObjectType objectType;
     private String titel;
     private String beschrijving;
 
-    public DocumentRequestImpl(URI informatieObject, URI object, ObjectType objectType) {
-        this.informatieObject = informatieObject;
+    public DocumentRequestImpl(URI informatieobject, URI object, ObjectType objectType) {
+        this.informatieobject = informatieobject;
         this.object = object;
         this.objectType = objectType;
+        this.titel = "";
+        this.beschrijving = "";
     }
 
     public void setUrl(URI url) {
@@ -43,8 +45,8 @@ public class DocumentRequestImpl implements DocumentRequest, Serializable {
     }
 
     @Override
-    public @NonNull URI informatieObject() {
-        return informatieObject;
+    public @NonNull URI informatieobject() {
+        return informatieobject;
     }
 
     @Override

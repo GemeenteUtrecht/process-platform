@@ -2,6 +2,12 @@ package com.gemeenteutrecht.processplatform.service.impl;
 
 import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
 import com.gemeenteutrecht.processplatform.config.RestTemplateConfiguration;
+import com.gemeenteutrecht.processplatform.domain.document.Document;
+import com.gemeenteutrecht.processplatform.domain.document.impl.ObjectType;
+import com.gemeenteutrecht.processplatform.domain.document.request.impl.DocumentRequestImpl;
+import com.gemeenteutrecht.processplatform.domain.resultaat.Resultaat;
+import com.gemeenteutrecht.processplatform.domain.resultaat.request.ResultaatRequest;
+import com.gemeenteutrecht.processplatform.domain.resultaat.request.impl.ResultaatRequestImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
 import com.gemeenteutrecht.processplatform.domain.zaak.ZaakStatus;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakStatusImpl;
@@ -35,6 +41,9 @@ public class ZaakServiceImplTest {
                 .setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImNsaWVudF9pZGVudGlmaWVyIjoicml0ZW5zZSJ9.eyJpc3MiOiJkb2NzLVU1b2FIaGYxQTJUWCIsImlhdCI6MTU0MzI0NjkwNywiemRzIjp7InNjb3BlcyI6WyJ6ZHMuc2NvcGVzLnpha2VuLmxlemVuIiwiemRzLnNjb3Blcy56YWtlbi5hYW5tYWtlbiIsInpkcy5zY29wZXMuemFrZW4uYmlqd2Vya2VuIiwiemRzLnNjb3Blcy56YWFrdHlwZXMubGV6ZW4iLCJ6ZHMuc2NvcGVzLnN0YXR1c3Nlbi50b2V2b2VnZW4iXSwiemFha3R5cGVzIjpbIioiXX19.YQWGsb295I6jAN6Etv7lNaPaD4sxRvWILe9oY-17XYk");
         nlxEndpointProperties.setZaak("http://localhost:12018/gemeente-utrecht/zrc/zaken");
         nlxEndpointProperties.setStatus("http://localhost:12018/gemeente-utrecht/zrc/statussen");
+        nlxEndpointProperties.setResultaat("http://localhost:12018/gemeente-utrecht/zrc/resultaten");
+        nlxEndpointProperties.setDocument("http://localhost:12018/gemeente-utrecht/drc/objectinformatieobjecten");
+
         zaakService = new ZaakServiceImpl(restTemplate, nlxEndpointProperties);
     }
 
@@ -49,6 +58,16 @@ public class ZaakServiceImplTest {
         final ZaakCreateRequestImpl zaakRequest = zaakCreateRequest();
         Zaak zaak = zaakService.createZaak(zaakRequest);
         assertNotNull(zaak);
+    }
+
+    @Test
+    public void createDocument() {
+        DocumentRequestImpl documentRequest = new DocumentRequestImpl(
+                URI.create("http://gemma-drc.k8s.dc1.proeftuin.utrecht.nl/api/v1/enkelvoudiginformatieobjecten/5e1cf8c2-abf5-448a-a757-0167edcb36a9"),
+                URI.create("http://gemma-zrc.k8s.dc1.proeftuin.utrecht.nl/api/v1/zaken/73bd9e00-18c9-4b05-9ed0-b78afd372a9e"),
+                ObjectType.zaak);
+        Document document = zaakService.createDocument(documentRequest);
+        assertNotNull(document);
     }
 
     @Test
@@ -70,6 +89,21 @@ public class ZaakServiceImplTest {
         Zaak zaak = zaakService.createZaak(zaakRequest);
         List<ZaakStatusImpl> statussen = zaakService.getStatussen(zaak.url());
         assertNotNull(statussen);
+    }
+
+    @Test
+    public void shouldAddResultaat() {
+        final ZaakCreateRequestImpl zaakRequest = zaakCreateRequest();
+        Zaak zaak = zaakService.createZaak(zaakRequest);
+
+        ResultaatRequest resultaatRequest = new ResultaatRequestImpl(
+                zaak.url(),
+                URI.create("http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaattypen/fd06791d-3084-4344-b221-597c7ac11e0c"),
+                "dit is een toelichting"
+        );
+
+        Resultaat resultaat = zaakService.addResultaat(resultaatRequest);
+        assertNotNull(resultaat);
     }
 
     private ZaakCreateRequestImpl zaakCreateRequest() {

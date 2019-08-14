@@ -15,6 +15,8 @@ public class NlxEndpointProperties {
 
     private String document;
 
+    private String resultaat;
+
     public String getToken() {
         return token;
     }
@@ -53,5 +55,13 @@ public class NlxEndpointProperties {
 
     public void setDocument(String document) {
         this.document = document;
+    }
+
+    public String getResultaat() {
+        return resultaat;
+    }
+
+    public void setResultaat(String resultaat) {
+        this.resultaat = resultaat;
     }
 }

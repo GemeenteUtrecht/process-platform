@@ -1,6 +1,12 @@
 package com.gemeenteutrecht.processplatform.service.impl;
 
 import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
+import com.gemeenteutrecht.processplatform.domain.document.Document;
+import com.gemeenteutrecht.processplatform.domain.document.impl.DocumentImpl;
+import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequest;
+import com.gemeenteutrecht.processplatform.domain.resultaat.Resultaat;
+import com.gemeenteutrecht.processplatform.domain.resultaat.impl.ResultaatImpl;
+import com.gemeenteutrecht.processplatform.domain.resultaat.request.ResultaatRequest;
 import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakStatusImpl;
@@ -70,6 +76,24 @@ public class ZaakServiceImpl implements ZaakService {
     }
 
     @Override
+    public Document createDocument(DocumentRequest documentRequest) {
+        final HttpEntity<DocumentRequest> request = new HttpEntity<>(documentRequest, headers(endpointProperties.getToken()));
+
+        ResponseEntity<DocumentImpl> response = restTemplate.exchange(
+                URI.create(endpointProperties.getDocument()),
+                HttpMethod.POST,
+                request,
+                DocumentImpl.class
+        );
+        if (response.getStatusCode().equals(HttpStatus.CREATED)) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Error while performing POST on /objectinformatieobjecten with code: "
+                    + response.getStatusCode());
+        }
+    }
+
+    @Override
     public ZaakStatusImpl setStatus(StatusCreateRequestImpl statusCreateRequest) {
         final HttpEntity request = new HttpEntity<>(statusCreateRequest, headers(endpointProperties.getToken()));
 
@@ -103,6 +127,24 @@ public class ZaakServiceImpl implements ZaakService {
             return response.getBody();
         } else {
             throw new RuntimeException("Error while performing GET on /status with code: " + response.getStatusCode());
+        }
+    }
+
+    @Override
+    public Resultaat addResultaat(ResultaatRequest request) {
+        final HttpEntity entity = new HttpEntity<>(request, headers(endpointProperties.getToken()));
+
+        final ResponseEntity<ResultaatImpl> response = restTemplate.exchange(
+                URI.create(endpointProperties.getResultaat()),
+                HttpMethod.POST,
+                entity,
+                ResultaatImpl.class
+        );
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Error while performing POST on /resultaten with code: " + response.getStatusCode());
         }
     }
 

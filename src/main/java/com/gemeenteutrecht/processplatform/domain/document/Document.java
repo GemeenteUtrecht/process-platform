@@ -38,6 +38,6 @@ public interface Document {
 
     @JsonProperty
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "YYYY-MM-dd")
     LocalDate registratiedatum();
 }

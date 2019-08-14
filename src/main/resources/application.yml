@@ -26,3 +26,4 @@ nlx:
     catalogusZaakType: http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/catalogussen
     status: http://gemma-zrc.k8s.dc1.proeftuin.utrecht.nl/api/v1/statussen
     document: http://gemma-drc.k8s.dc1.proeftuin.utrecht.nl/api/v1/objectinformatieobjecten
+    resultaat: http://gemma-zrc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaten

@@ -68,3 +68,4 @@ nlx:
     catalogusZaakType: http://localhost:12018/gemeente-utrecht/ztc/catalogussen
     status: http://localhost:12018/gemeente-utrecht/zrc/statussen
     document: http://localhost:12018/gemeente-utrecht/drc/objectinformatieobjecten
+    resultaat: http://localhost:12018/gemeente-utrecht/zrc/resultaten
