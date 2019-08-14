@@ -64,6 +64,7 @@ public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
 
         // link document
         //TODO
+        //documentService.createDocument()
 
         // update process var
         execution.setVariable("zaak", zaak);
