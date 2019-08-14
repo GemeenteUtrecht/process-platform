@@ -1,35 +1,30 @@
 package com.gemeenteutrecht.processplatform.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
 import com.gemeenteutrecht.processplatform.domain.document.Document;
 import com.gemeenteutrecht.processplatform.domain.document.impl.ObjectType;
-import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequest;
 import com.gemeenteutrecht.processplatform.domain.document.request.impl.DocumentRequestImpl;
 import com.gemeenteutrecht.processplatform.service.DocumentService;
-import com.gemeenteutrecht.processplatform.service.ZaakService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class DocumentServiceImplTest {
 
     private DocumentService documentService;
     private RestTemplate restTemplate;
-    private ObjectMapper objectMapper;
     private NlxEndpointProperties endpointProperties;
 
     @Before
     public void setUp() {
         restTemplate = new RestTemplate();
-        objectMapper = new ObjectMapper();
         endpointProperties = new NlxEndpointProperties();
         endpointProperties.setDocument("http://localhost:12018/gemeente-utrecht/drc/objectinformatieobjecten");
-        documentService = new DocumentServiceImpl(restTemplate, objectMapper, endpointProperties);
+        documentService = new DocumentServiceImpl(restTemplate, endpointProperties);
     }
 
     @Test

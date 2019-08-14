@@ -1,12 +1,10 @@
 package com.gemeenteutrecht.processplatform.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
 import com.gemeenteutrecht.processplatform.domain.document.Document;
 import com.gemeenteutrecht.processplatform.domain.document.impl.DocumentImpl;
 import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequest;
 import com.gemeenteutrecht.processplatform.service.DocumentService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -22,22 +20,16 @@ import java.util.Collections;
 public class DocumentServiceImpl implements DocumentService {
 
     private final RestTemplate restTemplate;
-    private final ObjectMapper mapper;
     private final NlxEndpointProperties endpointProperties;
 
-    public DocumentServiceImpl(
-            RestTemplate restTemplate,
-            ObjectMapper mapper,
-            NlxEndpointProperties endpointProperties
-    ) {
+    public DocumentServiceImpl(RestTemplate restTemplate, NlxEndpointProperties endpointProperties) {
         this.restTemplate = restTemplate;
-        this.mapper = mapper;
         this.endpointProperties = endpointProperties;
     }
 
     @Override
     public Document createDocument(DocumentRequest documentRequest) {
-        final HttpEntity<DocumentRequest> request = new HttpEntity<>(documentRequest, getHeaders());
+        final HttpEntity<DocumentRequest> request = new HttpEntity<>(documentRequest, headers());
 
         ResponseEntity<DocumentImpl> response = restTemplate.exchange(
                 endpointProperties.getDocument(),
@@ -53,11 +45,11 @@ public class DocumentServiceImpl implements DocumentService {
         }
     }
 
-    private HttpHeaders getHeaders() {
+    private HttpHeaders headers() {
         final HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
-
         return headers;
     }
+
 }

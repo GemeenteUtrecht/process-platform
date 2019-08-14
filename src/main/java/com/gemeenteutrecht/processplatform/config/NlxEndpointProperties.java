@@ -5,6 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "nlx", ignoreUnknownFields = false)
 public class NlxEndpointProperties {
 
+    private String token;
+
     private String zaak;
 
     private String status;
@@ -12,6 +14,14 @@ public class NlxEndpointProperties {
     private String catalogusZaakType;
 
     private String document;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getZaak() {
         return zaak;
