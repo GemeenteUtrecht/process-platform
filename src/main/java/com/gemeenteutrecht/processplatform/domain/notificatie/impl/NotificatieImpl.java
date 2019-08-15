@@ -36,37 +36,37 @@ public class NotificatieImpl implements Notificatie {
 
     @Override
     public String kanaal() {
-        return null;
+        return kanaal;
     }
 
     @Override
     public URI hoofdObject() {
-        return null;
+        return hoofdObject;
     }
 
     @Override
     public String resource() {
-        return null;
+        return resource;
     }
 
     @Override
     public URI resourceUrl() {
-        return null;
+        return resourceUrl;
     }
 
     @Override
     public String actie() {
-        return null;
+        return actie;
     }
 
     @Override
     public LocalDateTime aanmaakdatum() {
-        return null;
+        return aanmaakdatum;
     }
 
     @Override
     public Map kenmerken() {
-        return null;
+        return kenmerken;
     }
 
 }
