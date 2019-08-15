@@ -69,3 +69,4 @@ nlx:
     status: http://localhost:12018/gemeente-utrecht/zrc/statussen
     document: http://localhost:12018/gemeente-utrecht/drc/objectinformatieobjecten
     resultaat: http://localhost:12018/gemeente-utrecht/zrc/resultaten
+    notificatie: http://localhost:12018/gemeente-utrecht/nrc/notificaties

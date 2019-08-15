@@ -34,7 +34,7 @@ public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
 
     @Override
     public void createZaak(DelegateExecution execution) {
-        ZaakImpl zaak = processZaakHelper.getZaakFrom(execution).orElseThrow();
+        ZaakImpl zaak = processZaakHelper.getZaakFrom(execution).orElseThrow();//TODO rewrite to use request object
         // create zaak
         zaak = zaakService.createZaak(
                 new ZaakCreateRequestImpl(

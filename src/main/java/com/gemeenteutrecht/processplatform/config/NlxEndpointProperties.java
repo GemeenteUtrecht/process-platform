@@ -17,6 +17,8 @@ public class NlxEndpointProperties {
 
     private String resultaat;
 
+    private String notificatie;
+
     public String getToken() {
         return token;
     }
@@ -63,5 +65,13 @@ public class NlxEndpointProperties {
 
     public void setResultaat(String resultaat) {
         this.resultaat = resultaat;
+    }
+
+    public String getNotificatie() {
+        return notificatie;
+    }
+
+    public void setNotificatie(String notificatie) {
+        this.notificatie = notificatie;
     }
 }
