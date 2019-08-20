@@ -1,0 +1,43 @@
+---
+
+# A docker compose that uses upstream Camunda docker images and MySQL. This
+# enables persistence and is a test setup for the Kubernetes layout.
+
+version: '3'
+
+services:
+  db:
+    image: postgres:11
+    volumes:
+      - "postgres_data:/var/lib/postgres/data"
+
+  redis:
+    image: redis:5-alpine
+
+  worker:
+    image: scrumteamzgw/bing:${BING_VERSION:-0.11.1}
+    command: /celery_worker.sh
+    environment:
+      - DJANGO_SETTINGS_MODULE=bing.conf.docker
+      - SECRET_KEY=${SECRET_KEY:-v1zy5$p*a5s^9_7r!z9d30jyvpa6oj6j(ie#gpt*z=$&ojkwd0}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - db
+      - redis
+
+  bing:
+    image: scrumteamzgw/bing:${BING_VERSION:-0.11.1}
+    environment:
+      - DJANGO_SETTINGS_MODULE=bing.conf.docker
+      - SECRET_KEY=${SECRET_KEY:-v1zy5$p*a5s^9_7r!z9d30jyvpa6oj6j(ie#gpt*z=$&ojkwd0}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - db
+      - redis
+    ports:
+      - "${PORT:-8000}:8000"
+
+volumes:
+  postgres_data:
