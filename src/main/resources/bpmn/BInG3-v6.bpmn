@@ -192,6 +192,7 @@
             <camunda:value id="Regulier" name="Regulier" />
           </camunda:formField>
         </camunda:formData>
+        <camunda:taskListener delegateExpression="${statusExecutionListenerImpl.setStatus(execution, 2)}" event="complete" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0zxmava</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0li0j4v</bpmn:outgoing>
