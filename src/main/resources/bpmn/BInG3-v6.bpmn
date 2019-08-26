@@ -184,7 +184,7 @@
     <bpmn:endEvent id="end-event">
       <bpmn:incoming>SequenceFlow_10ral4p</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="bepalen-procedure" name="Bepalen procedure">
+    <bpmn:userTask id="bepalen-procedure" name="Bepalen procedure" camunda:candidateGroups="camunda-admin">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="Procedure" label="Welke procedure is van toepassing?" type="enum">
