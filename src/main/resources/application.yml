@@ -1,14 +1,14 @@
 server.port: 8080
 spring:
     application:
-        name: gemeente-utrecht-camunda-process-platform
+        name: GemeenteUtrechtCamundaProcessPlatform
     profiles:
         # The commented value for `active` can be replaced with valid spring profiles to load.
         # Otherwise, it will be filled in by gradle when building the WAR file
         # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
         active: #spring.profiles.active#
     jersey:
-        application-path: /api/camunda-rest
+        application-path: /camunda-rest
 
 camunda:
     bpm:
@@ -19,6 +19,12 @@ camunda:
             enabled-for-custom-code: false
             tenant-check-enabled: false
         default-serialization-format: "application/json"
+        webapp:
+            index-redirect-enabled: true
+        admin-user:
+            id: AdminAccountGemeenteUtrecht
+            password: snHa9wA8=$E-qRW4
+            first-name: Admin account
 
 nlx:
     token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImNsaWVudF9pZGVudGlmaWVyIjoicml0ZW5zZSJ9.eyJpc3MiOiJkb2NzLVU1b2FIaGYxQTJUWCIsImlhdCI6MTU0MzI0NjkwNywiemRzIjp7InNjb3BlcyI6WyJ6ZHMuc2NvcGVzLnpha2VuLmxlemVuIiwiemRzLnNjb3Blcy56YWtlbi5hYW5tYWtlbiIsInpkcy5zY29wZXMuemFrZW4uYmlqd2Vya2VuIiwiemRzLnNjb3Blcy56YWFrdHlwZXMubGV6ZW4iLCJ6ZHMuc2NvcGVzLnN0YXR1c3Nlbi50b2V2b2VnZW4iXSwiemFha3R5cGVzIjpbIioiXX19.YQWGsb295I6jAN6Etv7lNaPaD4sxRvWILe9oY-17XYk
