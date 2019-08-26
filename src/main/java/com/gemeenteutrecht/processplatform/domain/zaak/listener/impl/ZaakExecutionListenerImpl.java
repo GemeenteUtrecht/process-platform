@@ -62,12 +62,12 @@ public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
         );
 
         //TODO informatieobject uit execeution halen
-        zaakService.createDocument(
+        /*zaakService.createDocument(
                 new DocumentRequestImpl(
                         URI.create("http://gemma-drc.k8s.dc1.proeftuin.utrecht.nl/api/v1/enkelvoudiginformatieobjecten/5e1cf8c2-abf5-448a-a757-0167edcb36a9"),
                         zaak.url(),
                         ObjectType.zaak
-        ));
+        ));*/
 
         // update process var
         execution.setVariable("zaak", zaak);
