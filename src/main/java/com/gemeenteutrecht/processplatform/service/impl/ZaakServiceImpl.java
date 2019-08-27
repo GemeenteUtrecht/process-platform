@@ -7,7 +7,6 @@ import com.gemeenteutrecht.processplatform.domain.document.request.DocumentReque
 import com.gemeenteutrecht.processplatform.domain.resultaat.Resultaat;
 import com.gemeenteutrecht.processplatform.domain.resultaat.impl.ResultaatImpl;
 import com.gemeenteutrecht.processplatform.domain.resultaat.request.ResultaatRequest;
-import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakStatusImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.ZaakCreateRequest;
@@ -21,11 +20,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 import static com.gemeenteutrecht.processplatform.service.impl.ApiHelper.headers;
 
@@ -58,13 +57,13 @@ public class ZaakServiceImpl implements ZaakService {
     }
 
     @Override
-    public ZaakImpl getZaak(String id) {
+    public ZaakImpl getZaak(UUID id) {
         final HttpEntity entity = new HttpEntity<>(headers(endpointProperties.getToken()));
 
         final String uri = UriComponentsBuilder
                 .fromUriString(endpointProperties.getZaak())
                 .path("/")
-                .pathSegment(id)
+                .pathSegment(id.toString())
                 .build()
                 .toString();
 
