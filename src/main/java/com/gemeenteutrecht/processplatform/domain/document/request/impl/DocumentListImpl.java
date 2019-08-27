@@ -1,6 +1,6 @@
 package com.gemeenteutrecht.processplatform.domain.document.request.impl;
 
-import com.gemeenteutrecht.processplatform.domain.document.Document;
+import com.gemeenteutrecht.processplatform.domain.document.impl.DocumentImpl;
 import com.gemeenteutrecht.processplatform.domain.document.request.DocumentList;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -11,14 +11,14 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DocumentListImpl implements DocumentList, Serializable {
 
-    private List<Document> documents;
+    private List<DocumentImpl> documents;
 
-    public DocumentListImpl(List<Document> documents) {
+    public DocumentListImpl(List<DocumentImpl> documents) {
         this.documents = documents;
     }
 
     @Override
-    public List<Document> documents() {
+    public List<DocumentImpl> documents() {
         return documents;
     }
 }

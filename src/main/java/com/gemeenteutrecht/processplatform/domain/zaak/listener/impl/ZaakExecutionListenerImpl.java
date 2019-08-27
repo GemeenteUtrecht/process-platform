@@ -11,7 +11,6 @@ import com.gemeenteutrecht.processplatform.service.ZaakTypeCatalogusService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.springframework.stereotype.Service;
 
-import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -34,8 +33,8 @@ public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
     @Override
     public void createZaak(DelegateExecution execution) {
         ZaakImpl zaak = processZaakHelper.getZaakFrom(execution).orElseThrow();//TODO rewrite to use request object
+
         // create zaak
-        URI zaakUrl = zaak.url();
         zaak = zaakService.createZaak(
                 new ZaakCreateRequestImpl(
                         zaak.bronorganisatie(),
@@ -54,7 +53,7 @@ public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
 
         zaakService.setStatus(
                 new StatusCreateRequestImpl(
-                        zaakUrl,
+                        zaak.url(),
                         initialStatusType.url(),
                         LocalDateTime.now(),
                         ""
