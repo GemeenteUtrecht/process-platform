@@ -104,7 +104,7 @@
         <camunda:inputOutput>
           <camunda:outputParameter name="Output_07an3ck">Vraag extra stukken op</camunda:outputParameter>
         </camunda:inputOutput>
-        <camunda:executionListener delegateExpression="${statusExecutionListenerImpl.setStatus(execution, 3)}" event="end" />
+        <camunda:executionListener expression="${statusExecutionListenerImpl.setStatus(execution, 3)}" event="end" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1i9yjq1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0px2i0f</bpmn:outgoing>
@@ -182,6 +182,9 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_00z0zvo" sourceRef="besluit-nemen" targetRef="definitief-rapport-maken" />
     <bpmn:endEvent id="end-event">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${statusExecutionListenerImpl.setStatus(execution, 4)}" event="end" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_10ral4p</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:userTask id="bepalen-procedure" name="Bepalen procedure" camunda:candidateGroups="camunda-admin">
@@ -192,7 +195,7 @@
             <camunda:value id="Regulier" name="Regulier" />
           </camunda:formField>
         </camunda:formData>
-        <camunda:executionListener delegateExpression="${statusExecutionListenerImpl.setStatus(execution, 2)}" event="end" />
+        <camunda:executionListener expression="${statusExecutionListenerImpl.setStatus(execution, 2)}" event="end" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0zxmava</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0li0j4v</bpmn:outgoing>
