@@ -22,6 +22,8 @@ services:
       - SECRET_KEY=${SECRET_KEY:-v1zy5$p*a5s^9_7r!z9d30jyvpa6oj6j(ie#gpt*z=$&ojkwd0}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+    volumes:
+      - "temp_data:/tmp"
     depends_on:
       - db
       - redis
@@ -35,6 +37,7 @@ services:
       - REDIS_PORT=6379
     volumes:
       - "./bing-demo.json:/app/fixtures/demo.json"
+      - "temp_data:/tmp"
     depends_on:
       - db
       - redis
@@ -43,3 +46,4 @@ services:
 
 volumes:
   postgres_data:
+  temp_data:
