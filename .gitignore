@@ -30,3 +30,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Build Automation ###
+deployment.gradle

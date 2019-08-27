@@ -62,3 +62,39 @@ file as well:
 ```
 PORT=9000
 ```
+
+## Docker image
+
+There is a docker hub repository available that contains a pre-built image ready to run:
+
+https://cloud.docker.com/u/scrumteamzgw/repository/docker/scrumteamzgw/process-platform/general
+
+To launch the docker image you need to specify the following environment variables:
+
+
+MySQL database:      
+> SPRING_DATASOURCE_URL with value: jdbc:mysql://{hostname}:3306/{schema_name}
+
+> SPRING_DATASOURCE_USERNAME with your MySQL username
+
+> SPRING_DATASOURCE_PASSWORD with your MySQL password
+
+Admin login:
+> CAMUNDA_BPM_ADMINUSER_ID with your admin username (default AdminAccountGemeenteUtrecht)
+
+> CAMUNDA_BPM_ADMINUSER_PASSWORD with your admin password
+
+NLX API's:
+> NLX_TOKEN with your JWT token
+
+> NLX_ZAAK with the REST endpoint for zaken API
+
+> NLX_CATALOGUSZAAKTYPE with the REST endpoint for the catalogi API
+
+> NLX_STATUS with the REST endpoint for the statussen API
+
+> NLX_DOCUMENT with the REST endpoint for the object informatie objecten API
+
+> NLX_RESULTAAT with the REST endpoint for the resultaten API
+
+> NLX_NOTIFICATIE with the REST endpoint for the notificaties API

@@ -1,9 +1,26 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven { url "http://repo.spring.io/plugins-release" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "https://plugins.gradle.org/m2/" }
+
+    }
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.7.RELEASE"
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.20.0"
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.1.7.RELEASE'
     id 'java'
+    id 'war'
+    id 'io.spring.dependency-management' version "1.0.6.RELEASE"
 }
-
-apply plugin: 'io.spring.dependency-management'
 
 print(project)
 
@@ -14,8 +31,19 @@ if (project.hasProperty('prod')) {
 }
 
 group = 'com.gemeente-utrecht'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+war {
+    rootSpec.exclude("**/tomcat-*.jar")
+    manifest {
+        attributes 'Main-Class': 'com.gemeenteutrecht.processplatform.ProcessPlatformApplication'
+    }
+}
+
+springBoot {
+    mainClassName = 'com.gemeenteutrecht.processplatform.ProcessPlatformApplication'
+    buildInfo()
+}
 
 configurations {
     compileOnly {
@@ -51,4 +79,8 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation "org.assertj:assertj-core"
+}
+
+if (file('deployment.gradle').exists()) {
+    apply from: 'deployment.gradle'
 }
