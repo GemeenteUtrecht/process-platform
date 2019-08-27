@@ -82,6 +82,8 @@ https://cloud.docker.com/u/scrumteamzgw/repository/docker/scrumteamzgw/process-p
 
 To launch the docker image you need to specify the following environment variables:
 
+Server port:
+> SERVER_PORT with your server port. Default 8080.
 
 MySQL database:      
 > SPRING_DATASOURCE_URL with value: jdbc:mysql://{hostname}:3306/{schema_name}
