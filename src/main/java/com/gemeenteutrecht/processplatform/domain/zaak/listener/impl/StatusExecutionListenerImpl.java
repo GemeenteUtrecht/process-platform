@@ -29,7 +29,7 @@ public class StatusExecutionListenerImpl implements StatusExecutionListener {
     }
 
     @Override
-    public void setStatus(DelegateExecution execution, Integer volgnummer, String toelichting) {
+    public void setStatus(DelegateExecution execution, Integer volgnummer) {
         final UUID zaakId = (UUID) execution.getVariable("zaakId");
 
         final ZaakImpl zaak = zaakService.getZaak(zaakId);
@@ -45,16 +45,11 @@ public class StatusExecutionListenerImpl implements StatusExecutionListener {
                     zaak.url(),
                     statusType.url(),
                     LocalDateTime.now(),
-                    toelichting
+                    ""
             );
             zaakService.setStatus(statusCreateRequest);
         }, () -> new RuntimeException("Cannot set status"));
 
-    }
-
-    @Override
-    public void setStatus(DelegateExecution execution, Integer status) {
-        setStatus(execution, status, "");
     }
 
 }
