@@ -15,6 +15,9 @@
 
 # Status aanpassen via een task
 
+Kopier de volgende regel: ```${statusExecutionListenerImpl.setStatus(execution, 1)} ```
+Pas het volgnummer aan van 1 naar het gewenste nummer.
+
 ![Alt text](documentation/images/tutorial-set-status.png?raw=true "Title")
 
 ## BInG application
