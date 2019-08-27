@@ -131,7 +131,7 @@ public class ZaakServiceImpl implements ZaakService {
     }
 
     @Override
-    public Resultaat addResultaat(ResultaatRequest request) {
+    public Resultaat setResultaat(ResultaatRequest request) {
         final HttpEntity entity = new HttpEntity<>(request, headers(endpointProperties.getToken()));
 
         final ResponseEntity<ResultaatImpl> response = restTemplate.exchange(

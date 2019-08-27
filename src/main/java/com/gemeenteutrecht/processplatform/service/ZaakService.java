@@ -22,12 +22,12 @@ public interface ZaakService {
 
     ZaakImpl createZaak(ZaakCreateRequest zaak);
 
-    Document createDocument(DocumentRequest documentRequest);
+    Document createDocument(Document documentRequest);
 
     List<ZaakStatusImpl> getStatussen(URI zaak);
 
     ZaakStatusImpl setStatus(StatusCreateRequestImpl statusCreateRequest);
 
-    Resultaat addResultaat(ResultaatRequest resultaatRequest);
+    Resultaat setResultaat(ResultaatRequest resultaatRequest);
 
 }

@@ -102,7 +102,7 @@ public class ZaakServiceImplTest {
                 "dit is een toelichting"
         );
 
-        Resultaat resultaat = zaakService.addResultaat(resultaatRequest);
+        Resultaat resultaat = zaakService.setResultaat(resultaatRequest);
         assertNotNull(resultaat);
     }
 
