@@ -1,7 +1,6 @@
 package com.gemeenteutrecht.processplatform.service;
 
 import com.gemeenteutrecht.processplatform.domain.document.Document;
-import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequest;
 import com.gemeenteutrecht.processplatform.domain.resultaat.Resultaat;
 import com.gemeenteutrecht.processplatform.domain.resultaat.request.ResultaatRequest;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakStatusImpl;

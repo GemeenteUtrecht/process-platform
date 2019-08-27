@@ -7,7 +7,7 @@ import com.gemeenteutrecht.processplatform.domain.document.Document;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public interface DocumentRequest {
+public interface DocumentList {
 
     @JsonProperty
     List<Document> documents();
