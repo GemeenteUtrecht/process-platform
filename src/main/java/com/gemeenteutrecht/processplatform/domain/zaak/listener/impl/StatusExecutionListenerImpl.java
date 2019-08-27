@@ -12,28 +12,33 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class StatusExecutionListenerImpl implements StatusExecutionListener {
 
-    private final ProcessZaakHelper processZaakHelper;
-    private final ZaakService zaakService;
+    private final ZaakService<ZaakImpl> zaakService;
     private final ZaakTypeCatalogusService zaakTypeCatalogusService;
 
-    public StatusExecutionListenerImpl(ProcessZaakHelper processZaakHelper, ZaakService zaakService, ZaakTypeCatalogusService zaakTypeCatalogusService) {
-        this.processZaakHelper = processZaakHelper;
+    public StatusExecutionListenerImpl(
+            ZaakService zaakService,
+            ZaakTypeCatalogusService zaakTypeCatalogusService
+    ) {
         this.zaakService = zaakService;
         this.zaakTypeCatalogusService = zaakTypeCatalogusService;
     }
 
     @Override
     public void setStatus(DelegateExecution execution, Integer volgnummer, String toelichting) {
-        final ZaakImpl zaak = processZaakHelper.getZaakFrom(execution).orElseThrow();
+        final UUID zaakId = (UUID) execution.getVariable("zaakId");
+
+        final ZaakImpl zaak = zaakService.getZaak(zaakId);
+
         final List<StatusTypeImpl> zakenTypes = zaakTypeCatalogusService.getZakenTypes(zaak.catalog(), zaak.zaakType());
         final Optional<StatusTypeImpl> type = zakenTypes
-            .stream()
-            .filter(statusType -> statusType.volgnummer().equals(volgnummer))
-            .findFirst();
+                .stream()
+                .filter(statusType -> statusType.volgnummer().equals(volgnummer))
+                .findFirst();
 
         type.ifPresentOrElse(statusType -> {
             StatusCreateRequestImpl statusCreateRequest = new StatusCreateRequestImpl(

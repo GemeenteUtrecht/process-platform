@@ -1,8 +1,6 @@
 package com.gemeenteutrecht.processplatform.domain.zaak.listener.impl;
 
 import com.gemeenteutrecht.processplatform.domain.catalogus.impl.StatusTypeImpl;
-import com.gemeenteutrecht.processplatform.domain.document.impl.ObjectType;
-import com.gemeenteutrecht.processplatform.domain.document.request.impl.DocumentRequestImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.listener.ZaakExecutionListener;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.StatusCreateRequestImpl;
@@ -12,7 +10,6 @@ import com.gemeenteutrecht.processplatform.service.ZaakTypeCatalogusService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.springframework.stereotype.Service;
 
-import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,7 +17,7 @@ import java.util.List;
 public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
 
     private final ProcessZaakHelper processZaakHelper;
-    private final ZaakService zaakService;
+    private final ZaakService<ZaakImpl> zaakService;
     private final ZaakTypeCatalogusService zaakTypeCatalogusService;
 
     public ZaakExecutionListenerImpl(
@@ -70,7 +67,7 @@ public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
         ));*/
 
         // update process var
-        execution.setVariable("zaak", zaak);
+        execution.setVariable("zaakId", zaak.zaakId());
     }
 
 }
