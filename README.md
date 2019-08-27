@@ -1,4 +1,4 @@
-# process-platform
+# Process platform
 
 - Goal
     - Spring boot with Camunda as Process engine
@@ -12,6 +12,10 @@
         - Component for set Result of any type
         - Component for set Notification of any type
         - Component for link Document of any type
+
+- Modeleren
+
+![Alt text](documentation/images/tutorial-set-status.png?raw=true "Title")
 
 ## BInG application
 
