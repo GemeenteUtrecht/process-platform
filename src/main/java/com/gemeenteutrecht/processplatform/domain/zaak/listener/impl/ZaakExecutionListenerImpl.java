@@ -23,7 +23,7 @@ import java.util.Set;
 public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
 
     private final ProcessZaakHelper processZaakHelper;
-    private final ZaakService zaakService;
+    private final ZaakService<ZaakImpl> zaakService;
     private final ZaakTypeCatalogusService zaakTypeCatalogusService;
 
     public ZaakExecutionListenerImpl(
@@ -70,7 +70,7 @@ public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
         documentRequest.documents().forEach(zaakService::createDocument);
 
         // update process var
-        execution.setVariable("zaak", zaak);
+        execution.setVariable("zaakId", zaak.zaakId());
     }
 
 }

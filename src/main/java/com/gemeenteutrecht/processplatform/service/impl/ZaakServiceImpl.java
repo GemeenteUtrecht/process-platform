@@ -7,7 +7,6 @@ import com.gemeenteutrecht.processplatform.domain.document.request.DocumentReque
 import com.gemeenteutrecht.processplatform.domain.resultaat.Resultaat;
 import com.gemeenteutrecht.processplatform.domain.resultaat.impl.ResultaatImpl;
 import com.gemeenteutrecht.processplatform.domain.resultaat.request.ResultaatRequest;
-import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakStatusImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.ZaakCreateRequest;
@@ -24,9 +23,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.List;
+import java.util.UUID;
 
 import static com.gemeenteutrecht.processplatform.service.impl.ApiHelper.headers;
 
@@ -46,10 +44,34 @@ public class ZaakServiceImpl implements ZaakService {
         final HttpEntity entity = new HttpEntity<>(headers(endpointProperties.getToken()));
 
         final ResponseEntity<ZaakListResponse> response = restTemplate.exchange(
-                endpointProperties.getZaak(),
+                URI.create(endpointProperties.getZaak()),
                 HttpMethod.GET,
                 entity,
                 ParameterizedTypeReference.forType(ZaakListResponse.class)
+        );
+        if (response.getStatusCode().is2xxSuccessful()) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Error while performing GET on /zaken with code: " + response.getStatusCode());
+        }
+    }
+
+    @Override
+    public ZaakImpl getZaak(UUID id) {
+        final HttpEntity entity = new HttpEntity<>(headers(endpointProperties.getToken()));
+
+        final String uri = UriComponentsBuilder
+                .fromUriString(endpointProperties.getZaak())
+                .path("/")
+                .pathSegment(id.toString())
+                .build()
+                .toString();
+
+        final ResponseEntity<ZaakImpl> response = restTemplate.exchange(
+                uri,
+                HttpMethod.GET,
+                entity,
+                ZaakImpl.class
         );
         if (response.getStatusCode().is2xxSuccessful()) {
             return response.getBody();

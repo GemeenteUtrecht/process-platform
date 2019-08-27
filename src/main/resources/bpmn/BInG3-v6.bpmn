@@ -105,7 +105,7 @@
         <camunda:inputOutput>
           <camunda:outputParameter name="Output_07an3ck">Vraag extra stukken op</camunda:outputParameter>
         </camunda:inputOutput>
-        <camunda:taskListener expression="${statusExecutionListenerImpl.setStatus(execution, 3)}" event="complete" />
+        <camunda:executionListener expression="${statusExecutionListenerImpl.setStatus(execution, 3)}" event="end" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1i9yjq1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0px2i0f</bpmn:outgoing>
@@ -182,13 +182,17 @@
     <bpmn:sequenceFlow id="SequenceFlow_13kor81" name="Versneld" sourceRef="ExclusiveGateway_1qftoqa" targetRef="besluit-nemen">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${Procedure=='Versneld'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_00z0zvo" sourceRef="besluit-nemen" targetRef="definitief-rapport-maken" />
     <bpmn:endEvent id="end-event">
       <bpmn:extensionElements>
         <camunda:executionListener expression="${resultaatExecutionListenerImpl.setResultaat(execution, resultaat)}" event="end" />
       </bpmn:extensionElements>
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${statusExecutionListenerImpl.setStatus(execution, 4)}" event="end" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_10ral4p</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="bepalen-procedure" name="Bepalen procedure">
+    <bpmn:userTask id="bepalen-procedure" name="Bepalen procedure" camunda:candidateGroups="camunda-admin">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="Procedure" label="Welke procedure is van toepassing?" type="enum">
@@ -196,13 +200,14 @@
             <camunda:value id="Regulier" name="Regulier" />
           </camunda:formField>
         </camunda:formData>
-        <camunda:taskListener delegateExpression="${statusExecutionListenerImpl.setStatus(execution, 2)}" event="complete" />
+        <camunda:executionListener expression="${statusExecutionListenerImpl.setStatus(execution, 2)}" event="end" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0zxmava</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0li0j4v</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="definitief-rapport-maken" name="Definitief rapport maken">
-      <bpmn:incoming>SequenceFlow_1jggaou</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_00z0zvo</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0m3ixxg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1x0jca3</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:parallelGateway id="ExclusiveGateway_0swbqjx">

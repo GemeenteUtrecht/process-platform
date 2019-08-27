@@ -1,0 +1,204 @@
+[
+{
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$2wvWTqBKDxtF$0XfvevQ6+uOCtIv4snNUw+05diJf+q23nDZU06eGpkg=",
+        "last_login": "2019-08-20T14:59:01.611Z",
+        "is_superuser": true,
+        "username": "demo",
+        "first_name": "",
+        "last_name": "",
+        "email": "demo@example.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-08-20T14:56:47.145Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$2PUfjfIFf4eu$l4wg45Btj7vWZeJjr1no0su45nMR6XezauCLDR5a750=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "nrc",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2019-08-20T15:02:49Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "9fd4f5109aea054ea45bd2dd225b8145e74ceec3",
+    "fields": {
+        "user": 2,
+        "created": "2019-08-20T15:03:02.441Z"
+    }
+},
+{
+    "model": "config.apiconfig",
+    "pk": 1,
+    "fields": {
+        "zrc": 1,
+        "ztc": 3,
+        "drc": 2,
+        "brc": 5,
+        "nrc": 6,
+        "camunda_root": "http://172.17.0.1:12018/gemeente-utrecht/camunda/"
+    }
+},
+{
+    "model": "config.bingconfig",
+    "pk": 1,
+    "fields": {
+        "organisatie_rsin": "002220647",
+        "zaaktype_aanvraag": "http://172.17.0.1:12018/gemeente-utrecht/ztc/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/zaaktypen/7af2d4dd-511b-4b27-89a8-77ac7c8e7a82",
+        "zaaktype_vergadering": "http://172.17.0.1:12018/gemeente-utrecht/ztc/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/zaaktypen/6a916222-61ba-4596-bcca-a2a9c3e1ffe4",
+        "minimal_plan_duration": "7 00:00:00",
+        "aanvraag_process_key": ""
+    }
+},
+{
+    "model": "config.requireddocuments",
+    "pk": 1,
+    "fields": {
+        "toetswijze": "versneld",
+        "informatieobjecttypen": "[\"http://172.17.0.1:12018/gemeente-utrecht/ztc/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/informatieobjecttypen/6b8edc4d-dad4-4e2e-bfff-a45bc48ca83e\", \"http://172.17.0.1:12018/gemeente-utrecht/ztc/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/informatieobjecttypen/7463678c-28d5-4f56-a27d-afc95cf72e03\", \"http://172.17.0.1:12018/gemeente-utrecht/ztc/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/informatieobjecttypen/9be7b6ae-9956-4f00-af94-1066f73349d8\"]"
+    }
+},
+{
+    "model": "config.requireddocuments",
+    "pk": 2,
+    "fields": {
+        "toetswijze": "regulier",
+        "informatieobjecttypen": "[\"http://172.17.0.1:12018/gemeente-utrecht/ztc/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/informatieobjecttypen/6b8edc4d-dad4-4e2e-bfff-a45bc48ca83e\", \"http://172.17.0.1:12018/gemeente-utrecht/ztc/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/informatieobjecttypen/7463678c-28d5-4f56-a27d-afc95cf72e03\", \"http://172.17.0.1:12018/gemeente-utrecht/ztc/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/informatieobjecttypen/030ea2b2-af18-4a6d-a454-f3a517305f61\", \"http://172.17.0.1:12018/gemeente-utrecht/ztc/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/informatieobjecttypen/2d51df0a-331b-4823-ae51-77bcb3c62e2a\", \"http://172.17.0.1:12018/gemeente-utrecht/ztc/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/informatieobjecttypen/9be7b6ae-9956-4f00-af94-1066f73349d8\", \"http://172.17.0.1:12018/gemeente-utrecht/ztc/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/informatieobjecttypen/d3d6fb17-8f94-4f00-b9b4-9a2683c3273b\"]"
+    }
+},
+{
+    "model": "config.requireddocuments",
+    "pk": 3,
+    "fields": {
+        "toetswijze": "onbekend",
+        "informatieobjecttypen": "[\"http://172.17.0.1:12018/gemeente-utrecht/ztc/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/informatieobjecttypen/6b8edc4d-dad4-4e2e-bfff-a45bc48ca83e\", \"http://172.17.0.1:12018/gemeente-utrecht/ztc/catalogussen/28487d3f-6a1b-489c-b03d-c75ac6693e72/informatieobjecttypen/7463678c-28d5-4f56-a27d-afc95cf72e03\"]"
+    }
+},
+{
+    "model": "config.urlrewrite",
+    "pk": 1,
+    "fields": {
+        "from_value": "http://172.17.0.1:12018/gemeente-utrecht/brc",
+        "to_value": "http://gemma-brc.k8s.dc1.proeftuin.utrecht.nl/api/v1"
+    }
+},
+{
+    "model": "config.urlrewrite",
+    "pk": 2,
+    "fields": {
+        "from_value": "http://172.17.0.1:12018/gemeente-utrecht/zrc",
+        "to_value": "http://gemma-zrc.k8s.dc1.proeftuin.utrecht.nl/api/v1"
+    }
+},
+{
+    "model": "config.urlrewrite",
+    "pk": 3,
+    "fields": {
+        "from_value": "http://172.17.0.1:12018/gemeente-utrecht/drc",
+        "to_value": "http://gemma-drc.k8s.dc1.proeftuin.utrecht.nl/api/v1"
+    }
+},
+{
+    "model": "config.urlrewrite",
+    "pk": 4,
+    "fields": {
+        "from_value": "http://172.17.0.1:12018/gemeente-utrecht/ztc",
+        "to_value": "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1"
+    }
+},
+{
+    "model": "webhooks.webhook",
+    "pk": 1,
+    "fields": {
+        "key": "aanvraag-zaken",
+        "user": 2,
+        "_subscription": ""
+    }
+},
+{
+    "model": "sites.site",
+    "pk": 1,
+    "fields": {
+        "domain": "172.17.0.1:8000",
+        "name": "172.17.0.1:8000"
+    }
+},
+{
+    "model": "zgw_consumers.service",
+    "pk": 1,
+    "fields": {
+        "label": "Zaken API [NLX]",
+        "api_type": "zrc",
+        "api_root": "http://172.17.0.1:12018/gemeente-utrecht/zrc/",
+        "extra": {},
+        "client_id": "ritense",
+        "secret": "ritense"
+    }
+},
+{
+    "model": "zgw_consumers.service",
+    "pk": 2,
+    "fields": {
+        "label": "Documenten API [NLX]",
+        "api_type": "drc",
+        "api_root": "http://172.17.0.1:12018/gemeente-utrecht/drc/",
+        "extra": {},
+        "client_id": "ritense",
+        "secret": "ritense"
+    }
+},
+{
+    "model": "zgw_consumers.service",
+    "pk": 3,
+    "fields": {
+        "label": "Catalogi API [NLX]",
+        "api_type": "ztc",
+        "api_root": "http://172.17.0.1:12018/gemeente-utrecht/ztc/",
+        "extra": {
+            "main_catalogus_uuid": "28487d3f-6a1b-489c-b03d-c75ac6693e72"
+        },
+        "client_id": "ritense",
+        "secret": "ritense"
+    }
+},
+{
+    "model": "zgw_consumers.service",
+    "pk": 5,
+    "fields": {
+        "label": "Besluiten API [NLX]",
+        "api_type": "brc",
+        "api_root": "http://172.17.0.1:12018/gemeente-utrecht/brc/",
+        "extra": {},
+        "client_id": "ritense",
+        "secret": "ritense"
+    }
+},
+{
+    "model": "zgw_consumers.service",
+    "pk": 6,
+    "fields": {
+        "label": "Notificaties API [NLX]",
+        "api_type": "nrc",
+        "api_root": "http://172.17.0.1:12018/gemeente-utrecht/nrc/",
+        "extra": {},
+        "client_id": "ritense",
+        "secret": "ritense"
+    }
+}
+]
