@@ -13,7 +13,7 @@
         - Component for set Notification of any type
         - Component for link Document of any type
 
-- Modeleren
+# Status aanpassen via een task
 
 ![Alt text](documentation/images/tutorial-set-status.png?raw=true "Title")
 
