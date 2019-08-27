@@ -16,11 +16,13 @@ import com.gemeenteutrecht.processplatform.domain.zaak.response.impl.ZaakListRes
 import java.net.URI;
 import java.util.List;
 
-public interface ZaakService {
+public interface ZaakService<T_ZAAK_IMPL> {
 
     ListResponse getZaken();
 
-    ZaakImpl createZaak(ZaakCreateRequest zaak);
+    T_ZAAK_IMPL getZaak(String id);
+
+    T_ZAAK_IMPL createZaak(ZaakCreateRequest zaak);
 
     Document createDocument(DocumentRequest documentRequest);
 
