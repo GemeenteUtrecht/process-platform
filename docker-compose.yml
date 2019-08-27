@@ -15,7 +15,7 @@ services:
     image: redis:5-alpine
 
   worker:
-    image: scrumteamzgw/bing:${BING_VERSION:-0.11.2}
+    image: scrumteamzgw/bing:${BING_VERSION:-0.11.4}
     command: /celery_worker.sh
     environment:
       - DJANGO_SETTINGS_MODULE=bing.conf.docker
@@ -27,7 +27,7 @@ services:
       - redis
 
   bing:
-    image: scrumteamzgw/bing:${BING_VERSION:-0.11.2}
+    image: scrumteamzgw/bing:${BING_VERSION:-0.11.4}
     environment:
       - DJANGO_SETTINGS_MODULE=bing.conf.docker
       - SECRET_KEY=${SECRET_KEY:-v1zy5$p*a5s^9_7r!z9d30jyvpa6oj6j(ie#gpt*z=$&ojkwd0}
