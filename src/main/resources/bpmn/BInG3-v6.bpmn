@@ -186,8 +186,6 @@
     <bpmn:endEvent id="end-event">
       <bpmn:extensionElements>
         <camunda:executionListener expression="${resultaatExecutionListenerImpl.setResultaat(execution, resultaat)}" event="end" />
-      </bpmn:extensionElements>
-      <bpmn:extensionElements>
         <camunda:executionListener expression="${statusExecutionListenerImpl.setStatus(execution, 4)}" event="end" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_10ral4p</bpmn:incoming>
