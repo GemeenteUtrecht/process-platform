@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0tqu3yv" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.1.2">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0tqu3yv" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.1.0">
   <bpmn:message id="Message_1rjw2b3" name="StukkenOntvangen" />
   <bpmn:error id="Error_1qok9p9" name="Aanvraag afgebroken" errorCode="Aanvraag afgebroken" />
   <bpmn:collaboration id="Collaboration_19dynfr">
@@ -190,7 +190,7 @@
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_10ral4p</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="bepalen-procedure" name="Bepalen procedure" camunda:candidateGroups="camunda-admin">
+    <bpmn:userTask id="bepalen-procedure" name="Bepalen procedure" camunda:candidateGroups="camunda-admin,demoGroep">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="Procedure" label="Welke procedure is van toepassing?" type="enum">
