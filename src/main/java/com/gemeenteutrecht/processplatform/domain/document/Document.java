@@ -13,11 +13,11 @@ import java.time.LocalDate;
 public interface Document {
 
     @JsonProperty
-    URI url(); //TODO [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
+    URI url();
 
     @JsonProperty
     @NonNull
-    URI informatieObject();
+    URI informatieobject();
 
     @JsonProperty
     @NonNull
@@ -25,7 +25,7 @@ public interface Document {
 
     @JsonProperty
     @NonNull
-    ObjectType objectType(); // TODO RSIN [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
+    ObjectType objectType();
 
     @JsonProperty
     String aardRelatie();

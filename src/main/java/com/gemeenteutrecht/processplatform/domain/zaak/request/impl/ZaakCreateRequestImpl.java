@@ -12,7 +12,12 @@ public class ZaakCreateRequestImpl implements ZaakCreateRequest {
     private String verantwoordelijkeOrganisatie; // TODO RSIN [ 1 .. 9 ] characters https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef
     private LocalDate startdatum;
 
-    public ZaakCreateRequestImpl(String bronorganisatie, URI zaaktype, String verantwoordelijkeOrganisatie, LocalDate startdatum) {
+    public ZaakCreateRequestImpl(
+        String bronorganisatie,
+        URI zaaktype,
+        String verantwoordelijkeOrganisatie,
+        LocalDate startdatum
+    ) {
         this.bronorganisatie = bronorganisatie;
         this.zaaktype = zaaktype;
         this.verantwoordelijkeOrganisatie = verantwoordelijkeOrganisatie;

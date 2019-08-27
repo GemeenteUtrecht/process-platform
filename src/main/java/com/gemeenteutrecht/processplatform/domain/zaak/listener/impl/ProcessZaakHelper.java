@@ -1,6 +1,8 @@
 package com.gemeenteutrecht.processplatform.domain.zaak.listener.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gemeenteutrecht.processplatform.domain.document.request.DocumentList;
+import com.gemeenteutrecht.processplatform.domain.document.request.impl.DocumentListImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.spin.impl.json.jackson.JacksonJsonNode;
@@ -24,6 +26,15 @@ public class ProcessZaakHelper {
             return Optional.of(objectMapper.readValue(variable.toString(), ZaakImpl.class));
         } catch (IOException e) {
             throw new RuntimeException("Cannot find zaak variable in process");
+        }
+    }
+
+    public Optional<DocumentList> getDocumentRequestFrom(DelegateExecution execution) {
+        try {
+            final JacksonJsonNode variable = (JacksonJsonNode) execution.getVariable("documenten");
+            return Optional.of(objectMapper.readValue(variable.toString(), DocumentListImpl.class));
+        } catch (IOException e) {
+            throw new RuntimeException("Cannot find documenten variable in process");
         }
     }
 

@@ -22,12 +22,12 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
 
     @Override
     public void handleError(ClientHttpResponse httpResponse) throws IOException {
+        final String responseString = new String(ByteStreams.toByteArray(httpResponse.getBody()), Charset.forName("UTF-8"));
+
         if (httpResponse.getStatusCode().series() == SERVER_ERROR) {
             // handle SERVER_ERROR
         } else if (httpResponse.getStatusCode().series() == CLIENT_ERROR) {
             // handle CLIENT_ERROR
-
-            String responseString = new String(ByteStreams.toByteArray(httpResponse.getBody()), Charset.forName("UTF-8"));
             if (httpResponse.getStatusCode() == HttpStatus.NOT_FOUND) {
                 //throw new NotFoundException();
             }

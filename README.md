@@ -19,6 +19,17 @@ The `docker-compose.yml` services definition contains everything to start
 the BInG application. This application can be used to actually go through the
 flow to submit a project, which starts the Camunda process.
 
+### Requirements
+
+You need to have an NLX outway running to be able to access the APIs hosted in
+the Utrecht network - see the [NLX documentation](https://docs.nlx.io/get-started/).
+
+In particular, it's expected that you are running the outway on port 12018 on
+your localhost machine. If you choose different ports/machines, make sure to
+update the configuration in `bing-demo.json`.
+
+### Running the BIng application
+
 Start up the application:
 
 ```bash

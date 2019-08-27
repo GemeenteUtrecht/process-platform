@@ -5,8 +5,6 @@ import com.gemeenteutrecht.processplatform.domain.zaak.Kenmerk;
 import com.gemeenteutrecht.processplatform.domain.zaak.Opschorting;
 import com.gemeenteutrecht.processplatform.domain.zaak.Verlenging;
 import com.gemeenteutrecht.processplatform.domain.zaak.Zaak;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URI;
@@ -14,8 +12,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * see https://directory.demo.nlx.io/documentation/gemeente-utrecht/zrc#operation/zaak_create
@@ -199,6 +195,11 @@ public class ZaakImpl implements Zaak {
 
     public UUID zaakType() {
         final String uuidAsString = StringUtils.substringAfter(zaaktype().toString(), "zaaktypen/");
+        return UUID.fromString(uuidAsString);
+    }
+
+    public UUID zaakId() {
+        final String uuidAsString = StringUtils.substringAfter(url().toString(), "zaken/");
         return UUID.fromString(uuidAsString);
     }
 }

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class DocumentImpl implements Document {
 
     private URI url;
-    private URI informatieObject;
+    private URI informatieobject;
     private URI object;
     private ObjectType objectType;//
     private String aardRelatie;//TODO enum
@@ -20,14 +20,22 @@ public class DocumentImpl implements Document {
     private String beschrijving;
     private LocalDate registratiedatum;
 
+    public DocumentImpl(URI informatieobject, URI object, ObjectType objectType) {
+        this.informatieobject = informatieobject;
+        this.object = object;
+        this.objectType = objectType;
+        this.titel = "";
+        this.beschrijving = "";
+    }
+
     @Override
     public URI url() {
         return url;
     }
 
     @Override
-    public @NonNull URI informatieObject() {
-        return informatieObject;
+    public @NonNull URI informatieobject() {
+        return informatieobject;
     }
 
     @Override

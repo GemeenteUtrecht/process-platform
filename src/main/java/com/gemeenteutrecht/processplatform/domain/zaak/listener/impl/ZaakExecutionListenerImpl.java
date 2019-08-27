@@ -1,8 +1,7 @@
 package com.gemeenteutrecht.processplatform.domain.zaak.listener.impl;
 
 import com.gemeenteutrecht.processplatform.domain.catalogus.impl.StatusTypeImpl;
-import com.gemeenteutrecht.processplatform.domain.document.impl.ObjectType;
-import com.gemeenteutrecht.processplatform.domain.document.request.impl.DocumentRequestImpl;
+import com.gemeenteutrecht.processplatform.domain.document.request.DocumentList;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.listener.ZaakExecutionListener;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.StatusCreateRequestImpl;
@@ -20,7 +19,7 @@ import java.util.List;
 public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
 
     private final ProcessZaakHelper processZaakHelper;
-    private final ZaakService zaakService;
+    private final ZaakService<ZaakImpl> zaakService;
     private final ZaakTypeCatalogusService zaakTypeCatalogusService;
 
     public ZaakExecutionListenerImpl(
@@ -36,6 +35,7 @@ public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
     public void createZaak(DelegateExecution execution) {
         ZaakImpl zaak = processZaakHelper.getZaakFrom(execution).orElseThrow();//TODO rewrite to use request object
         // create zaak
+        URI zaakUrl = zaak.url();
         zaak = zaakService.createZaak(
                 new ZaakCreateRequestImpl(
                         zaak.bronorganisatie(),
@@ -54,23 +54,19 @@ public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
 
         zaakService.setStatus(
                 new StatusCreateRequestImpl(
-                        zaak.url(),
+                        zaakUrl,
                         initialStatusType.url(),
                         LocalDateTime.now(),
                         ""
                 )
         );
 
-        //TODO informatieobject uit execeution halen
-        /*zaakService.createDocument(
-                new DocumentRequestImpl(
-                        URI.create("http://gemma-drc.k8s.dc1.proeftuin.utrecht.nl/api/v1/enkelvoudiginformatieobjecten/5e1cf8c2-abf5-448a-a757-0167edcb36a9"),
-                        zaak.url(),
-                        ObjectType.zaak
-        ));*/
+        DocumentList documentList = processZaakHelper.getDocumentRequestFrom(execution).orElseThrow();
+
+        documentList.documents().forEach(zaakService::createDocument);
 
         // update process var
-        execution.setVariable("zaak", zaak);
+        execution.setVariable("zaakId", zaak.zaakId());
     }
 
 }
