@@ -45,7 +45,7 @@
       <bpmn:outgoing>regulier-sequence-flow</bpmn:outgoing>
       <bpmn:outgoing>versneld-sequence-flow</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="controle-stukken-regulier" name="Controle stukken - regulier">
+    <bpmn:userTask id="controle-stukken-regulier" name="Controle stukken - regulier" camunda:candidateGroups="demoGroep">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="ControleStukken" label="Zijn alle stukken aanwezig en compleet?" type="enum">
@@ -57,7 +57,7 @@
       <bpmn:incoming>regulier-sequence-flow</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0orhnmd</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="controle-stukken-versneld" name="Controle stukken - versneld">
+    <bpmn:userTask id="controle-stukken-versneld" name="Controle stukken - versneld" camunda:candidateGroups="demoGroep">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="ControleStukken" label="Zijn alle stukken aanwezig en compleet?" type="enum">
@@ -100,7 +100,7 @@
       <bpmn:outgoing>SequenceFlow_1i9yjq1</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0jzb64g</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="extra-stukken-opvragen" name="Extra stukken opvragen">
+    <bpmn:userTask id="extra-stukken-opvragen" name="Extra stukken opvragen" camunda:candidateGroups="demoGroep">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:outputParameter name="Output_07an3ck">Vraag extra stukken op</camunda:outputParameter>
@@ -115,11 +115,11 @@
       <bpmn:outgoing>SequenceFlow_0oqwpva</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0cqfp68</bpmn:outgoing>
     </bpmn:parallelGateway>
-    <bpmn:userTask id="vergadering-voorbereiden" name="Vergadering voorbereiden">
+    <bpmn:userTask id="vergadering-voorbereiden" name="Vergadering voorbereiden" camunda:candidateGroups="demoGroep">
       <bpmn:incoming>SequenceFlow_0cqfp68</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1vlc2wu</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="concept-rapport-maken" name="Concept rapport maken">
+    <bpmn:userTask id="concept-rapport-maken" name="Concept rapport maken" camunda:candidateGroups="demoGroep">
       <bpmn:incoming>SequenceFlow_0oqwpva</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0a43oac</bpmn:outgoing>
     </bpmn:userTask>
@@ -203,7 +203,7 @@
       <bpmn:incoming>SequenceFlow_0zxmava</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0li0j4v</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="definitief-rapport-maken" name="Definitief rapport maken">
+    <bpmn:userTask id="definitief-rapport-maken" name="Definitief rapport maken" camunda:candidateGroups="demoGroep">
       <bpmn:incoming>SequenceFlow_00z0zvo</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_0m3ixxg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1x0jca3</bpmn:outgoing>
@@ -223,7 +223,7 @@
       <bpmn:outgoing>SequenceFlow_1rv1v70</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_13kor81</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="besluit-nemen" name="Besluit nemen">
+    <bpmn:userTask id="besluit-nemen" name="Besluit nemen" camunda:candidateGroups="demoGroep">
       <bpmn:incoming>SequenceFlow_13kor81</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1r4ozpa</bpmn:outgoing>
     </bpmn:userTask>
@@ -513,7 +513,7 @@
       <bpmndi:BPMNShape id="IntermediateCatchEvent_0hrholb_di" bpmnElement="IntermediateThrowEvent_1dyzvgz">
         <dc:Bounds x="1890" y="796" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1864" y="839" width="88" height="40" />
+          <dc:Bounds x="1864" y="749" width="88" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0phvhkm_di" bpmnElement="ExclusiveGateway_0phvhkm" isMarkerVisible="true">
