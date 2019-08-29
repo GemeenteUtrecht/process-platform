@@ -29,6 +29,7 @@ if (project.hasProperty('prod')) {
 } else {
     apply from: 'gradle/profile_dev.gradle'
 }
+compileJava.dependsOn processResources
 
 group = 'com.gemeente-utrecht'
 sourceCompatibility = '11'
