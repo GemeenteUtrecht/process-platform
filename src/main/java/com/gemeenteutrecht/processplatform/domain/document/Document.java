@@ -20,7 +20,6 @@ public interface Document {
     URI informatieobject();
 
     @JsonProperty
-    @NonNull
     URI object(); //[ 1 .. 200 ] characters
 
     @JsonProperty
@@ -40,4 +39,6 @@ public interface Document {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonFormat(pattern = "YYYY-MM-dd")
     LocalDate registratiedatum();
+
+    void addObject(URI object);
 }

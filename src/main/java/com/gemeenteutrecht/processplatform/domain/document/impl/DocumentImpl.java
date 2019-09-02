@@ -20,10 +20,9 @@ public class DocumentImpl implements Document {
     private String beschrijving;
     private LocalDate registratiedatum;
 
-    public DocumentImpl(URI informatieobject, URI object, ObjectType objectType) {
+    public DocumentImpl(URI informatieobject) {
         this.informatieobject = informatieobject;
-        this.object = object;
-        this.objectType = objectType;
+        this.objectType = ObjectType.zaak;
         this.titel = "";
         this.beschrijving = "";
     }
@@ -39,7 +38,7 @@ public class DocumentImpl implements Document {
     }
 
     @Override
-    public @NonNull URI object() {
+    public URI object() {
         return object;
     }
 
@@ -67,4 +66,10 @@ public class DocumentImpl implements Document {
     public LocalDate registratiedatum() {
         return registratiedatum;
     }
+
+    @Override
+    public void addObject(URI object) {
+        this.object = object;
+    }
+
 }

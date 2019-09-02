@@ -40,7 +40,7 @@ public class ProcessZaakHelper {
             final DocumentListImpl documentList = new DocumentListImpl(documents);
             return Optional.of(documentList);
         } catch (IOException e) {
-            throw new RuntimeException("Cannot find documenten variable in process");
+            throw new RuntimeException("Cannot find documenten variable in process due to exception: " + e.getMessage());
         }
     }
 

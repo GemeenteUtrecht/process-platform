@@ -20,7 +20,7 @@ public interface ZaakService<T_ZAAK_IMPL> {
 
     T_ZAAK_IMPL createZaak(ZaakCreateRequest zaak);
 
-    Document createDocument(Document documentRequest);
+    Document addDocument(Document documentRequest);
 
     List<ZaakStatusImpl> getStatussen(URI zaak);
 

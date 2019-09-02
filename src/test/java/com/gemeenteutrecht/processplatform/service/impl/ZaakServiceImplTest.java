@@ -63,11 +63,10 @@ public class ZaakServiceImplTest {
     @Test
     public void createDocument() {
         Document document = new DocumentImpl(
-                URI.create("http://gemma-drc.k8s.dc1.proeftuin.utrecht.nl/api/v1/enkelvoudiginformatieobjecten/5e1cf8c2-abf5-448a-a757-0167edcb36a9"),
-                URI.create("http://gemma-zrc.k8s.dc1.proeftuin.utrecht.nl/api/v1/zaken/73bd9e00-18c9-4b05-9ed0-b78afd372a9e"),
-                ObjectType.zaak);
-        Document documentRequest = zaakService.createDocument(document);
-        assertNotNull(document);
+                URI.create("http://gemma-drc.k8s.dc1.proeftuin.utrecht.nl/api/v1/enkelvoudiginformatieobjecten/5e1cf8c2-abf5-448a-a757-0167edcb36a9"));
+        document.addObject(URI.create("http://gemma-zrc.k8s.dc1.proeftuin.utrecht.nl/api/v1/zaken/73bd9e00-18c9-4b05-9ed0-b78afd372a9e"));
+        Document documentRequest = zaakService.addDocument(document);
+        assertNotNull(documentRequest);
     }
 
     @Test

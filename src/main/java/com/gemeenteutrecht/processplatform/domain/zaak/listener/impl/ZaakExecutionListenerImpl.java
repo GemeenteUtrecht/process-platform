@@ -11,6 +11,7 @@ import com.gemeenteutrecht.processplatform.service.ZaakTypeCatalogusService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.springframework.stereotype.Service;
 
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -61,8 +62,12 @@ public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
         );
 
         DocumentList documentList = processZaakHelper.getDocumentRequestFrom(execution).orElseThrow();
-
-        documentList.documents().forEach(zaakService::createDocument);
+        final URI object = zaak.url();
+        documentList.documents().forEach(document -> {
+                    document.addObject(object);
+                    zaakService.addDocument(document);
+                }
+        );
 
         // update process var
         execution.setVariable("zaakId", zaak.zaakId());

@@ -97,7 +97,7 @@ public class ZaakServiceImpl implements ZaakService {
     }
 
     @Override
-    public DocumentImpl createDocument(Document documentRequest) {
+    public DocumentImpl addDocument(Document documentRequest) {
         final HttpEntity<Document> request = new HttpEntity<>(documentRequest, headers(endpointProperties.getToken()));
 
         ResponseEntity<DocumentImpl> response = restTemplate.exchange(
