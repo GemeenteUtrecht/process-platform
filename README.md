@@ -13,12 +13,23 @@
         - Component for set Notification of any type
         - Component for link Document of any type
 
-# Status aanpassen via een task
 
-- Kopier de volgende regel: ```${statusExecutionListenerImpl.setStatus(execution, 1)} ```
-- Pas het volgnummer aan van 1 naar het gewenste nummer.
 
-![Alt text](documentation/images/tutorial-set-status.png?raw=true "Title")
+# Gemeente Utrecht generic components 
+
+### Zaak aanmaken via start event (inclusief initiele status automatisch gezet)
+- Kopier de volgende regel: ```${zaakExecutionListenerImpl.createZaak(execution)}```
+- Volg de stappen in het plaatje
+
+![Alt text](documentation/images/tutorial-create-zaak.png?raw=false "Zaak aanmaken via start event")
+
+### Status / Resultaat -aanpassen via een task
+- Kopier de volgende regel voor status aanpassen: ```${statusExecutionListenerImpl.setStatus(execution, 1)} ```
+- Kopier de volgende regel voor resultaat aanpassen: ```${statusExecutionListenerImpl.setResultaat(execution, url)} ```
+- Pas het volgnummer of url aan naar wens 
+- Volg de stappen in het plaatje
+
+![Alt text](documentation/images/tutorial-set-status.png?raw=false "Status aanpassen via een task")
 
 ## BInG application
 
