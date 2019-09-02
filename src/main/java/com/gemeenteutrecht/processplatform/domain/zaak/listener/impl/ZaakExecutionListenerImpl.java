@@ -1,7 +1,7 @@
 package com.gemeenteutrecht.processplatform.domain.zaak.listener.impl;
 
 import com.gemeenteutrecht.processplatform.domain.catalogus.impl.StatusTypeImpl;
-import com.gemeenteutrecht.processplatform.domain.document.request.DocumentList;
+import com.gemeenteutrecht.processplatform.domain.document.request.processvariable.DocumentList;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.listener.ZaakExecutionListener;
 import com.gemeenteutrecht.processplatform.domain.zaak.request.impl.StatusCreateRequestImpl;
@@ -63,9 +63,10 @@ public class ZaakExecutionListenerImpl implements ZaakExecutionListener {
 
         DocumentList documentList = processZaakHelper.getDocumentRequestFrom(execution).orElseThrow();
         final URI object = zaak.url();
-        documentList.documents().forEach(document -> {
-                    document.addObject(object);
-                    zaakService.addDocument(document);
+        documentList.documents().forEach(documentRequest -> {
+                    documentRequest.addObject(object);
+                    documentRequest.addUrl(URI.create("http://example.com"));
+                    zaakService.addDocument(documentRequest);
                 }
         );
 

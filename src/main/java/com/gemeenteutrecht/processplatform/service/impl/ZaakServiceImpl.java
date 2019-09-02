@@ -1,7 +1,8 @@
 package com.gemeenteutrecht.processplatform.service.impl;
 
 import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
-import com.gemeenteutrecht.processplatform.domain.document.Document;
+import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequest;
+import com.gemeenteutrecht.processplatform.domain.document.request.processvariable.Document;
 import com.gemeenteutrecht.processplatform.domain.document.impl.DocumentImpl;
 import com.gemeenteutrecht.processplatform.domain.resultaat.Resultaat;
 import com.gemeenteutrecht.processplatform.domain.resultaat.impl.ResultaatImpl;
@@ -25,6 +26,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
+import static com.gemeenteutrecht.processplatform.service.impl.ApiHelper.documentHeaders;
 import static com.gemeenteutrecht.processplatform.service.impl.ApiHelper.headers;
 
 @Service
@@ -97,8 +99,8 @@ public class ZaakServiceImpl implements ZaakService {
     }
 
     @Override
-    public DocumentImpl addDocument(Document documentRequest) {
-        final HttpEntity<Document> request = new HttpEntity<>(documentRequest, headers(endpointProperties.getToken()));
+    public DocumentImpl addDocument(DocumentRequest documentRequest) {
+        final HttpEntity<DocumentRequest> request = new HttpEntity<>(documentRequest, documentHeaders());
 
         ResponseEntity<DocumentImpl> response = restTemplate.exchange(
                 URI.create(endpointProperties.getDocument()),

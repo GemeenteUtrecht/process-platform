@@ -1,4 +1,4 @@
-package com.gemeenteutrecht.processplatform.domain.document;
+package com.gemeenteutrecht.processplatform.domain.document.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,7 +10,7 @@ import lombok.NonNull;
 import java.net.URI;
 import java.time.LocalDate;
 
-public interface Document {
+public interface DocumentRequest {
 
     @JsonProperty
     URI url();
@@ -20,6 +20,7 @@ public interface Document {
     URI informatieobject();
 
     @JsonProperty
+    @NonNull
     URI object(); //[ 1 .. 200 ] characters
 
     @JsonProperty
@@ -27,18 +28,12 @@ public interface Document {
     ObjectType objectType();
 
     @JsonProperty
-    String aardRelatie();
-
-    @JsonProperty
     String titel();
 
     @JsonProperty
     String beschrijving();
 
-    @JsonProperty
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonFormat(pattern = "YYYY-MM-dd")
-    LocalDate registratiedatum();
-
     void addObject(URI object);
+
+    void addUrl(URI url);
 }

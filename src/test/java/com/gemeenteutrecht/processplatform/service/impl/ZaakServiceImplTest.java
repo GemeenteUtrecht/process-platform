@@ -2,7 +2,9 @@ package com.gemeenteutrecht.processplatform.service.impl;
 
 import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
 import com.gemeenteutrecht.processplatform.config.RestTemplateConfiguration;
-import com.gemeenteutrecht.processplatform.domain.document.Document;
+import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequest;
+import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequestImpl;
+import com.gemeenteutrecht.processplatform.domain.document.request.processvariable.Document;
 import com.gemeenteutrecht.processplatform.domain.document.impl.DocumentImpl;
 import com.gemeenteutrecht.processplatform.domain.document.impl.ObjectType;
 import com.gemeenteutrecht.processplatform.domain.resultaat.Resultaat;
@@ -62,12 +64,13 @@ public class ZaakServiceImplTest {
 
     @Test
     public void createDocument() {
-        Document document = new DocumentImpl(
+        DocumentRequest document = new DocumentRequestImpl(
                 URI.create("http://gemma-drc.k8s.dc1.proeftuin.utrecht.nl/api/v1/enkelvoudiginformatieobjecten/5e1cf8c2-abf5-448a-a757-0167edcb36a9"),
                 ObjectType.zaak,
                 "testTitle",
                 "testBeschrijving"
         );
+        document.addUrl(URI.create("http://example.com"));
         document.addObject(URI.create("http://gemma-zrc.k8s.dc1.proeftuin.utrecht.nl/api/v1/zaken/73bd9e00-18c9-4b05-9ed0-b78afd372a9e"));
         Document documentRequest = zaakService.addDocument(document);
         assertNotNull(documentRequest);

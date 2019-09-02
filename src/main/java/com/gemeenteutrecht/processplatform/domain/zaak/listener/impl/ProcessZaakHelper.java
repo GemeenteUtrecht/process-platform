@@ -3,8 +3,9 @@ package com.gemeenteutrecht.processplatform.domain.zaak.listener.impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gemeenteutrecht.processplatform.domain.document.impl.DocumentImpl;
-import com.gemeenteutrecht.processplatform.domain.document.request.DocumentList;
-import com.gemeenteutrecht.processplatform.domain.document.request.impl.DocumentListImpl;
+import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequestImpl;
+import com.gemeenteutrecht.processplatform.domain.document.request.processvariable.DocumentList;
+import com.gemeenteutrecht.processplatform.domain.document.request.processvariable.impl.DocumentListImpl;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakImpl;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.spin.impl.json.jackson.JacksonJsonNode;
@@ -35,7 +36,7 @@ public class ProcessZaakHelper {
     public Optional<DocumentList> getDocumentRequestFrom(DelegateExecution execution) {
         try {
             final JacksonJsonNode variable = (JacksonJsonNode) execution.getVariable("documenten");
-            List<DocumentImpl> documents = objectMapper.readValue(variable.toString(), new TypeReference<List<DocumentImpl>>() {
+            List<DocumentRequestImpl> documents = objectMapper.readValue(variable.toString(), new TypeReference<List<DocumentRequestImpl>>() {
             });
             final DocumentListImpl documentList = new DocumentListImpl(documents);
             return Optional.of(documentList);

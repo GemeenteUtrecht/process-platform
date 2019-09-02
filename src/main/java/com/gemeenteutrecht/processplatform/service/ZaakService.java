@@ -1,6 +1,7 @@
 package com.gemeenteutrecht.processplatform.service;
 
-import com.gemeenteutrecht.processplatform.domain.document.Document;
+import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequest;
+import com.gemeenteutrecht.processplatform.domain.document.request.processvariable.Document;
 import com.gemeenteutrecht.processplatform.domain.resultaat.Resultaat;
 import com.gemeenteutrecht.processplatform.domain.resultaat.request.ResultaatRequest;
 import com.gemeenteutrecht.processplatform.domain.zaak.impl.ZaakStatusImpl;
@@ -20,7 +21,7 @@ public interface ZaakService<T_ZAAK_IMPL> {
 
     T_ZAAK_IMPL createZaak(ZaakCreateRequest zaak);
 
-    Document addDocument(Document documentRequest);
+    Document addDocument(DocumentRequest documentRequest);
 
     List<ZaakStatusImpl> getStatussen(URI zaak);
 

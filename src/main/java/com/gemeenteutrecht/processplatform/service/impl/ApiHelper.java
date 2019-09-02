@@ -17,4 +17,11 @@ public class ApiHelper {
         return headers;
     }
 
+    protected static HttpHeaders documentHeaders() {
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return headers;
+    }
+
 }

@@ -1,40 +1,24 @@
-package com.gemeenteutrecht.processplatform.domain.document.impl;
+package com.gemeenteutrecht.processplatform.domain.document.request;
 
-import com.gemeenteutrecht.processplatform.domain.document.request.processvariable.Document;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import com.gemeenteutrecht.processplatform.domain.document.impl.ObjectType;
 import lombok.NonNull;
 
 import java.net.URI;
-import java.time.LocalDate;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class DocumentImpl implements Document {
+public class DocumentRequestImpl implements DocumentRequest{
 
     private URI url;
     private URI informatieobject;
     private URI object;
-    private ObjectType objectType;//
+    private ObjectType objectType;
     private String titel;
     private String beschrijving;
-    private LocalDate registratiedatum;
 
-    public DocumentImpl(
-            URI url,
-            URI informatieobject,
-            URI object,
-            ObjectType objectType,
-            String titel,
-            String beschrijving,
-            LocalDate registratiedatum
-    ) {
-        this.url = url;
+    public DocumentRequestImpl(URI informatieobject, ObjectType objectType, String titel, String beschrijving) {
         this.informatieobject = informatieobject;
-        this.object = object;
         this.objectType = objectType;
         this.titel = titel;
         this.beschrijving = beschrijving;
-        this.registratiedatum = registratiedatum;
     }
 
     @Override
@@ -68,8 +52,12 @@ public class DocumentImpl implements Document {
     }
 
     @Override
-    public LocalDate registratiedatum() {
-        return registratiedatum;
+    public void addObject(URI object) {
+        this.object = object;
     }
 
+    @Override
+    public void addUrl(URI url) {
+        this.url = url;
+    }
 }
