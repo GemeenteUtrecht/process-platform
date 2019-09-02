@@ -20,11 +20,11 @@ public class DocumentImpl implements Document {
     private String beschrijving;
     private LocalDate registratiedatum;
 
-    public DocumentImpl(URI informatieobject) {
+    public DocumentImpl(URI informatieobject, ObjectType objectType, String titel, String beschrijving) {
         this.informatieobject = informatieobject;
-        this.objectType = ObjectType.zaak;
-        this.titel = "";
-        this.beschrijving = "";
+        this.objectType = objectType;
+        this.titel = titel;
+        this.beschrijving = beschrijving;
     }
 
     @Override

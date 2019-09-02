@@ -56,14 +56,18 @@ public class ZaakServiceImplTest {
     @Test
     public void createZaak() {
         final ZaakCreateRequestImpl zaakRequest = zaakCreateRequest();
-        Zaak zaak = (Zaak)zaakService.createZaak(zaakRequest);
+        Zaak zaak = (Zaak) zaakService.createZaak(zaakRequest);
         assertNotNull(zaak);
     }
 
     @Test
     public void createDocument() {
         Document document = new DocumentImpl(
-                URI.create("http://gemma-drc.k8s.dc1.proeftuin.utrecht.nl/api/v1/enkelvoudiginformatieobjecten/5e1cf8c2-abf5-448a-a757-0167edcb36a9"));
+                URI.create("http://gemma-drc.k8s.dc1.proeftuin.utrecht.nl/api/v1/enkelvoudiginformatieobjecten/5e1cf8c2-abf5-448a-a757-0167edcb36a9"),
+                ObjectType.zaak,
+                "testTitle",
+                "testBeschrijving"
+        );
         document.addObject(URI.create("http://gemma-zrc.k8s.dc1.proeftuin.utrecht.nl/api/v1/zaken/73bd9e00-18c9-4b05-9ed0-b78afd372a9e"));
         Document documentRequest = zaakService.addDocument(document);
         assertNotNull(documentRequest);
@@ -85,7 +89,7 @@ public class ZaakServiceImplTest {
     @Test
     public void shouldGetStatussen() {
         final ZaakCreateRequestImpl zaakRequest = zaakCreateRequest();
-        Zaak zaak = (Zaak)zaakService.createZaak(zaakRequest);
+        Zaak zaak = (Zaak) zaakService.createZaak(zaakRequest);
         List<ZaakStatusImpl> statussen = zaakService.getStatussen(zaak.url());
         assertNotNull(statussen);
     }
@@ -93,7 +97,7 @@ public class ZaakServiceImplTest {
     @Test
     public void shouldAddResultaat() {
         final ZaakCreateRequestImpl zaakRequest = zaakCreateRequest();
-        Zaak zaak = (Zaak)zaakService.createZaak(zaakRequest);
+        Zaak zaak = (Zaak) zaakService.createZaak(zaakRequest);
 
         ResultaatRequest resultaatRequest = new ResultaatRequestImpl(
                 zaak.url(),
