@@ -2,11 +2,10 @@ package com.gemeenteutrecht.processplatform.service.impl;
 
 import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
 import com.gemeenteutrecht.processplatform.config.RestTemplateConfiguration;
+import com.gemeenteutrecht.processplatform.domain.document.impl.ObjectType;
 import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequest;
 import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequestImpl;
 import com.gemeenteutrecht.processplatform.domain.document.request.processvariable.Document;
-import com.gemeenteutrecht.processplatform.domain.document.impl.DocumentImpl;
-import com.gemeenteutrecht.processplatform.domain.document.impl.ObjectType;
 import com.gemeenteutrecht.processplatform.domain.resultaat.Resultaat;
 import com.gemeenteutrecht.processplatform.domain.resultaat.request.ResultaatRequest;
 import com.gemeenteutrecht.processplatform.domain.resultaat.request.impl.ResultaatRequestImpl;
