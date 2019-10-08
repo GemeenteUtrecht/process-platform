@@ -22,9 +22,9 @@ public class ResultaatExecutionListenerImpl implements ResultaatExecutionListene
     }
 
     @Override
-    public void setResultaat(DelegateExecution delegateExecution, URI resultaat, String toelichting) {
+    public void setResultaat(DelegateExecution delegateExecution, URI resultaatType, String toelichting) {
         final ZaakImpl zaak = processZaakHelper.getZaakFrom(delegateExecution).orElseThrow();
-        ResultaatRequest resultaatRequest = new ResultaatRequestImpl(zaak.url(), resultaat, toelichting);
+        ResultaatRequest resultaatRequest = new ResultaatRequestImpl(zaak.url(), resultaatType, toelichting);
         zaakService.setResultaat(resultaatRequest);
     }
 

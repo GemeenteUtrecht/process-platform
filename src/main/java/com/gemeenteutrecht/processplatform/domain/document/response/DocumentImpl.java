@@ -1,6 +1,6 @@
-package com.gemeenteutrecht.processplatform.domain.document.impl;
+package com.gemeenteutrecht.processplatform.domain.document.response;
 
-import com.gemeenteutrecht.processplatform.domain.document.request.processvariable.Document;
+import com.gemeenteutrecht.processplatform.domain.document.ObjectType;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;

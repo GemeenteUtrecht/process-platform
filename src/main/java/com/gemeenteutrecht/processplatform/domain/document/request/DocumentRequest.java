@@ -1,7 +1,6 @@
 package com.gemeenteutrecht.processplatform.domain.document.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.gemeenteutrecht.processplatform.domain.document.impl.ObjectType;
 import lombok.NonNull;
 
 import java.net.URI;
@@ -9,27 +8,20 @@ import java.net.URI;
 public interface DocumentRequest {
 
     @JsonProperty
-    URI url();
+    @NonNull
+    URI informatieobject(); //documentUrl
 
     @JsonProperty
     @NonNull
-    URI informatieobject();
+    URI object(); //zaakUrl
 
     @JsonProperty
     @NonNull
-    URI object(); //[ 1 .. 200 ] characters
-
-    @JsonProperty
-    @NonNull
-    ObjectType objectType();
+    String objectType();
 
     @JsonProperty
     String titel();
 
     @JsonProperty
     String beschrijving();
-
-    void addObject(URI object);
-
-    void addUrl(URI url);
 }

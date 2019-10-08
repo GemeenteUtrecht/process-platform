@@ -2,10 +2,10 @@ package com.gemeenteutrecht.processplatform.service.impl;
 
 import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
 import com.gemeenteutrecht.processplatform.config.RestTemplateConfiguration;
-import com.gemeenteutrecht.processplatform.domain.document.impl.ObjectType;
+import com.gemeenteutrecht.processplatform.domain.document.ObjectType;
 import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequest;
 import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequestImpl;
-import com.gemeenteutrecht.processplatform.domain.document.request.processvariable.Document;
+import com.gemeenteutrecht.processplatform.domain.document.response.Document;
 import com.gemeenteutrecht.processplatform.domain.resultaat.Resultaat;
 import com.gemeenteutrecht.processplatform.domain.resultaat.request.ResultaatRequest;
 import com.gemeenteutrecht.processplatform.domain.resultaat.request.impl.ResultaatRequestImpl;
@@ -63,14 +63,13 @@ public class ZaakServiceImplTest {
 
     @Test
     public void createDocument() {
+        final ZaakCreateRequestImpl zaakRequest = zaakCreateRequest();
+        Zaak zaak = (Zaak) zaakService.createZaak(zaakRequest);
+
         DocumentRequest document = new DocumentRequestImpl(
                 URI.create("http://gemma-drc.k8s.dc1.proeftuin.utrecht.nl/api/v1/enkelvoudiginformatieobjecten/5e1cf8c2-abf5-448a-a757-0167edcb36a9"),
-                ObjectType.zaak,
-                "testTitle",
-                "testBeschrijving"
+                zaak.url()
         );
-        document.addUrl(URI.create("http://example.com"));
-        document.addObject(URI.create("http://gemma-zrc.k8s.dc1.proeftuin.utrecht.nl/api/v1/zaken/73bd9e00-18c9-4b05-9ed0-b78afd372a9e"));
         Document documentRequest = zaakService.addDocument(document);
         assertNotNull(documentRequest);
     }
@@ -103,7 +102,7 @@ public class ZaakServiceImplTest {
 
         ResultaatRequest resultaatRequest = new ResultaatRequestImpl(
                 zaak.url(),
-                URI.create("http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaattypen/fd06791d-3084-4344-b221-597c7ac11e0c"),
+                URI.create("http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaattypen/7f0ef5c2-ce3b-4ca4-944f-d6f721a4824c"),
                 "dit is een toelichting"
         );
 

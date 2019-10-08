@@ -1,29 +1,23 @@
 package com.gemeenteutrecht.processplatform.domain.document.request;
 
-import com.gemeenteutrecht.processplatform.domain.document.impl.ObjectType;
 import lombok.NonNull;
 
 import java.net.URI;
 
 public class DocumentRequestImpl implements DocumentRequest{
 
-    private URI url;
     private URI informatieobject;
     private URI object;
-    private ObjectType objectType;
+    private String objectType;
     private String titel;
     private String beschrijving;
 
-    public DocumentRequestImpl(URI informatieobject, ObjectType objectType, String titel, String beschrijving) {
+    public DocumentRequestImpl(URI informatieobject, URI object) {
+        this.object = object;
         this.informatieobject = informatieobject;
-        this.objectType = objectType;
-        this.titel = titel;
-        this.beschrijving = beschrijving;
-    }
-
-    @Override
-    public URI url() {
-        return url;
+        this.objectType = "zaak";
+        this.titel = "title";
+        this.beschrijving = "beschrijving";
     }
 
     @Override
@@ -37,7 +31,7 @@ public class DocumentRequestImpl implements DocumentRequest{
     }
 
     @Override
-    public @NonNull ObjectType objectType() {
+    public @NonNull String objectType() {
         return objectType;
     }
 
@@ -49,15 +43,5 @@ public class DocumentRequestImpl implements DocumentRequest{
     @Override
     public String beschrijving() {
         return beschrijving;
-    }
-
-    @Override
-    public void addObject(URI object) {
-        this.object = object;
-    }
-
-    @Override
-    public void addUrl(URI url) {
-        this.url = url;
     }
 }

@@ -2,8 +2,7 @@ package com.gemeenteutrecht.processplatform.service.impl;
 
 import com.gemeenteutrecht.processplatform.config.NlxEndpointProperties;
 import com.gemeenteutrecht.processplatform.domain.document.request.DocumentRequest;
-import com.gemeenteutrecht.processplatform.domain.document.request.processvariable.Document;
-import com.gemeenteutrecht.processplatform.domain.document.impl.DocumentImpl;
+import com.gemeenteutrecht.processplatform.domain.document.response.DocumentImpl;
 import com.gemeenteutrecht.processplatform.domain.resultaat.Resultaat;
 import com.gemeenteutrecht.processplatform.domain.resultaat.impl.ResultaatImpl;
 import com.gemeenteutrecht.processplatform.domain.resultaat.request.ResultaatRequest;
@@ -111,8 +110,8 @@ public class ZaakServiceImpl implements ZaakService {
         if (response.getStatusCode().equals(HttpStatus.CREATED)) {
             return response.getBody();
         } else {
-            throw new RuntimeException("Error while performing POST on /objectinformatieobjecten with code: "
-                    + response.getStatusCode());
+            throw new RuntimeException("Error while performing POST on /objectinformatieobjecten with code and message: "
+                    + response.getStatusCode() + response.getBody());
         }
     }
 
@@ -167,7 +166,7 @@ public class ZaakServiceImpl implements ZaakService {
         if (response.getStatusCode().is2xxSuccessful()) {
             return response.getBody();
         } else {
-            throw new RuntimeException("Error while performing POST on /resultaten with code: " + response.getStatusCode());
+            throw new RuntimeException("Error while performing POST on /resultaten with code and message: " + response.getStatusCode() + response.getBody());
         }
     }
 

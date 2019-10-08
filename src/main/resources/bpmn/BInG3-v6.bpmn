@@ -14,13 +14,11 @@
         <bpmn:flowNodeRef>definitief-rapport-maken</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0wdu8ab" name="Toetsingscommissie">
-        <bpmn:flowNodeRef>Task_091i6dy</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>commissie-besluit</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0dpea0h" name="Secretariaat">
-        <bpmn:flowNodeRef>ExclusiveGateway_08nh387</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>controle-stukken-regulier</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>controle-stukken-versneld</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>exclusive-gateway-1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>aanvraag-ontvangen-start-event</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0fm5q3i</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0x019hl</bpmn:flowNodeRef>
@@ -35,13 +33,9 @@
         <bpmn:flowNodeRef>bepalen-procedure</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0swbqjx</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>end-event</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_08nh387</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_08nh387" name="Welke procedure?">
-      <bpmn:incoming>SequenceFlow_1qqln55</bpmn:incoming>
-      <bpmn:outgoing>regulier-sequence-flow</bpmn:outgoing>
-      <bpmn:outgoing>versneld-sequence-flow</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
     <bpmn:userTask id="controle-stukken-regulier" name="Controle stukken - regulier" camunda:candidateGroups="demoGroep">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -66,29 +60,12 @@
       <bpmn:incoming>versneld-sequence-flow</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_15gu60u</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:exclusiveGateway id="exclusive-gateway-1">
-      <bpmn:incoming>SequenceFlow_0li0j4v</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_1d6nbfu</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1qqln55</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
     <bpmn:startEvent id="aanvraag-ontvangen-start-event" name="Aanvraag ontvangen">
       <bpmn:extensionElements>
         <camunda:executionListener expression="${zaakExecutionListenerImpl.createZaak(execution)}" event="end" />
       </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_0zxmava</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_1qqln55" sourceRef="exclusive-gateway-1" targetRef="ExclusiveGateway_08nh387" />
-    <bpmn:sequenceFlow id="SequenceFlow_15gu60u" sourceRef="controle-stukken-versneld" targetRef="ExclusiveGateway_0fm5q3i" />
-    <bpmn:sequenceFlow id="SequenceFlow_0orhnmd" sourceRef="controle-stukken-regulier" targetRef="ExclusiveGateway_0fm5q3i" />
-    <bpmn:sequenceFlow id="SequenceFlow_1d6nbfu" sourceRef="IntermediateCatchEvent_18ajjyt" targetRef="exclusive-gateway-1" />
-    <bpmn:sequenceFlow id="versneld-sequence-flow" name="Versneld" sourceRef="ExclusiveGateway_08nh387" targetRef="controle-stukken-versneld">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${Procedure=='Versneld'}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="regulier-sequence-flow" name="Regulier" sourceRef="ExclusiveGateway_08nh387" targetRef="controle-stukken-regulier">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${Procedure=='Regulier'}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0li0j4v" sourceRef="bepalen-procedure" targetRef="exclusive-gateway-1" />
-    <bpmn:sequenceFlow id="SequenceFlow_0zxmava" sourceRef="aanvraag-ontvangen-start-event" targetRef="bepalen-procedure" />
     <bpmn:exclusiveGateway id="ExclusiveGateway_0fm5q3i">
       <bpmn:incoming>SequenceFlow_0orhnmd</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_15gu60u</bpmn:incoming>
@@ -96,8 +73,8 @@
     </bpmn:exclusiveGateway>
     <bpmn:exclusiveGateway id="ExclusiveGateway_0x019hl" name="Stukken compleet?" default="SequenceFlow_0jzb64g">
       <bpmn:incoming>SequenceFlow_1gil0rs</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1i9yjq1</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0jzb64g</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1i9yjq1</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="extra-stukken-opvragen" name="Extra stukken opvragen" camunda:candidateGroups="demoGroep">
       <bpmn:extensionElements>
@@ -142,22 +119,10 @@
       <bpmn:outgoing>SequenceFlow_1d6nbfu</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0g7i8n0" messageRef="Message_1rjw2b3" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_1gil0rs" sourceRef="ExclusiveGateway_0fm5q3i" targetRef="ExclusiveGateway_0x019hl" />
-    <bpmn:sequenceFlow id="SequenceFlow_1i9yjq1" name="Nee" sourceRef="ExclusiveGateway_0x019hl" targetRef="extra-stukken-opvragen">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{ControleStukken == 'Nee'}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0jzb64g" name="Ja" sourceRef="ExclusiveGateway_0x019hl" targetRef="ExclusiveGateway_054hcrz" />
-    <bpmn:sequenceFlow id="SequenceFlow_0pn3djl" sourceRef="EventBasedGateway_0utwco7" targetRef="IntermediateCatchEvent_0oh466y" />
-    <bpmn:sequenceFlow id="SequenceFlow_1m7ekak" sourceRef="IntermediateCatchEvent_0oh466y" targetRef="aanvraag-geweigerd-end-event" />
     <bpmn:sequenceFlow id="SequenceFlow_0px2i0f" sourceRef="extra-stukken-opvragen" targetRef="EventBasedGateway_0utwco7" />
     <bpmn:sequenceFlow id="SequenceFlow_1rmume7" name="Regulier" sourceRef="ExclusiveGateway_054hcrz" targetRef="ExclusiveGateway_0sfwei2">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${Procedure=='Regulier'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0oqwpva" sourceRef="ExclusiveGateway_0sfwei2" targetRef="concept-rapport-maken" />
-    <bpmn:sequenceFlow id="SequenceFlow_0cqfp68" sourceRef="ExclusiveGateway_0sfwei2" targetRef="vergadering-voorbereiden" />
-    <bpmn:sequenceFlow id="SequenceFlow_1vlc2wu" sourceRef="vergadering-voorbereiden" targetRef="ExclusiveGateway_0swbqjx" />
-    <bpmn:sequenceFlow id="SequenceFlow_0a43oac" sourceRef="concept-rapport-maken" targetRef="ExclusiveGateway_0swbqjx" />
-    <bpmn:sequenceFlow id="SequenceFlow_0lv4nyx" sourceRef="EventBasedGateway_0utwco7" targetRef="IntermediateCatchEvent_18ajjyt" />
     <bpmn:intermediateCatchEvent id="IntermediateCatchEvent_0oh466y" name="2 weken wachten">
       <bpmn:incoming>SequenceFlow_0pn3djl</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1m7ekak</bpmn:outgoing>
@@ -168,7 +133,7 @@
     <bpmn:endEvent id="aanvraag-geweigerd-end-event" name="Aanvraag geweigerd">
       <bpmn:extensionElements>
         <camunda:executionListener expression="${statusExecutionListenerImpl.setStatus(execution, 4)}" event="end" />
-        <camunda:executionListener expression="${resultaatExecutionListenerImpl.setResultaat(execution, &#34;afgekeurd&#34;)}" event="end" />
+        <camunda:executionListener expression="${resultaatExecutionListenerImpl.setResultaat(execution, &#34;http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaattypen/7f0ef5c2-ce3b-4ca4-944f-d6f721a4824c&#34;)}" event="end" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1m7ekak</bpmn:incoming>
     </bpmn:endEvent>
@@ -184,7 +149,7 @@
         <camunda:executionListener expression="${statusExecutionListenerImpl.setStatus(execution, 2)}" event="end" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0zxmava</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0li0j4v</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_12z8jny</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:parallelGateway id="ExclusiveGateway_0swbqjx">
       <bpmn:incoming>SequenceFlow_1vlc2wu</bpmn:incoming>
@@ -200,23 +165,6 @@
       <bpmn:incoming>SequenceFlow_13kor81</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1r4ozpa</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_1r4ozpa" sourceRef="besluit-nemen" targetRef="ExclusiveGateway_0phvhkm" />
-    <bpmn:exclusiveGateway id="ExclusiveGateway_0phvhkm">
-      <bpmn:incoming>SequenceFlow_1r4ozpa</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_0luv5ks</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1x6ptcm</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_1x6ptcm" sourceRef="ExclusiveGateway_0phvhkm" targetRef="definitief-rapport-maken" />
-    <bpmn:userTask id="definitief-rapport-maken" name="Definitief rapport maken" camunda:candidateGroups="demoGroep">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="rapport" label="Definitief rapport gemaakt?" type="boolean" />
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_1x6ptcm</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0mm8dd3</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_0mm8dd3" sourceRef="definitief-rapport-maken" targetRef="end-event" />
     <bpmn:endEvent id="end-event">
       <bpmn:extensionElements>
         <camunda:executionListener expression="${statusExecutionListenerImpl.setStatus(execution, 4)}" event="end" />
@@ -224,17 +172,77 @@
       <bpmn:incoming>SequenceFlow_0mm8dd3</bpmn:incoming>
       <bpmn:messageEventDefinition />
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0luv5ks" sourceRef="Task_091i6dy" targetRef="ExclusiveGateway_0phvhkm" />
-    <bpmn:userTask id="Task_091i6dy" name="Commissie vergadering besluit genomen">
+    <bpmn:userTask id="commissie-besluit" name="Commissie vergadering besluit genomen">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="besluit" label="goedgekeurd?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1jo7y8q</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0luv5ks</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_1jo7y8q" sourceRef="ExclusiveGateway_0swbqjx" targetRef="Task_091i6dy">
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0phvhkm">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="end">
+          <camunda:script scriptFormat="javascript">if(besluit) {
+resultaatExecutionListenerImpl.setResultaat(execution, "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaattypen/728bb0c7-5bfa-4cac-aa3f-12bcaec92e0b")
+} else {
+${resultaatExecutionListenerImpl.setResultaat(execution, "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaattypen/7f0ef5c2-ce3b-4ca4-944f-d6f721a4824c")
+}</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1r4ozpa</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0luv5ks</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_034fvf6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="definitief-rapport-maken" name="Definitief rapport maken" camunda:candidateGroups="demoGroep">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="rapport" label="Definitief rapport gemaakt?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_034fvf6</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0mm8dd3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_08nh387" name="Welke procedure?">
+      <bpmn:incoming>SequenceFlow_12z8jny</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1d6nbfu</bpmn:incoming>
+      <bpmn:outgoing>versneld-sequence-flow</bpmn:outgoing>
+      <bpmn:outgoing>regulier-sequence-flow</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0zxmava" sourceRef="aanvraag-ontvangen-start-event" targetRef="bepalen-procedure" />
+    <bpmn:sequenceFlow id="versneld-sequence-flow" name="Versneld" sourceRef="ExclusiveGateway_08nh387" targetRef="controle-stukken-versneld">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${Procedure=='Versneld'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="regulier-sequence-flow" name="Regulier" sourceRef="ExclusiveGateway_08nh387" targetRef="controle-stukken-regulier">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${Procedure=='Regulier'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0orhnmd" sourceRef="controle-stukken-regulier" targetRef="ExclusiveGateway_0fm5q3i" />
+    <bpmn:sequenceFlow id="SequenceFlow_12z8jny" sourceRef="bepalen-procedure" targetRef="ExclusiveGateway_08nh387" />
+    <bpmn:sequenceFlow id="SequenceFlow_15gu60u" sourceRef="controle-stukken-versneld" targetRef="ExclusiveGateway_0fm5q3i" />
+    <bpmn:sequenceFlow id="SequenceFlow_1gil0rs" sourceRef="ExclusiveGateway_0fm5q3i" targetRef="ExclusiveGateway_0x019hl" />
+    <bpmn:sequenceFlow id="SequenceFlow_0jzb64g" name="Ja" sourceRef="ExclusiveGateway_0x019hl" targetRef="ExclusiveGateway_054hcrz" />
+    <bpmn:sequenceFlow id="SequenceFlow_1i9yjq1" name="Nee" sourceRef="ExclusiveGateway_0x019hl" targetRef="extra-stukken-opvragen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{ControleStukken == 'Nee'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_13kor81" name="Versneld" sourceRef="ExclusiveGateway_054hcrz" targetRef="besluit-nemen">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${Procedure=='Versneld'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0oqwpva" sourceRef="ExclusiveGateway_0sfwei2" targetRef="concept-rapport-maken" />
+    <bpmn:sequenceFlow id="SequenceFlow_0cqfp68" sourceRef="ExclusiveGateway_0sfwei2" targetRef="vergadering-voorbereiden" />
+    <bpmn:sequenceFlow id="SequenceFlow_1vlc2wu" sourceRef="vergadering-voorbereiden" targetRef="ExclusiveGateway_0swbqjx" />
+    <bpmn:sequenceFlow id="SequenceFlow_1m7ekak" sourceRef="IntermediateCatchEvent_0oh466y" targetRef="aanvraag-geweigerd-end-event" />
+    <bpmn:sequenceFlow id="SequenceFlow_0pn3djl" sourceRef="EventBasedGateway_0utwco7" targetRef="IntermediateCatchEvent_0oh466y" />
+    <bpmn:sequenceFlow id="SequenceFlow_0lv4nyx" sourceRef="EventBasedGateway_0utwco7" targetRef="IntermediateCatchEvent_18ajjyt" />
+    <bpmn:sequenceFlow id="SequenceFlow_1d6nbfu" sourceRef="IntermediateCatchEvent_18ajjyt" targetRef="ExclusiveGateway_08nh387" />
+    <bpmn:sequenceFlow id="SequenceFlow_0a43oac" sourceRef="concept-rapport-maken" targetRef="ExclusiveGateway_0swbqjx" />
+    <bpmn:sequenceFlow id="SequenceFlow_1jo7y8q" sourceRef="ExclusiveGateway_0swbqjx" targetRef="commissie-besluit">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${Procedure=='Regulier'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1r4ozpa" sourceRef="besluit-nemen" targetRef="ExclusiveGateway_0phvhkm" />
+    <bpmn:sequenceFlow id="SequenceFlow_0luv5ks" sourceRef="commissie-besluit" targetRef="ExclusiveGateway_0phvhkm" />
+    <bpmn:sequenceFlow id="SequenceFlow_034fvf6" sourceRef="ExclusiveGateway_0phvhkm" targetRef="definitief-rapport-maken" />
+    <bpmn:sequenceFlow id="SequenceFlow_0mm8dd3" sourceRef="definitief-rapport-maken" targetRef="end-event" />
   </bpmn:process>
   <bpmn:message id="Message_1ii3mla" name="BesluitOntvangen" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -251,7 +259,7 @@
       <bpmndi:BPMNShape id="ExclusiveGateway_08nh387_di" bpmnElement="ExclusiveGateway_08nh387" isMarkerVisible="true">
         <dc:Bounds x="616" y="392" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="588" y="376" width="90" height="14" />
+          <dc:Bounds x="661" y="330" width="90" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_19xsybc_di" bpmnElement="controle-stukken-regulier">
@@ -305,96 +313,9 @@
       <bpmndi:BPMNShape id="UserTask_0nhmwpr_di" bpmnElement="vergadering-voorbereiden">
         <dc:Bounds x="1346" y="377" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ExclusiveGateway_0td223m_di" bpmnElement="exclusive-gateway-1" isMarkerVisible="true">
-        <dc:Bounds x="517" y="392" width="50" height="50" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1qqln55_di" bpmnElement="SequenceFlow_1qqln55">
-        <di:waypoint x="567" y="417" />
-        <di:waypoint x="616" y="417" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0lv4nyx_di" bpmnElement="SequenceFlow_0lv4nyx">
-        <di:waypoint x="1147" y="220" />
-        <di:waypoint x="1147" y="182" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0oqwpva_di" bpmnElement="SequenceFlow_0oqwpva">
-        <di:waypoint x="1269" y="442" />
-        <di:waypoint x="1269" y="668" />
-        <di:waypoint x="1346" y="668" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1191" y="562" width="43" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1gil0rs_di" bpmnElement="SequenceFlow_1gil0rs">
-        <di:waypoint x="944" y="417" />
-        <di:waypoint x="987" y="417" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1m7ekak_di" bpmnElement="SequenceFlow_1m7ekak">
-        <di:waypoint x="1287" y="245" />
-        <di:waypoint x="1378" y="245" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0pn3djl_di" bpmnElement="SequenceFlow_0pn3djl">
-        <di:waypoint x="1172" y="245" />
-        <di:waypoint x="1251" y="245" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0px2i0f_di" bpmnElement="SequenceFlow_0px2i0f">
         <di:waypoint x="1062" y="245" />
         <di:waypoint x="1122" y="245" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0a43oac_di" bpmnElement="SequenceFlow_0a43oac">
-        <di:waypoint x="1446" y="668" />
-        <di:waypoint x="1515" y="668" />
-        <di:waypoint x="1515" y="442" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0jzb64g_di" bpmnElement="SequenceFlow_0jzb64g">
-        <di:waypoint x="1037" y="417" />
-        <di:waypoint x="1122" y="417" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1065" y="402" width="12" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1i9yjq1_di" bpmnElement="SequenceFlow_1i9yjq1">
-        <di:waypoint x="1012" y="392" />
-        <di:waypoint x="1012" y="285" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1021" y="355" width="21" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_15gu60u_di" bpmnElement="SequenceFlow_15gu60u">
-        <di:waypoint x="834" y="540" />
-        <di:waypoint x="919" y="540" />
-        <di:waypoint x="919" y="442" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0orhnmd_di" bpmnElement="SequenceFlow_0orhnmd">
-        <di:waypoint x="834" y="417" />
-        <di:waypoint x="894" y="417" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1d6nbfu_di" bpmnElement="SequenceFlow_1d6nbfu">
-        <di:waypoint x="1129" y="164" />
-        <di:waypoint x="542" y="164" />
-        <di:waypoint x="542" y="392" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_02sp1h5_di" bpmnElement="versneld-sequence-flow">
-        <di:waypoint x="641" y="442" />
-        <di:waypoint x="641" y="540" />
-        <di:waypoint x="734" y="540" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="647" y="524" width="43" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0iz6srg_di" bpmnElement="regulier-sequence-flow">
-        <di:waypoint x="666" y="417" />
-        <di:waypoint x="734" y="417" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="677" y="401" width="42" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0li0j4v_di" bpmnElement="SequenceFlow_0li0j4v">
-        <di:waypoint x="449" y="417" />
-        <di:waypoint x="517" y="417" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0zxmava_di" bpmnElement="SequenceFlow_0zxmava">
-        <di:waypoint x="285" y="417" />
-        <di:waypoint x="349" y="417" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Lane_0dpea0h_di" bpmnElement="Lane_0dpea0h" isHorizontal="true">
         <dc:Bounds x="186" y="81" width="2296" height="519" />
@@ -415,14 +336,6 @@
       <bpmndi:BPMNShape id="ParallelGateway_0kzi5gn_di" bpmnElement="ExclusiveGateway_0sfwei2">
         <dc:Bounds x="1244" y="392" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_0cqfp68_di" bpmnElement="SequenceFlow_0cqfp68">
-        <di:waypoint x="1294" y="417" />
-        <di:waypoint x="1346" y="417" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1vlc2wu_di" bpmnElement="SequenceFlow_1vlc2wu">
-        <di:waypoint x="1446" y="417" />
-        <di:waypoint x="1490" y="417" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ParallelGateway_0bqjiqi_di" bpmnElement="ExclusiveGateway_0swbqjx">
         <dc:Bounds x="1490" y="392" width="50" height="50" />
       </bpmndi:BPMNShape>
@@ -433,43 +346,65 @@
         <dc:Bounds x="1858" y="628" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0phvhkm_di" bpmnElement="ExclusiveGateway_0phvhkm" isMarkerVisible="true">
-        <dc:Bounds x="1999" y="643" width="50" height="50" />
+        <dc:Bounds x="2005" y="643" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1r4ozpa_di" bpmnElement="SequenceFlow_1r4ozpa">
-        <di:waypoint x="1958" y="668" />
-        <di:waypoint x="1999" y="668" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1x6ptcm_di" bpmnElement="SequenceFlow_1x6ptcm">
-        <di:waypoint x="2049" y="668" />
-        <di:waypoint x="2122" y="668" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_095nhfs_di" bpmnElement="definitief-rapport-maken">
-        <dc:Bounds x="2122" y="628" width="100" height="80" />
+        <dc:Bounds x="2334" y="628" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_0mm8dd3_di" bpmnElement="SequenceFlow_0mm8dd3">
-        <di:waypoint x="2222" y="668" />
-        <di:waypoint x="2324" y="668" />
-        <di:waypoint x="2324" y="417" />
-        <di:waypoint x="2426" y="417" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_15b1820_di" bpmnElement="end-event">
         <dc:Bounds x="2426" y="399" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_0luv5ks_di" bpmnElement="SequenceFlow_0luv5ks">
-        <di:waypoint x="1958" y="806" />
-        <di:waypoint x="2024" y="806" />
-        <di:waypoint x="2024" y="693" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_0kgk4kj_di" bpmnElement="Task_091i6dy">
+      <bpmndi:BPMNShape id="UserTask_0kgk4kj_di" bpmnElement="commissie-besluit">
         <dc:Bounds x="1858" y="766" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1jo7y8q_di" bpmnElement="SequenceFlow_1jo7y8q">
-        <di:waypoint x="1540" y="417" />
-        <di:waypoint x="1702" y="417" />
-        <di:waypoint x="1702" y="806" />
-        <di:waypoint x="1858" y="806" />
+      <bpmndi:BPMNEdge id="SequenceFlow_0zxmava_di" bpmnElement="SequenceFlow_0zxmava">
+        <di:waypoint x="285" y="417" />
+        <di:waypoint x="349" y="417" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_02sp1h5_di" bpmnElement="versneld-sequence-flow">
+        <di:waypoint x="641" y="442" />
+        <di:waypoint x="641" y="540" />
+        <di:waypoint x="734" y="540" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1697" y="609" width="42" height="14" />
+          <dc:Bounds x="647" y="524" width="43" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0iz6srg_di" bpmnElement="regulier-sequence-flow">
+        <di:waypoint x="666" y="417" />
+        <di:waypoint x="734" y="417" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="677" y="401" width="42" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0orhnmd_di" bpmnElement="SequenceFlow_0orhnmd">
+        <di:waypoint x="834" y="417" />
+        <di:waypoint x="894" y="417" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_12z8jny_di" bpmnElement="SequenceFlow_12z8jny">
+        <di:waypoint x="449" y="417" />
+        <di:waypoint x="616" y="417" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_15gu60u_di" bpmnElement="SequenceFlow_15gu60u">
+        <di:waypoint x="834" y="540" />
+        <di:waypoint x="919" y="540" />
+        <di:waypoint x="919" y="442" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1gil0rs_di" bpmnElement="SequenceFlow_1gil0rs">
+        <di:waypoint x="944" y="417" />
+        <di:waypoint x="987" y="417" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0jzb64g_di" bpmnElement="SequenceFlow_0jzb64g">
+        <di:waypoint x="1037" y="417" />
+        <di:waypoint x="1122" y="417" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1065" y="402" width="12" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1i9yjq1_di" bpmnElement="SequenceFlow_1i9yjq1">
+        <di:waypoint x="1012" y="392" />
+        <di:waypoint x="1012" y="285" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1021" y="355" width="21" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_13kor81_di" bpmnElement="SequenceFlow_13kor81">
@@ -481,6 +416,71 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1537" y="321" width="43" height="14" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0oqwpva_di" bpmnElement="SequenceFlow_0oqwpva">
+        <di:waypoint x="1269" y="442" />
+        <di:waypoint x="1269" y="668" />
+        <di:waypoint x="1346" y="668" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1191" y="562" width="43" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0cqfp68_di" bpmnElement="SequenceFlow_0cqfp68">
+        <di:waypoint x="1294" y="417" />
+        <di:waypoint x="1346" y="417" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1vlc2wu_di" bpmnElement="SequenceFlow_1vlc2wu">
+        <di:waypoint x="1446" y="417" />
+        <di:waypoint x="1490" y="417" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1m7ekak_di" bpmnElement="SequenceFlow_1m7ekak">
+        <di:waypoint x="1287" y="245" />
+        <di:waypoint x="1378" y="245" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0pn3djl_di" bpmnElement="SequenceFlow_0pn3djl">
+        <di:waypoint x="1172" y="245" />
+        <di:waypoint x="1251" y="245" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0lv4nyx_di" bpmnElement="SequenceFlow_0lv4nyx">
+        <di:waypoint x="1147" y="220" />
+        <di:waypoint x="1147" y="182" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1d6nbfu_di" bpmnElement="SequenceFlow_1d6nbfu">
+        <di:waypoint x="1129" y="164" />
+        <di:waypoint x="641" y="164" />
+        <di:waypoint x="641" y="392" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0a43oac_di" bpmnElement="SequenceFlow_0a43oac">
+        <di:waypoint x="1446" y="668" />
+        <di:waypoint x="1515" y="668" />
+        <di:waypoint x="1515" y="442" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1jo7y8q_di" bpmnElement="SequenceFlow_1jo7y8q">
+        <di:waypoint x="1540" y="417" />
+        <di:waypoint x="1702" y="417" />
+        <di:waypoint x="1702" y="806" />
+        <di:waypoint x="1858" y="806" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1697" y="609" width="42" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1r4ozpa_di" bpmnElement="SequenceFlow_1r4ozpa">
+        <di:waypoint x="1958" y="668" />
+        <di:waypoint x="2005" y="668" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0luv5ks_di" bpmnElement="SequenceFlow_0luv5ks">
+        <di:waypoint x="1958" y="806" />
+        <di:waypoint x="2030" y="806" />
+        <di:waypoint x="2030" y="693" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_034fvf6_di" bpmnElement="SequenceFlow_034fvf6">
+        <di:waypoint x="2055" y="668" />
+        <di:waypoint x="2334" y="668" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0mm8dd3_di" bpmnElement="SequenceFlow_0mm8dd3">
+        <di:waypoint x="2384" y="628" />
+        <di:waypoint x="2384" y="417" />
+        <di:waypoint x="2426" y="417" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
