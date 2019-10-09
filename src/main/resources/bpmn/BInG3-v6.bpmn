@@ -187,7 +187,7 @@
           <camunda:script scriptFormat="javascript">if(besluit) {
 resultaatExecutionListenerImpl.setResultaat(execution, "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaattypen/728bb0c7-5bfa-4cac-aa3f-12bcaec92e0b")
 } else {
-${resultaatExecutionListenerImpl.setResultaat(execution, "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaattypen/7f0ef5c2-ce3b-4ca4-944f-d6f721a4824c")
+resultaatExecutionListenerImpl.setResultaat(execution, "http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaattypen/7f0ef5c2-ce3b-4ca4-944f-d6f721a4824c")
 }</camunda:script>
         </camunda:executionListener>
       </bpmn:extensionElements>
