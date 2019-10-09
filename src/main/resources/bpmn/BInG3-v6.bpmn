@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0tqu3yv" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.16.1">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0tqu3yv" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.1.2">
   <bpmn:message id="Message_1rjw2b3" name="StukkenOntvangen" />
   <bpmn:error id="Error_1qok9p9" name="Aanvraag afgebroken" errorCode="Aanvraag afgebroken" />
   <bpmn:collaboration id="Collaboration_19dynfr">
@@ -257,17 +257,11 @@
       <bpmn:outgoing>SequenceFlow_1nql8r1</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1suskik</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="resulaat_goedgekeurd" name="Resultaat&#10;goedgekeurd">
-      <bpmn:extensionElements>
-        <camunda:executionListener expression="${resultaatExecutionListenerImpl.setResultaat(execution, &#34;http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaattypen/728bb0c7-5bfa-4cac-aa3f-12bcaec92e0b&#34;)}" event="end" />
-      </bpmn:extensionElements>
+    <bpmn:serviceTask id="resulaat_goedgekeurd" name="Resultaat&#10;goedgekeurd" camunda:expression="${resultaatExecutionListenerImpl.setResultaat(execution, &#34;http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaattypen/728bb0c7-5bfa-4cac-aa3f-12bcaec92e0b&#34;)}">
       <bpmn:incoming>SequenceFlow_1nql8r1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_01tzuea</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="resulaat_afgekeurd" name="Resultaat&#10;afgekeurd">
-      <bpmn:extensionElements>
-        <camunda:executionListener expression="${resultaatExecutionListenerImpl.setResultaat(execution, &#34;http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaattypen/7f0ef5c2-ce3b-4ca4-944f-d6f721a4824c&#34;)}" event="end" />
-      </bpmn:extensionElements>
+    <bpmn:serviceTask id="resulaat_afgekeurd" name="Resultaat&#10;afgekeurd" camunda:expression="${resultaatExecutionListenerImpl.setResultaat(execution, &#34;http://gemma-ztc.k8s.dc1.proeftuin.utrecht.nl/api/v1/resultaattypen/7f0ef5c2-ce3b-4ca4-944f-d6f721a4824c&#34;)}">
       <bpmn:incoming>SequenceFlow_1suskik</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0a7kgpl</bpmn:outgoing>
     </bpmn:serviceTask>

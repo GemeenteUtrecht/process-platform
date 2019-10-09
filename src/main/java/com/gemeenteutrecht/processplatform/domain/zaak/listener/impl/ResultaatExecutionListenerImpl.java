@@ -9,27 +9,28 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
+import java.util.UUID;
 
 @Service
 public class ResultaatExecutionListenerImpl implements ResultaatExecutionListener {
 
-    private final ProcessZaakHelper processZaakHelper;
-    private final ZaakService zaakService;
+    private final ZaakService<ZaakImpl> zaakService;
 
-    public ResultaatExecutionListenerImpl(ProcessZaakHelper processZaakHelper, ZaakService zaakService) {
-        this.processZaakHelper = processZaakHelper;
+    public ResultaatExecutionListenerImpl(ZaakService zaakService) {
         this.zaakService = zaakService;
     }
 
     @Override
-    public void setResultaat(DelegateExecution delegateExecution, URI resultaatType, String toelichting) {
-        final ZaakImpl zaak = processZaakHelper.getZaakFrom(delegateExecution).orElseThrow();
-        ResultaatRequest resultaatRequest = new ResultaatRequestImpl(zaak.url(), resultaatType, toelichting);
+    public void setResultaat(DelegateExecution delegateExecution, String resultaatType, String toelichting) {
+        final UUID zaakId = (UUID) delegateExecution.getVariable("zaakId");
+        final ZaakImpl zaak = zaakService.getZaak(zaakId);
+
+        ResultaatRequest resultaatRequest = new ResultaatRequestImpl(zaak.url(), URI.create(resultaatType), toelichting);
         zaakService.setResultaat(resultaatRequest);
     }
 
     @Override
-    public void setResultaat(DelegateExecution delegateExecution, URI resultaat) {
+    public void setResultaat(DelegateExecution delegateExecution, String resultaat) {
         setResultaat(delegateExecution, resultaat, "");
     }
 
