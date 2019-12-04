@@ -1,6 +1,5 @@
 package com.gemeenteutrecht.processplatform.domain.document.response;
 
-import com.gemeenteutrecht.processplatform.domain.document.ObjectType;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -13,8 +12,7 @@ public class DocumentImpl implements Document {
 
     private URI url;
     private URI informatieobject;
-    private URI object;
-    private ObjectType objectType;//
+    private URI zaak;
     private String titel;
     private String beschrijving;
     private LocalDate registratiedatum;
@@ -22,16 +20,14 @@ public class DocumentImpl implements Document {
     public DocumentImpl(
             URI url,
             URI informatieobject,
-            URI object,
-            ObjectType objectType,
+            URI zaak,
             String titel,
             String beschrijving,
             LocalDate registratiedatum
     ) {
         this.url = url;
         this.informatieobject = informatieobject;
-        this.object = object;
-        this.objectType = objectType;
+        this.zaak = zaak;
         this.titel = titel;
         this.beschrijving = beschrijving;
         this.registratiedatum = registratiedatum;
@@ -48,13 +44,8 @@ public class DocumentImpl implements Document {
     }
 
     @Override
-    public @NonNull URI object() {
-        return object;
-    }
-
-    @Override
-    public @NonNull ObjectType objectType() {
-        return objectType;
+    public @NonNull URI zaak() {
+        return zaak;
     }
 
     @Override

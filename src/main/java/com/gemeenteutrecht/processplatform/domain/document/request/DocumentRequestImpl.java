@@ -7,15 +7,13 @@ import java.net.URI;
 public class DocumentRequestImpl implements DocumentRequest{
 
     private URI informatieobject;
-    private URI object;
-    private String objectType;
+    private URI zaak;
     private String titel;
     private String beschrijving;
 
-    public DocumentRequestImpl(URI informatieobject, URI object) {
-        this.object = object;
+    public DocumentRequestImpl(URI informatieobject, URI zaak) {
+        this.zaak = zaak;
         this.informatieobject = informatieobject;
-        this.objectType = "zaak";
         this.titel = "title";
         this.beschrijving = "beschrijving";
     }
@@ -26,13 +24,8 @@ public class DocumentRequestImpl implements DocumentRequest{
     }
 
     @Override
-    public @NonNull URI object() {
-        return object;
-    }
-
-    @Override
-    public @NonNull String objectType() {
-        return objectType;
+    public @NonNull URI zaak() {
+        return zaak;
     }
 
     @Override

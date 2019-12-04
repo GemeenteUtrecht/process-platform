@@ -13,11 +13,7 @@ public interface DocumentRequest {
 
     @JsonProperty
     @NonNull
-    URI object(); //zaakUrl
-
-    @JsonProperty
-    @NonNull
-    String objectType();
+    URI zaak(); //zaakUrl
 
     @JsonProperty
     String titel();
