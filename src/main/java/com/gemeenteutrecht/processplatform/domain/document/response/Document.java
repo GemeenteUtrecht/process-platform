@@ -20,11 +20,7 @@ public interface Document {
     URI informatieobject();
 
     @JsonProperty
-    URI object(); //[ 1 .. 200 ] characters
-
-    @JsonProperty
-    @NonNull
-    ObjectType objectType();
+    URI zaak(); //[ 1 .. 200 ] characters
 
     @JsonProperty
     String titel();

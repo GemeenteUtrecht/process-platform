@@ -110,7 +110,7 @@ public class ZaakServiceImpl implements ZaakService {
         if (response.getStatusCode().equals(HttpStatus.CREATED)) {
             return response.getBody();
         } else {
-            throw new RuntimeException("Error while performing POST on /objectinformatieobjecten with code and message: "
+            throw new RuntimeException("Error while performing POST on /zaakinformatieobjecten with code and message: "
                     + response.getStatusCode() + response.getBody());
         }
     }
